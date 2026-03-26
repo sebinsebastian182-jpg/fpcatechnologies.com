@@ -266,7 +266,17 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto px-6">
           <div className="col-span-1 md:col-span-1">
             <div className="font-['Space_Grotesk'] text-xl font-bold text-white mb-4">FPCA</div>
-            <p className="text-gray-500 leading-relaxed">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
+            <p className="text-gray-500 leading-relaxed mb-6">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
+            <div className="space-y-3 text-gray-500 text-sm">
+              <p className="flex items-start gap-3">
+                <span className="material-symbols-outlined text-primary text-lg mt-0.5" data-icon="location_on">location_on</span>
+                <span className="leading-relaxed">Kerala Technology Innovation Zone, Kinfra Hi-Tech Park Main Rd, HMT Colony, North Kalamassery, Kalamassery, Kochi, Kerala 683503</span>
+              </p>
+              <p className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-primary text-lg" data-icon="call">call</span>
+                <span>+918086430571</span>
+              </p>
+            </div>
           </div>
           <div>
             <h4 className="text-white font-semibold mb-6">Navigation</h4>
