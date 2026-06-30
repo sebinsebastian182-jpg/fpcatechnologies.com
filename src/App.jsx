@@ -22,6 +22,7 @@ const openings = [
 ];
 
 const careersEmail = 'careers@fpcatechnologies.com';
+const applicationFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdJ9j_87dLK8leaJUUzpxwn-hiM2h8YHPGv013lZ-xRY9yhTQ/viewform?usp=header';
 
 function CareersPage() {
   return (
@@ -35,7 +36,7 @@ function CareersPage() {
             <a className="text-gray-400 hover:text-white transition-colors" href="/#applications">Applications</a>
             <a className="text-white transition-colors" href="/career">Careers</a>
           </div>
-          <a className="bg-primary-container text-on-primary-container px-6 py-2 font-medium scale-95 active:scale-90 transition-transform" href={`mailto:${careersEmail}`}>
+          <a className="bg-primary-container text-on-primary-container px-6 py-2 font-medium scale-95 active:scale-90 transition-transform" href={applicationFormUrl} rel="noreferrer" target="_blank">
             Apply Now
           </a>
         </div>
@@ -133,7 +134,7 @@ function CareersPage() {
                       </div>
                       <p className="text-on-surface-variant mt-4 leading-relaxed">{opening.focus}</p>
                     </div>
-                    <a className="shrink-0 bg-primary-container text-on-primary-container px-6 py-3 font-semibold inline-flex items-center justify-center gap-2" href={`mailto:${careersEmail}?subject=${encodeURIComponent(`Application: ${opening.title}`)}`}>
+                    <a className="shrink-0 bg-primary-container text-on-primary-container px-6 py-3 font-semibold inline-flex items-center justify-center gap-2" href={applicationFormUrl} rel="noreferrer" target="_blank">
                       Apply
                       <span className="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
@@ -186,7 +187,7 @@ function CareersPage() {
             <a className="hover:text-[#2E5BFF] transition-colors" href="/">Home</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href="/#solution">Solution</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a>
-            <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${careersEmail}`}>Apply</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href={applicationFormUrl} rel="noreferrer" target="_blank">Apply</a>
           </div>
         </div>
       </footer>
