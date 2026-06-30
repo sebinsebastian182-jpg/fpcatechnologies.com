@@ -1,6 +1,207 @@
 import React from 'react';
 
+const openings = [
+  {
+    title: 'Autonomous Flight Systems Engineer',
+    type: 'Full-time',
+    location: 'Kochi, Kerala',
+    focus: 'Flight controls, tether stability, embedded validation',
+  },
+  {
+    title: 'Power Electronics Engineer',
+    type: 'Full-time',
+    location: 'Kochi, Kerala',
+    focus: 'High-voltage delivery, converter design, field reliability',
+  },
+  {
+    title: 'Mechanical Design Intern',
+    type: 'Internship',
+    location: 'Kochi, Kerala',
+    focus: 'Drone structures, cable management, prototype testing',
+  },
+];
+
+const careersEmail = 'careers@fpcatechnologies.com';
+
+function CareersPage() {
+  return (
+    <>
+      <nav className="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl shadow-2xl shadow-black/50">
+        <div className="flex justify-between items-center max-w-7xl mx-auto px-6 h-20 font-['Space_Grotesk'] tracking-tight">
+          <a className="text-2xl font-bold tracking-tighter text-white" href="/">FPCA</a>
+          <div className="hidden md:flex gap-8">
+            <a className="text-gray-400 hover:text-white transition-colors" href="/">Home</a>
+            <a className="text-gray-400 hover:text-white transition-colors" href="/#solution">Solution</a>
+            <a className="text-gray-400 hover:text-white transition-colors" href="/#applications">Applications</a>
+            <a className="text-white transition-colors" href="/career">Careers</a>
+          </div>
+          <a className="bg-primary-container text-on-primary-container px-6 py-2 font-medium scale-95 active:scale-90 transition-transform" href={`mailto:${careersEmail}`}>
+            Apply Now
+          </a>
+        </div>
+      </nav>
+
+      <main className="pt-20">
+        <section className="relative min-h-[78vh] flex items-center overflow-hidden">
+          <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(0,228,117,0.16),transparent_30%),linear-gradient(135deg,rgba(46,91,255,0.18),transparent_45%)] pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 py-24">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-sm mb-6">
+                <span className="w-2 h-2 bg-tertiary rounded-full"></span>
+                <span className="text-[0.6875rem] font-label uppercase tracking-[0.2em] text-on-surface-variant">Careers at FPCA</span>
+              </div>
+              <h1 className="font-headline text-5xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+                Build the future of <span className="text-primary-container">industrial electrification</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 leading-relaxed font-light">
+                Join a compact engineering team creating autonomous flying power cable systems for heavy machines that need continuous clean energy.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a className="bg-primary-container text-on-primary-container px-8 py-4 text-lg font-semibold flex items-center justify-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#openings">
+                  View Open Roles
+                  <span className="material-symbols-outlined">arrow_downward</span>
+                </a>
+                <a className="border border-outline-variant hover:bg-surface-container-high px-8 py-4 text-lg font-semibold transition-colors text-center" href={`mailto:${careersEmail}`}>
+                  Send Your Profile
+                </a>
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="bg-surface-container-low rounded-xl overflow-hidden shadow-2xl border border-outline-variant/20">
+                <img
+                  alt="Engineers testing industrial drone hardware"
+                  className="w-full aspect-[4/3] object-cover"
+                  src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1600&auto=format&fit=crop"
+                />
+                <div className="p-6 border-t border-outline-variant/20">
+                  <p className="font-label text-xs uppercase tracking-widest text-primary mb-2">Hiring Focus</p>
+                  <p className="text-white text-lg font-medium">Autonomy, power delivery, rugged mechanical systems, and field validation.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 bg-surface-container-low">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-8 bg-surface-container-high">
+                <span className="material-symbols-outlined text-primary text-4xl mb-6">engineering</span>
+                <h2 className="text-2xl font-headline font-bold mb-4">Prototype fast</h2>
+                <p className="text-on-surface-variant leading-relaxed">Work close to hardware, simulations, test rigs, and field feedback instead of isolated desk-only engineering.</p>
+              </div>
+              <div className="p-8 bg-surface-container-high">
+                <span className="material-symbols-outlined text-tertiary text-4xl mb-6">electric_bolt</span>
+                <h2 className="text-2xl font-headline font-bold mb-4">Solve hard power problems</h2>
+                <p className="text-on-surface-variant leading-relaxed">Design around real constraints: high power, motion, safety, harsh sites, and continuous industrial uptime.</p>
+              </div>
+              <div className="p-8 bg-surface-container-high">
+                <span className="material-symbols-outlined text-primary text-4xl mb-6">groups</span>
+                <h2 className="text-2xl font-headline font-bold mb-4">Own meaningful work</h2>
+                <p className="text-on-surface-variant leading-relaxed">Contribute across product decisions, system architecture, vendor selection, and customer-facing trials.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-28 bg-background" id="openings">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+              <div>
+                <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-4">Open positions</p>
+                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Current roles</h2>
+              </div>
+              <p className="text-on-surface-variant max-w-md leading-relaxed">Do not see the right role? Send your profile anyway if your work connects autonomy, robotics, energy, manufacturing, or industrial deployment.</p>
+            </div>
+
+            <div className="space-y-4">
+              {openings.map((opening) => (
+                <article className="bg-surface-container-high p-6 md:p-8 border border-outline-variant/20" key={opening.title}>
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                    <div>
+                      <h3 className="text-2xl font-headline font-bold mb-3">{opening.title}</h3>
+                      <div className="flex flex-wrap gap-3 text-sm text-on-surface-variant">
+                        <span className="inline-flex items-center gap-2">
+                          <span className="material-symbols-outlined text-base text-primary">work</span>
+                          {opening.type}
+                        </span>
+                        <span className="inline-flex items-center gap-2">
+                          <span className="material-symbols-outlined text-base text-primary">location_on</span>
+                          {opening.location}
+                        </span>
+                      </div>
+                      <p className="text-on-surface-variant mt-4 leading-relaxed">{opening.focus}</p>
+                    </div>
+                    <a className="shrink-0 bg-primary-container text-on-primary-container px-6 py-3 font-semibold inline-flex items-center justify-center gap-2" href={`mailto:${careersEmail}?subject=${encodeURIComponent(`Application: ${opening.title}`)}`}>
+                      Apply
+                      <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 bg-surface-container-low">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-4">Hiring process</p>
+              <h2 className="font-headline text-4xl font-bold mb-6">Practical, engineering-led interviews</h2>
+              <p className="text-lg text-on-surface-variant leading-relaxed">We focus on how you reason, build, test, and communicate tradeoffs. Expect direct conversations with the people building the system.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {['Profile review', 'Technical conversation', 'Work sample discussion', 'Offer and onboarding'].map((step, index) => (
+                <div className="p-6 bg-surface-container-high" key={step}>
+                  <div className="text-4xl font-headline font-black text-primary/40 mb-6">{String(index + 1).padStart(2, '0')}</div>
+                  <h3 className="text-xl font-bold">{step}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-28 relative overflow-hidden">
+          <div className="absolute inset-0 bg-primary-container/10"></div>
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent"></div>
+          <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 className="font-headline text-4xl md:text-6xl font-bold mb-8">Ready to build with us?</h2>
+            <p className="text-xl text-on-surface-variant mb-10">Send your resume, portfolio, GitHub, LinkedIn, or a short note about the hardest system you have built.</p>
+            <a className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold inline-flex items-center justify-center gap-3 transition-all hover:scale-105" href={`mailto:${careersEmail}`}>
+              Contact Careers
+              <span className="material-symbols-outlined">send</span>
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer className="w-full py-12 border-t border-[#2a2a2a] bg-[#131313] font-['Inter'] text-sm tracking-wide">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-8">
+          <div>
+            <div className="font-['Space_Grotesk'] text-xl font-bold text-white mb-4">FPCA</div>
+            <p className="text-gray-500 max-w-xl leading-relaxed">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
+          </div>
+          <div className="flex flex-wrap gap-6 text-gray-500">
+            <a className="hover:text-[#2E5BFF] transition-colors" href="/">Home</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href="/#solution">Solution</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${careersEmail}`}>Apply</a>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}
+
 function App() {
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+  const isCareersPage = currentPath === '/career' || currentPath === '/careers';
+
+  if (isCareersPage) {
+    return <CareersPage />;
+  }
+
   return (
     <>
       {/* Top Navigation Bar */}
@@ -11,10 +212,11 @@ function App() {
             <a className="text-gray-400 hover:text-white transition-colors" href="#solution">Solution</a>
             <a className="text-gray-400 hover:text-white transition-colors" href="#benefits">Benefits</a>
             <a className="text-gray-400 hover:text-white transition-colors" href="#applications">Applications</a>
+            <a className="text-gray-400 hover:text-white transition-colors" href="/career">Careers</a>
           </div>
           <div className="flex items-center gap-4">
-            <button className="hidden md:block text-gray-400 hover:text-[#b8c3ff] transition-all duration-300">Learn More</button>
-            <button className="bg-primary-container text-on-primary-container px-6 py-2 font-medium scale-95 active:scale-90 transition-transform">Contact Us</button>
+            <a className="hidden md:block text-gray-400 hover:text-[#b8c3ff] transition-all duration-300" href="#solution">Learn More</a>
+            <a className="bg-primary-container text-on-primary-container px-6 py-2 font-medium scale-95 active:scale-90 transition-transform" href="mailto:info@fpcatechnologies.com">Contact Us</a>
           </div>
         </div>
       </nav>
@@ -36,13 +238,13 @@ function App() {
               Accelerating adoption of off-highway electric vehicles with a new way of providing power. Tethering heavy machinery to the grid via autonomous flight.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-primary-container text-on-primary-container px-8 py-4 text-lg font-semibold flex items-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]">
+              <a className="bg-primary-container text-on-primary-container px-8 py-4 text-lg font-semibold flex items-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#solution">
                 Explore Technology
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </button>
-              <button className="border border-outline-variant hover:bg-surface-container-high px-8 py-4 text-lg font-semibold transition-colors">
+              </a>
+              <a className="border border-outline-variant hover:bg-surface-container-high px-8 py-4 text-lg font-semibold transition-colors" href="#applications">
                 Watch Technical Demo
-              </button>
+              </a>
             </div>
           </div>
           <div className="lg:col-span-5 relative">
@@ -255,8 +457,8 @@ function App() {
           <h2 className="font-headline text-5xl md:text-6xl font-bold mb-8">Join the Sustainable Revolution</h2>
           <p className="text-xl text-on-surface-variant mb-12">Be at the forefront of the kinetic blueprint for a fossil-free industrial future.</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold transition-all hover:scale-105">Get Started</button>
-            <button className="border border-outline-variant hover:bg-surface-container-high px-10 py-5 text-xl font-bold transition-colors">Request a Quote</button>
+            <a className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold transition-all hover:scale-105" href="/career">Join Our Team</a>
+            <a className="border border-outline-variant hover:bg-surface-container-high px-10 py-5 text-xl font-bold transition-colors" href="mailto:info@fpcatechnologies.com">Request a Quote</a>
           </div>
         </div>
       </section>
@@ -281,9 +483,9 @@ function App() {
           <div>
             <h4 className="text-white font-semibold mb-6">Navigation</h4>
             <ul className="space-y-4">
-              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Solution</a></li>
-              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Benefits</a></li>
-              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Applications</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#solution">Solution</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#benefits">Benefits</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#applications">Applications</a></li>
             </ul>
           </div>
           <div>
@@ -291,6 +493,7 @@ function App() {
             <ul className="space-y-4">
               <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Privacy Policy</a></li>
               <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Terms of Service</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a></li>
             </ul>
           </div>
           <div>
