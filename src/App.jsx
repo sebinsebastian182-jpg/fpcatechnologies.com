@@ -2,27 +2,44 @@ import React from 'react';
 
 const openings = [
   {
-    title: 'Autonomous Flight Systems Engineer',
-    type: 'Full-time',
-    location: 'Kochi, Kerala',
-    focus: 'Flight controls, tether stability, embedded validation',
-  },
-  {
-    title: 'Power Electronics Engineer',
-    type: 'Full-time',
-    location: 'Kochi, Kerala',
-    focus: 'High-voltage delivery, converter design, field reliability',
-  },
-  {
-    title: 'Mechanical Design Intern',
+    title: 'UAV Robotics Software Intern',
     type: 'Internship',
-    location: 'Kochi, Kerala',
-    focus: 'Drone structures, cable management, prototype testing',
+    duration: '3 months',
+    mode: 'On-site',
+    location: 'Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi',
+    focus: 'UAV autonomy, robotics software, flight control integration, simulation, and field testing.',
   },
 ];
 
 const careersEmail = 'careers@fpcatechnologies.com';
 const applicationFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdJ9j_87dLK8leaJUUzpxwn-hiM2h8YHPGv013lZ-xRY9yhTQ/viewform?usp=header';
+
+const responsibilities = [
+  'Develop software for autonomous UAV operations.',
+  'Work with ROS 2, Python, and C++ for robotics software development.',
+  'Integrate GPS, LiDAR, cameras, UWB, telemetry, and other sensing systems.',
+  'Support Pixhawk flight controller integration using MAVLink, ArduPilot or PX4, and companion computers such as Raspberry Pi.',
+  'Develop and test control algorithms for autonomous flight and tether management.',
+  'Debug software through laboratory checks and outdoor flight testing.',
+  'Document experiments and collaborate with hardware and mechanical teams to improve system performance.',
+];
+
+const qualifications = [
+  "Pursuing or recently completed a Diploma or Bachelor's degree in Robotics, Mechatronics, Electronics, Electrical Engineering, Mechanical Engineering, Computer Science, or a related field.",
+  'Basic knowledge of robotics and autonomous systems.',
+  'Familiarity with Linux, especially Ubuntu, is preferred.',
+  'Exposure to ROS or ROS 2, Raspberry Pi, Pixhawk, MAVLink, ArduPilot, or PX4 is a plus.',
+  'Strong interest in UAVs, drones, robotics, and autonomous navigation.',
+  'Problem-solving mindset, willingness to learn, and comfort working hands-on.',
+  'Ability to work on-site in Kochi and participate in laboratory and field testing.',
+];
+
+const gains = [
+  'Hands-on experience building a real autonomous UAV product.',
+  'Exposure to robotics, embedded systems, autonomous navigation, and drone technologies.',
+  'Experience taking a product from prototype toward real-world deployment.',
+  'Practice with engineering documentation, experiments, debugging, and cross-disciplinary collaboration.',
+];
 
 function CareersPage() {
   return (
@@ -43,21 +60,43 @@ function CareersPage() {
       </nav>
 
       <main className="pt-20">
-        <section className="relative min-h-[78vh] flex items-center overflow-hidden">
+        <section className="relative min-h-[72vh] lg:min-h-[78vh] flex items-center overflow-hidden">
           <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(0,228,117,0.16),transparent_30%),linear-gradient(135deg,rgba(46,91,255,0.18),transparent_45%)] pointer-events-none"></div>
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 py-24">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 py-12 lg:py-24">
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-sm mb-6">
                 <span className="w-2 h-2 bg-tertiary rounded-full"></span>
                 <span className="text-[0.6875rem] font-label uppercase tracking-[0.2em] text-on-surface-variant">Careers at FPCA</span>
               </div>
-              <h1 className="font-headline text-5xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+              <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter leading-none mb-5 lg:mb-6">
                 Build the future of <span className="text-primary-container">industrial electrification</span>
               </h1>
-              <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 leading-relaxed font-light">
-                Join a compact engineering team creating autonomous flying power cable systems for heavy machines that need continuous clean energy.
+              <p className="text-lg md:text-2xl text-on-surface-variant max-w-2xl mb-6 lg:mb-10 leading-relaxed font-light">
+                Join our engineering team building autonomous tethered drone systems that deliver grid power to heavy electric machines.
               </p>
+              <div className="lg:hidden bg-surface-container-high border border-outline-variant/20 p-5 mb-6">
+                <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-3">Open now</p>
+                <h2 className="font-headline text-2xl font-bold mb-4">UAV Robotics Software Intern</h2>
+                <div className="grid grid-cols-2 gap-3 text-sm text-on-surface-variant mb-5">
+                  <span className="inline-flex items-center gap-2">
+                    <span className="material-symbols-outlined text-base text-primary">schedule</span>
+                    3 months
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <span className="material-symbols-outlined text-base text-primary">apartment</span>
+                    On-site
+                  </span>
+                  <span className="inline-flex items-center gap-2 col-span-2">
+                    <span className="material-symbols-outlined text-base text-primary">location_on</span>
+                    Maker Village, Kochi
+                  </span>
+                </div>
+                <a className="w-full bg-primary-container text-on-primary-container px-5 py-3 font-semibold inline-flex items-center justify-center gap-2" href={applicationFormUrl} rel="noreferrer" target="_blank">
+                  Apply for Internship
+                  <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                </a>
+              </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a className="bg-primary-container text-on-primary-container px-8 py-4 text-lg font-semibold flex items-center justify-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#openings">
                   View Open Roles
@@ -68,7 +107,7 @@ function CareersPage() {
                 </a>
               </div>
             </div>
-            <div className="lg:col-span-5">
+            <div className="hidden lg:block lg:col-span-5">
               <div className="bg-surface-container-low rounded-xl overflow-hidden shadow-2xl border border-outline-variant/20">
                 <img
                   alt="Engineers testing industrial drone hardware"
@@ -77,55 +116,67 @@ function CareersPage() {
                 />
                 <div className="p-6 border-t border-outline-variant/20">
                   <p className="font-label text-xs uppercase tracking-widest text-primary mb-2">Hiring Focus</p>
-                  <p className="text-white text-lg font-medium">Autonomy, power delivery, rugged mechanical systems, and field validation.</p>
+                  <p className="text-white text-lg font-medium">UAV robotics software, autonomous navigation, flight control integration, and field testing.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-24 bg-surface-container-low">
+        <section className="py-16 lg:py-24 bg-surface-container-low">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-8 bg-surface-container-high">
-                <span className="material-symbols-outlined text-primary text-4xl mb-6">engineering</span>
-                <h2 className="text-2xl font-headline font-bold mb-4">Prototype fast</h2>
-                <p className="text-on-surface-variant leading-relaxed">Work close to hardware, simulations, test rigs, and field feedback instead of isolated desk-only engineering.</p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              <div className="lg:col-span-5">
+                <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-4">About FPCA</p>
+                <h2 className="font-headline text-3xl md:text-5xl font-bold tracking-tight mb-6">Powering heavy EVs without the battery bottleneck</h2>
+                <p className="text-lg text-on-surface-variant leading-relaxed">
+                  FPCA Technologies Private Limited is developing a tethered drone-based power delivery system for off-highway electric vehicles such as excavators, backhoe loaders, and tractors.
+                </p>
               </div>
-              <div className="p-8 bg-surface-container-high">
-                <span className="material-symbols-outlined text-tertiary text-4xl mb-6">electric_bolt</span>
-                <h2 className="text-2xl font-headline font-bold mb-4">Solve hard power problems</h2>
-                <p className="text-on-surface-variant leading-relaxed">Design around real constraints: high power, motion, safety, harsh sites, and continuous industrial uptime.</p>
-              </div>
-              <div className="p-8 bg-surface-container-high">
-                <span className="material-symbols-outlined text-primary text-4xl mb-6">groups</span>
-                <h2 className="text-2xl font-headline font-bold mb-4">Own meaningful work</h2>
-                <p className="text-on-surface-variant leading-relaxed">Contribute across product decisions, system architecture, vendor selection, and customer-facing trials.</p>
+              <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="p-6 lg:p-8 bg-surface-container-high">
+                  <span className="material-symbols-outlined text-primary text-4xl mb-6">electric_bolt</span>
+                  <h3 className="text-2xl font-headline font-bold mb-4">Grid power in motion</h3>
+                  <p className="text-on-surface-variant leading-relaxed">Our autonomous tethered drone enables heavy machines to draw power directly from the electrical grid, reducing battery dependence and downtime.</p>
+                </div>
+                <div className="p-6 lg:p-8 bg-surface-container-high">
+                  <span className="material-symbols-outlined text-tertiary text-4xl mb-6">precision_manufacturing</span>
+                  <h3 className="text-2xl font-headline font-bold mb-4">Real product engineering</h3>
+                  <p className="text-on-surface-variant leading-relaxed">Incubated at Maker Village, Kerala Startup Mission Integrated Startup Complex, we work across UAVs, robotics, embedded systems, and autonomous navigation.</p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-28 bg-background" id="openings">
-          <div className="max-w-5xl mx-auto px-6">
+        <section className="py-16 lg:py-28 bg-background" id="openings">
+          <div className="max-w-6xl mx-auto px-6">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
               <div>
-                <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-4">Open positions</p>
-                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Current roles</h2>
+                <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-4">Current opening</p>
+                <h2 className="font-headline text-3xl md:text-5xl font-bold tracking-tight">UAV Robotics Software Intern</h2>
               </div>
-              <p className="text-on-surface-variant max-w-md leading-relaxed">Do not see the right role? Send your profile anyway if your work connects autonomy, robotics, energy, manufacturing, or industrial deployment.</p>
+              <p className="text-on-surface-variant max-w-md leading-relaxed">A hands-on internship for makers who want to build autonomous drone systems for real-world industrial electrification.</p>
             </div>
 
             <div className="space-y-4">
               {openings.map((opening) => (
-                <article className="bg-surface-container-high p-6 md:p-8 border border-outline-variant/20" key={opening.title}>
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <article className="bg-surface-container-high p-5 md:p-8 border border-outline-variant/20" key={opening.title}>
+                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                     <div>
-                      <h3 className="text-2xl font-headline font-bold mb-3">{opening.title}</h3>
+                      <h3 className="text-xl md:text-2xl font-headline font-bold mb-3">{opening.title}</h3>
                       <div className="flex flex-wrap gap-3 text-sm text-on-surface-variant">
                         <span className="inline-flex items-center gap-2">
                           <span className="material-symbols-outlined text-base text-primary">work</span>
                           {opening.type}
+                        </span>
+                        <span className="inline-flex items-center gap-2">
+                          <span className="material-symbols-outlined text-base text-primary">schedule</span>
+                          {opening.duration}
+                        </span>
+                        <span className="inline-flex items-center gap-2">
+                          <span className="material-symbols-outlined text-base text-primary">apartment</span>
+                          {opening.mode}
                         </span>
                         <span className="inline-flex items-center gap-2">
                           <span className="material-symbols-outlined text-base text-primary">location_on</span>
@@ -134,10 +185,67 @@ function CareersPage() {
                       </div>
                       <p className="text-on-surface-variant mt-4 leading-relaxed">{opening.focus}</p>
                     </div>
-                    <a className="shrink-0 bg-primary-container text-on-primary-container px-6 py-3 font-semibold inline-flex items-center justify-center gap-2" href={applicationFormUrl} rel="noreferrer" target="_blank">
+                    <a className="w-full lg:w-auto shrink-0 bg-primary-container text-on-primary-container px-6 py-3 font-semibold inline-flex items-center justify-center gap-2" href={applicationFormUrl} rel="noreferrer" target="_blank">
                       Apply
                       <span className="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8 lg:mt-10 pt-8 border-t border-outline-variant/20">
+                    <div className="lg:col-span-2">
+                      <h4 className="font-headline text-xl md:text-2xl font-bold mb-5">What you will work on</h4>
+                      <ul className="space-y-3 text-on-surface-variant">
+                        {responsibilities.map((item) => (
+                          <li className="flex gap-3 leading-relaxed" key={item}>
+                            <span className="material-symbols-outlined text-tertiary text-lg mt-0.5">check_circle</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <aside className="space-y-6">
+                      <div>
+                        <h4 className="font-headline text-xl font-bold mb-4">Core tools</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {['ROS 2', 'Python', 'C++', 'Linux', 'Pixhawk', 'MAVLink', 'ArduPilot/PX4', 'Raspberry Pi'].map((tool) => (
+                            <span className="bg-surface-container-low px-3 py-2 text-sm text-on-surface-variant border border-outline-variant/20" key={tool}>{tool}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-headline text-xl font-bold mb-4">Systems exposure</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {['GPS', 'LiDAR', 'Cameras', 'UWB', 'Telemetry', 'Tether control'].map((system) => (
+                            <span className="bg-surface-container-low px-3 py-2 text-sm text-on-surface-variant border border-outline-variant/20" key={system}>{system}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </aside>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+                    <div className="bg-surface-container-low p-5 md:p-6">
+                      <h4 className="font-headline text-xl md:text-2xl font-bold mb-5">Who should apply</h4>
+                      <ul className="space-y-3 text-on-surface-variant">
+                        {qualifications.map((item) => (
+                          <li className="flex gap-3 leading-relaxed" key={item}>
+                            <span className="material-symbols-outlined text-primary text-lg mt-0.5">radio_button_checked</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="bg-surface-container-low p-5 md:p-6">
+                      <h4 className="font-headline text-xl md:text-2xl font-bold mb-5">What you will gain</h4>
+                      <ul className="space-y-3 text-on-surface-variant">
+                        {gains.map((item) => (
+                          <li className="flex gap-3 leading-relaxed" key={item}>
+                            <span className="material-symbols-outlined text-tertiary text-lg mt-0.5">trending_up</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </article>
               ))}
@@ -145,11 +253,11 @@ function CareersPage() {
           </div>
         </section>
 
-        <section className="py-24 bg-surface-container-low">
+        <section className="py-16 lg:py-24 bg-surface-container-low">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
               <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-4">Hiring process</p>
-              <h2 className="font-headline text-4xl font-bold mb-6">Practical, engineering-led interviews</h2>
+              <h2 className="font-headline text-3xl md:text-4xl font-bold mb-6">Practical, engineering-led interviews</h2>
               <p className="text-lg text-on-surface-variant leading-relaxed">We focus on how you reason, build, test, and communicate tradeoffs. Expect direct conversations with the people building the system.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -163,16 +271,22 @@ function CareersPage() {
           </div>
         </section>
 
-        <section className="py-28 relative overflow-hidden">
+        <section className="py-16 lg:py-28 relative overflow-hidden">
           <div className="absolute inset-0 bg-primary-container/10"></div>
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent"></div>
           <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 className="font-headline text-4xl md:text-6xl font-bold mb-8">Ready to build with us?</h2>
-            <p className="text-xl text-on-surface-variant mb-10">Send your resume, portfolio, GitHub, LinkedIn, or a short note about the hardest system you have built.</p>
-            <a className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold inline-flex items-center justify-center gap-3 transition-all hover:scale-105" href={`mailto:${careersEmail}`}>
-              Contact Careers
-              <span className="material-symbols-outlined">send</span>
-            </a>
+            <h2 className="font-headline text-3xl md:text-6xl font-bold mb-8">Ready to work on real UAV systems?</h2>
+            <p className="text-xl text-on-surface-variant mb-10">Apply for the 3-month on-site internship at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold inline-flex items-center justify-center gap-3 transition-all hover:scale-105" href={applicationFormUrl} rel="noreferrer" target="_blank">
+                Apply Now
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </a>
+              <a className="border border-outline-variant hover:bg-surface-container-high px-10 py-5 text-xl font-bold inline-flex items-center justify-center gap-3 transition-colors" href={`mailto:${careersEmail}`}>
+                Ask a Question
+                <span className="material-symbols-outlined">mail</span>
+              </a>
+            </div>
           </div>
         </section>
       </main>
