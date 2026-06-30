@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const openings = [
   {
@@ -41,25 +41,94 @@ const gains = [
   'Practice with engineering documentation, experiments, debugging, and cross-disciplinary collaboration.',
 ];
 
+const navLinks = [
+  { label: 'Home', href: '/', key: 'home' },
+  { label: 'Solution', href: '/#solution', key: 'solution' },
+  { label: 'Benefits', href: '/#benefits', key: 'benefits' },
+  { label: 'Applications', href: '/#applications', key: 'applications' },
+  { label: 'Careers', href: '/career', key: 'careers' },
+];
+
+function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, secondaryHref, secondaryLabel }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const ctaProps = ctaExternal ? { rel: 'noreferrer', target: '_blank' } : {};
+
+  return (
+    <nav className="fixed top-0 w-full z-50 bg-[#131313]/90 backdrop-blur-xl shadow-2xl shadow-black/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 font-['Space_Grotesk'] tracking-tight">
+        <div className="flex justify-between items-center h-16 sm:h-20">
+          <a className="text-2xl font-bold tracking-tighter text-white shrink-0" href="/">FPCA</a>
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                className={`${activePage === link.key ? 'text-white' : 'text-gray-400 hover:text-white'} transition-colors`}
+                href={link.href}
+                key={link.key}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 sm:gap-4">
+            {secondaryHref && secondaryLabel ? (
+              <a className="hidden md:block text-gray-400 hover:text-[#b8c3ff] transition-all duration-300" href={secondaryHref}>
+                {secondaryLabel}
+              </a>
+            ) : null}
+            <a
+              className="bg-primary-container text-on-primary-container px-3 sm:px-6 py-2 text-sm sm:text-base font-medium whitespace-nowrap scale-95 active:scale-90 transition-transform"
+              href={ctaHref}
+              {...ctaProps}
+            >
+              {ctaLabel}
+            </a>
+            <button
+              aria-controls="mobile-navigation"
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              className="md:hidden inline-flex h-10 w-10 items-center justify-center border border-outline-variant text-white active:scale-95 transition-transform"
+              onClick={() => setIsMenuOpen((open) => !open)}
+              type="button"
+            >
+              <span className="material-symbols-outlined text-2xl">{isMenuOpen ? 'close' : 'menu'}</span>
+            </button>
+          </div>
+        </div>
+        <div
+          className={`${isMenuOpen ? 'grid' : 'hidden'} md:hidden gap-1 border-t border-outline-variant/30 py-3`}
+          id="mobile-navigation"
+        >
+          {navLinks.map((link) => (
+            <a
+              className={`${activePage === link.key ? 'bg-surface-container-high text-white' : 'text-gray-300 hover:bg-surface-container-low hover:text-white'} px-3 py-3 text-base transition-colors`}
+              href={link.href}
+              key={link.key}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          {secondaryHref && secondaryLabel ? (
+            <a
+              className="px-3 py-3 text-base text-gray-300 hover:bg-surface-container-low hover:text-white transition-colors"
+              href={secondaryHref}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {secondaryLabel}
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 function CareersPage() {
   return (
     <>
-      <nav className="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl shadow-2xl shadow-black/50">
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-6 h-20 font-['Space_Grotesk'] tracking-tight">
-          <a className="text-2xl font-bold tracking-tighter text-white" href="/">FPCA</a>
-          <div className="hidden md:flex gap-8">
-            <a className="text-gray-400 hover:text-white transition-colors" href="/">Home</a>
-            <a className="text-gray-400 hover:text-white transition-colors" href="/#solution">Solution</a>
-            <a className="text-gray-400 hover:text-white transition-colors" href="/#applications">Applications</a>
-            <a className="text-white transition-colors" href="/career">Careers</a>
-          </div>
-          <a className="bg-primary-container text-on-primary-container px-6 py-2 font-medium scale-95 active:scale-90 transition-transform" href={applicationFormUrl} rel="noreferrer" target="_blank">
-            Apply Now
-          </a>
-        </div>
-      </nav>
+      <TopNav activePage="careers" ctaExternal ctaHref={applicationFormUrl} ctaLabel="Apply Now" />
 
-      <main className="pt-20">
+      <main className="pt-16 sm:pt-20">
         <section className="relative min-h-[72vh] lg:min-h-[78vh] flex items-center overflow-hidden">
           <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(0,228,117,0.16),transparent_30%),linear-gradient(135deg,rgba(46,91,255,0.18),transparent_45%)] pointer-events-none"></div>
@@ -320,24 +389,10 @@ function App() {
   return (
     <>
       {/* Top Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl shadow-2xl shadow-black/50">
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-6 h-20 font-['Space_Grotesk'] tracking-tight">
-          <div className="text-2xl font-bold tracking-tighter text-white">FPCA</div>
-          <div className="hidden md:flex gap-8">
-            <a className="text-gray-400 hover:text-white transition-colors" href="#solution">Solution</a>
-            <a className="text-gray-400 hover:text-white transition-colors" href="#benefits">Benefits</a>
-            <a className="text-gray-400 hover:text-white transition-colors" href="#applications">Applications</a>
-            <a className="text-gray-400 hover:text-white transition-colors" href="/career">Careers</a>
-          </div>
-          <div className="flex items-center gap-4">
-            <a className="hidden md:block text-gray-400 hover:text-[#b8c3ff] transition-all duration-300" href="#solution">Learn More</a>
-            <a className="bg-primary-container text-on-primary-container px-6 py-2 font-medium scale-95 active:scale-90 transition-transform" href="mailto:info@fpcatechnologies.com">Contact Us</a>
-          </div>
-        </div>
-      </nav>
+      <TopNav activePage="home" ctaHref="mailto:info@fpcatechnologies.com" ctaLabel="Contact Us" secondaryHref="#solution" secondaryLabel="Learn More" />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <section className="relative min-h-screen flex items-center pt-16 sm:pt-20 overflow-hidden">
         <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
