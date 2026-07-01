@@ -14,6 +14,7 @@ const openings = [
 const companyName = 'FPCA TECHNOLOGIES Private Limited';
 const contactEmail = 'admin@fpcatechnologies.com';
 const careersEmail = contactEmail;
+const logoSrc = '/fpca-logo.png';
 const applicationFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdJ9j_87dLK8leaJUUzpxwn-hiM2h8YHPGv013lZ-xRY9yhTQ/viewform?usp=header';
 
 const responsibilities = [
@@ -51,6 +52,16 @@ const navLinks = [
   { label: 'Careers', href: '/career', key: 'careers' },
 ];
 
+function BrandLogo({ className = 'h-9' }) {
+  return (
+    <img
+      alt={`${companyName} logo`}
+      className={`${className} w-auto rounded-sm object-contain`}
+      src={logoSrc}
+    />
+  );
+}
+
 function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, secondaryHref, secondaryLabel }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ctaProps = ctaExternal ? { rel: 'noreferrer', target: '_blank' } : {};
@@ -59,7 +70,9 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
     <nav className="fixed top-0 w-full z-50 bg-[#131313]/90 backdrop-blur-xl shadow-2xl shadow-black/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 font-['Space_Grotesk'] tracking-tight">
         <div className="flex justify-between items-center h-16 sm:h-20">
-          <a className="text-2xl font-bold tracking-tighter text-white shrink-0" href="/">FPCA</a>
+          <a aria-label={`${companyName} home`} className="inline-flex shrink-0 items-center" href="/">
+            <BrandLogo className="h-8 sm:h-10" />
+          </a>
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
@@ -365,7 +378,10 @@ function CareersPage() {
       <footer className="w-full py-12 border-t border-[#2a2a2a] bg-[#131313] font-['Inter'] text-sm tracking-wide">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-8">
           <div>
-            <div className="font-['Space_Grotesk'] text-xl font-bold text-white mb-4">{companyName}</div>
+            <div className="mb-4">
+              <BrandLogo className="h-10" />
+              <p className="font-['Space_Grotesk'] text-sm font-semibold text-white mt-3">{companyName}</p>
+            </div>
             <p className="text-gray-500 max-w-xl leading-relaxed">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
           </div>
           <div className="flex flex-wrap gap-6 text-gray-500">
@@ -640,7 +656,10 @@ function App() {
       <footer className="w-full py-12 border-t border-[#2a2a2a] bg-[#131313] font-['Inter'] text-sm tracking-wide">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto px-6">
           <div className="col-span-1 md:col-span-1">
-            <div className="font-['Space_Grotesk'] text-xl font-bold text-white mb-4">{companyName}</div>
+            <div className="mb-4">
+              <BrandLogo className="h-10" />
+              <p className="font-['Space_Grotesk'] text-sm font-semibold text-white mt-3">{companyName}</p>
+            </div>
             <p className="text-gray-500 leading-relaxed mb-6">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
             <div className="space-y-3 text-gray-500 text-sm">
               <p className="flex items-start gap-3">
