@@ -11,7 +11,9 @@ const openings = [
   },
 ];
 
-const careersEmail = 'careers@fpcatechnologies.com';
+const companyName = 'FPCA TECHNOLOGIES Private Limited';
+const contactEmail = 'admin@fpcatechnologies.com';
+const careersEmail = contactEmail;
 const applicationFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdJ9j_87dLK8leaJUUzpxwn-hiM2h8YHPGv013lZ-xRY9yhTQ/viewform?usp=header';
 
 const responsibilities = [
@@ -199,7 +201,7 @@ function CareersPage() {
                 <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-4">About FPCA</p>
                 <h2 className="font-headline text-3xl md:text-5xl font-bold tracking-tight mb-6">Powering heavy EVs without the battery bottleneck</h2>
                 <p className="text-lg text-on-surface-variant leading-relaxed">
-                  FPCA Technologies Private Limited is developing a tethered drone-based power delivery system for off-highway electric vehicles such as excavators, backhoe loaders, and tractors.
+                  {companyName} is developing a tethered drone-based power delivery system for off-highway electric vehicles such as excavators, backhoe loaders, and tractors.
                 </p>
               </div>
               <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -363,13 +365,14 @@ function CareersPage() {
       <footer className="w-full py-12 border-t border-[#2a2a2a] bg-[#131313] font-['Inter'] text-sm tracking-wide">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-8">
           <div>
-            <div className="font-['Space_Grotesk'] text-xl font-bold text-white mb-4">FPCA</div>
+            <div className="font-['Space_Grotesk'] text-xl font-bold text-white mb-4">{companyName}</div>
             <p className="text-gray-500 max-w-xl leading-relaxed">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
           </div>
           <div className="flex flex-wrap gap-6 text-gray-500">
             <a className="hover:text-[#2E5BFF] transition-colors" href="/">Home</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href="/#solution">Solution</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${contactEmail}`}>{contactEmail}</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href={applicationFormUrl} rel="noreferrer" target="_blank">Apply</a>
           </div>
         </div>
@@ -389,7 +392,7 @@ function App() {
   return (
     <>
       {/* Top Navigation Bar */}
-      <TopNav activePage="home" ctaHref="mailto:info@fpcatechnologies.com" ctaLabel="Contact Us" secondaryHref="#solution" secondaryLabel="Learn More" />
+      <TopNav activePage="home" ctaHref={`mailto:${contactEmail}`} ctaLabel="Contact Us" secondaryHref="#solution" secondaryLabel="Learn More" />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-16 sm:pt-20 overflow-hidden">
@@ -402,7 +405,7 @@ function App() {
               <span className="text-[0.6875rem] font-label uppercase tracking-[0.2em] text-on-surface-variant">The Kinetic Blueprint</span>
             </div>
             <h1 className="font-headline text-5xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
-              Flying Power <span className="text-primary-container">Cables</span>
+              FPCA <span className="text-primary-container">TECHNOLOGIES</span>
             </h1>
             <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 leading-relaxed font-light">
               Accelerating adoption of off-highway electric vehicles with a new way of providing power. Tethering heavy machinery to the grid via autonomous flight.
@@ -628,7 +631,7 @@ function App() {
           <p className="text-xl text-on-surface-variant mb-12">Be at the forefront of the kinetic blueprint for a fossil-free industrial future.</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold transition-all hover:scale-105" href="/career">Join Our Team</a>
-            <a className="border border-outline-variant hover:bg-surface-container-high px-10 py-5 text-xl font-bold transition-colors" href="mailto:info@fpcatechnologies.com">Request a Quote</a>
+            <a className="border border-outline-variant hover:bg-surface-container-high px-10 py-5 text-xl font-bold transition-colors" href={`mailto:${contactEmail}`}>Request a Quote</a>
           </div>
         </div>
       </section>
@@ -637,7 +640,7 @@ function App() {
       <footer className="w-full py-12 border-t border-[#2a2a2a] bg-[#131313] font-['Inter'] text-sm tracking-wide">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto px-6">
           <div className="col-span-1 md:col-span-1">
-            <div className="font-['Space_Grotesk'] text-xl font-bold text-white mb-4">FPCA</div>
+            <div className="font-['Space_Grotesk'] text-xl font-bold text-white mb-4">{companyName}</div>
             <p className="text-gray-500 leading-relaxed mb-6">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
             <div className="space-y-3 text-gray-500 text-sm">
               <p className="flex items-start gap-3">
@@ -647,6 +650,10 @@ function App() {
               <p className="flex items-center gap-3">
                 <span className="material-symbols-outlined text-primary text-lg" data-icon="call">call</span>
                 <span>+918086430571</span>
+              </p>
+              <p className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-primary text-lg" data-icon="mail">mail</span>
+                <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${contactEmail}`}>{contactEmail}</a>
               </p>
             </div>
           </div>
@@ -677,7 +684,7 @@ function App() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-[#2a2a2a] text-center text-gray-500">
-          © 2024 Flying Power Cables. Engineered for the Kinetic Blueprint.
+          © 2026 {companyName}. Engineered for the Kinetic Blueprint.
         </div>
       </footer>
     </>
