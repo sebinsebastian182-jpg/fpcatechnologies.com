@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import CareerApplicationPage from './CareerApplicationPage.jsx';
 
 const openings = [
   {
@@ -15,7 +16,39 @@ const companyName = 'FPCA TECHNOLOGIES Private Limited';
 const contactEmail = 'admin@fpcatechnologies.com';
 const careersEmail = contactEmail;
 const logoSrc = '/fpca-logo.png';
-const applicationFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdJ9j_87dLK8leaJUUzpxwn-hiM2h8YHPGv013lZ-xRY9yhTQ/viewform?usp=header';
+const applicationFormUrl = '/career/apply';
+
+const jobPosting = {
+  '@context': 'https://schema.org',
+  '@type': 'JobPosting',
+  title: 'UAV Robotics Software Intern',
+  description: 'A three-month, full-time, on-site internship working on UAV autonomy, robotics software, flight-control integration, simulation, sensor integration, laboratory checks, and field testing.',
+  datePosted: '2026-07-28',
+  employmentType: 'INTERN',
+  hiringOrganization: {
+    '@type': 'Organization',
+    name: 'FPCA Technologies Private Limited',
+    sameAs: 'https://www.fpcatechnologies.com',
+  },
+  jobLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Maker Village, KINFRA Hi-Tech Park',
+      addressLocality: 'Kalamassery',
+      addressRegion: 'Kerala',
+      postalCode: '683503',
+      addressCountry: 'IN',
+    },
+  },
+  directApply: true,
+  url: 'https://www.fpcatechnologies.com/career',
+  applicationContact: {
+    '@type': 'ContactPoint',
+    email: 'admin@fpcatechnologies.com',
+    contactType: 'Recruitment',
+  },
+};
 
 const responsibilities = [
   'Develop software for autonomous UAV operations.',
@@ -141,7 +174,8 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
 function CareersPage() {
   return (
     <>
-      <TopNav activePage="careers" ctaExternal ctaHref={applicationFormUrl} ctaLabel="Apply Now" />
+      <script dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPosting) }} type="application/ld+json" />
+      <TopNav activePage="careers" ctaHref={applicationFormUrl} ctaLabel="Apply Now" />
 
       <main className="pt-16 sm:pt-20">
         <section className="relative min-h-[72vh] lg:min-h-[78vh] flex items-center overflow-hidden">
@@ -176,7 +210,7 @@ function CareersPage() {
                     Maker Village, Kochi
                   </span>
                 </div>
-                <a className="w-full bg-primary-container text-on-primary-container px-5 py-3 font-semibold inline-flex items-center justify-center gap-2" href={applicationFormUrl} rel="noreferrer" target="_blank">
+                <a className="w-full bg-primary-container text-on-primary-container px-5 py-3 font-semibold inline-flex items-center justify-center gap-2" href={applicationFormUrl}>
                   Apply for Internship
                   <span className="material-symbols-outlined text-lg">arrow_forward</span>
                 </a>
@@ -214,7 +248,7 @@ function CareersPage() {
                 <p className="font-label text-xs uppercase tracking-[0.2em] text-primary mb-4">About FPCA</p>
                 <h2 className="font-headline text-3xl md:text-5xl font-bold tracking-tight mb-6">Powering heavy EVs without the battery bottleneck</h2>
                 <p className="text-lg text-on-surface-variant leading-relaxed">
-                  {companyName} is developing a tethered drone-based power delivery system for off-highway electric vehicles such as excavators, backhoe loaders, and tractors.
+                  FPCA is developing an autonomous system in which a drone transports an electrical connector to an elevated grid-connected docking port. After docking, the drone powers down while the machine receives electricity through the tether.
                 </p>
               </div>
               <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -269,7 +303,7 @@ function CareersPage() {
                       </div>
                       <p className="text-on-surface-variant mt-4 leading-relaxed">{opening.focus}</p>
                     </div>
-                    <a className="w-full lg:w-auto shrink-0 bg-primary-container text-on-primary-container px-6 py-3 font-semibold inline-flex items-center justify-center gap-2" href={applicationFormUrl} rel="noreferrer" target="_blank">
+                    <a className="w-full lg:w-auto shrink-0 bg-primary-container text-on-primary-container px-6 py-3 font-semibold inline-flex items-center justify-center gap-2" href={applicationFormUrl}>
                       Apply
                       <span className="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
@@ -362,7 +396,7 @@ function CareersPage() {
             <h2 className="font-headline text-3xl md:text-6xl font-bold mb-8">Ready to work on real UAV systems?</h2>
             <p className="text-xl text-on-surface-variant mb-10">Apply for the 3-month on-site internship at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold inline-flex items-center justify-center gap-3 transition-all hover:scale-105" href={applicationFormUrl} rel="noreferrer" target="_blank">
+              <a className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold inline-flex items-center justify-center gap-3 transition-all hover:scale-105" href={applicationFormUrl}>
                 Apply Now
                 <span className="material-symbols-outlined">arrow_forward</span>
               </a>
@@ -382,14 +416,14 @@ function CareersPage() {
               <BrandLogo className="h-10" />
               <p className="font-['Space_Grotesk'] text-sm font-semibold text-white mt-3">{companyName}</p>
             </div>
-            <p className="text-gray-500 max-w-xl leading-relaxed">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
+            <p className="text-gray-500 max-w-xl leading-relaxed">Developing autonomous connector delivery for grid-powered heavy machinery.</p>
           </div>
           <div className="flex flex-wrap gap-6 text-gray-500">
             <a className="hover:text-[#2E5BFF] transition-colors" href="/">Home</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href="/#solution">Solution</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${contactEmail}`}>{contactEmail}</a>
-            <a className="hover:text-[#2E5BFF] transition-colors" href={applicationFormUrl} rel="noreferrer" target="_blank">Apply</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href={applicationFormUrl}>Apply</a>
           </div>
         </div>
       </footer>
@@ -400,6 +434,11 @@ function CareersPage() {
 function App() {
   const currentPath = window.location.pathname.replace(/\/$/, '');
   const isCareersPage = currentPath === '/career' || currentPath === '/careers';
+  const isApplicationPage = currentPath === '/career/apply' || currentPath === '/careers/apply';
+
+  if (isApplicationPage) {
+    return <CareerApplicationPage />;
+  }
 
   if (isCareersPage) {
     return <CareersPage />;
@@ -424,7 +463,7 @@ function App() {
               FPCA <span className="text-primary-container">TECHNOLOGIES</span>
             </h1>
             <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 leading-relaxed font-light">
-              Accelerating adoption of off-highway electric vehicles with a new way of providing power. Tethering heavy machinery to the grid via autonomous flight.
+              Accelerating adoption of off-highway electric vehicles with a new way of providing power. An autonomous drone transports and docks the grid connector, then powers down.
             </p>
             <div className="flex flex-wrap gap-4">
               <a className="bg-primary-container text-on-primary-container px-8 py-4 text-lg font-semibold flex items-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#solution">
@@ -441,8 +480,8 @@ function App() {
               <img alt="Industrial drone tether concept" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High-tech industrial drone in mid-air connected by a glowing power cable to a heavy electric excavator in a quarry at twilight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfU0ZHO-g187GCEYNQDUWl5OtHjEFmRxmx3NHoeJ59E-Z3lVdMZSv7FE_zPnuDeT-0nnlE7fWYc6tNPSDC9qfzx595axzQXKXQNH9k7VDf2wmCLItpddeJpzLvocMR1KXtRj1xteHnxugtlq8xtHXJnva5Kst9_s4PcWB60aKYOyCMu-T6pzki8-A7-VrCcOrfUSbhlhvNsXevF21KNG2hQ0qaCyFcn5Y-c5jFXZJ68lhWkK6fPLLK53LMnztaJFKQw39UjmLUM6M" />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6 p-4 glass-card border-l-2 border-primary-container">
-                <p className="font-label text-xs uppercase tracking-widest text-primary mb-1">Status: Operational</p>
-                <p className="text-white font-medium">Continuous Grid Connection Achieved</p>
+                <p className="font-label text-xs uppercase tracking-widest text-primary mb-1">Status: Prototype development</p>
+                <p className="text-white font-medium">Autonomous Connector Docking</p>
               </div>
             </div>
             {/* Abstract Geometric Decoration */}
@@ -486,8 +525,8 @@ function App() {
       <section className="py-32 overflow-hidden" id="solution">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="font-headline text-5xl font-bold mb-6">Continuous Energy. <br /><span className="text-primary">Autonomous Tethering.</span></h2>
-            <p className="text-xl text-on-surface-variant">We replace massive batteries with a dynamic, flying conduit that follows your fleet wherever the work is.</p>
+            <h2 className="font-headline text-5xl font-bold mb-6">Grid Energy. <br /><span className="text-primary">Autonomous Connector Delivery.</span></h2>
+            <p className="text-xl text-on-surface-variant">The drone transports the electrical connector to an elevated grid-connected docking port and powers down after docking.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
@@ -495,7 +534,7 @@ function App() {
               <div className="absolute top-0 right-0 p-4 text-8xl font-headline font-black text-white/5 group-hover:text-primary/10 transition-colors">01</div>
               <span className="material-symbols-outlined text-primary text-5xl mb-8" data-icon="precision_manufacturing">precision_manufacturing</span>
               <h3 className="text-2xl font-bold mb-4">Autonomous Flight</h3>
-              <p className="text-on-surface-variant">Precision drone flight controllers maintain perfect positioning, ensuring the cable never interferes with machine movement.</p>
+              <p className="text-on-surface-variant">Precision flight control transports and docks the electrical connector at the elevated grid-connected port.</p>
             </div>
             {/* Step 2 */}
             <div className="group relative p-10 bg-surface-container-high overflow-hidden">
@@ -660,7 +699,7 @@ function App() {
               <BrandLogo className="h-10" />
               <p className="font-['Space_Grotesk'] text-sm font-semibold text-white mt-3">{companyName}</p>
             </div>
-            <p className="text-gray-500 leading-relaxed mb-6">Revolutionizing industrial power delivery through autonomous flight tethering technology.</p>
+            <p className="text-gray-500 leading-relaxed mb-6">Developing autonomous connector delivery for grid-powered heavy machinery.</p>
             <div className="space-y-3 text-gray-500 text-sm">
               <p className="flex items-start gap-3">
                 <span className="material-symbols-outlined text-primary text-lg mt-0.5" data-icon="location_on">location_on</span>

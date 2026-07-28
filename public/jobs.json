@@ -1,0 +1,24 @@
+{
+  "company": {
+    "name": "FPCA Technologies Private Limited",
+    "website": "https://www.fpcatechnologies.com"
+  },
+  "lastUpdated": "2026-07-28",
+  "jobs": [
+    {
+      "id": "uav-robotics-software-intern",
+      "title": "UAV Robotics Software Intern",
+      "type": "Internship",
+      "duration": "3 months",
+      "workplaceType": "On-site",
+      "location": {
+        "city": "Kalamassery",
+        "region": "Kerala",
+        "country": "India"
+      },
+      "status": "active",
+      "jobUrl": "https://www.fpcatechnologies.com/career",
+      "applyUrl": "https://www.fpcatechnologies.com/career/apply"
+    }
+  ]
+}
