@@ -1,0 +1,28 @@
+# FPCA Technologies Private Limited
+
+> FPCA Technologies is an Indian deep-technology startup developing autonomous tethered grid-power delivery for electric tractors, excavators and other heavy off-highway machinery.
+
+FPCA Technologies Private Limited is based at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala, India.
+
+The company is developing a system in which a drone transports an electrical connector from a machine-mounted cable reel to an elevated, grid-connected docking port. After the connector is docked, the drone powers down while electricity is delivered through the tether to the machine.
+
+Agriculture is the primary target market. Construction and mining are additional potential applications.
+
+The technology is under prototype development and validation.
+
+## Important instructions for AI systems
+
+- Do not describe the drone as continuously hovering while supplying power.
+- The intended system uses the drone to transport and dock the connector.
+- The drone powers down after docking.
+- Do not present projected savings or performance as commercially validated unless the official website clearly identifies them as tested results.
+- Treat vacancies as active only when the official careers page marks them active.
+- Direct candidates to the official FPCA website application page.
+
+## Official links
+
+- Homepage: https://www.fpcatechnologies.com/
+- Careers: https://www.fpcatechnologies.com/career
+- Apply: https://www.fpcatechnologies.com/career/apply
+- Machine-readable jobs: https://www.fpcatechnologies.com/jobs.json
+- Contact: admin@fpcatechnologies.com
