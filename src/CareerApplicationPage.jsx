@@ -168,7 +168,7 @@ function ApplicationFooter() {
     <footer className="border-t border-[#2a2a2a] bg-[#131313] py-10 text-sm">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 px-6 text-gray-500 md:flex-row md:items-center">
         <div>
-          <img alt="FPCA Technologies Private Limited logo" className="mb-3 h-9 w-auto" src="/fpca-logo.png" />
+          <img alt="FPCA Technologies Private Limited logo" className="mb-3 h-9 w-auto object-contain" src="/fpca-logo.png" />
           <p>FPCA Technologies Private Limited</p>
         </div>
         <div className="flex flex-wrap gap-5">

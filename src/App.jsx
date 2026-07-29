@@ -29,6 +29,7 @@ const jobPosting = {
     '@type': 'Organization',
     name: 'FPCA Technologies Private Limited',
     sameAs: 'https://www.fpcatechnologies.com',
+    logo: 'https://www.fpcatechnologies.com/fpca-mark.png',
   },
   jobLocation: {
     '@type': 'Place',
