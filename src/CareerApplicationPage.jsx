@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 
+const linkedInUrl = 'https://www.linkedin.com/company/flying-power-cables-applications/';
+
 const ROLE = 'UAV Robotics Software Intern';
 const MAX_RESUME_BYTES = 2 * 1024 * 1024;
 const ALLOWED_RESUME_TYPES = [
@@ -174,6 +176,10 @@ function ApplicationFooter() {
         <div className="flex flex-wrap gap-5">
           <a className="hover:text-primary" href="/">Home</a>
           <a className="hover:text-primary" href="/career">Careers</a>
+          <a className="inline-flex items-center gap-2 hover:text-[#0A66C2]" href={linkedInUrl} rel="noreferrer" target="_blank">
+            <span aria-hidden="true" className="inline-flex h-5 w-5 items-center justify-center rounded-sm bg-[#0A66C2] text-[11px] font-bold leading-none text-white">in</span>
+            <span>LinkedIn</span>
+          </a>
           <a className="hover:text-primary" href="mailto:admin@fpcatechnologies.com">admin@fpcatechnologies.com</a>
         </div>
       </div>

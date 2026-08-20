@@ -17,6 +17,7 @@ const contactEmail = 'admin@fpcatechnologies.com';
 const careersEmail = contactEmail;
 const logoSrc = '/fpca-logo.png';
 const applicationFormUrl = '/career/apply';
+const linkedInUrl = 'https://www.linkedin.com/company/flying-power-cables-applications/';
 
 const jobPosting = {
   '@context': 'https://schema.org',
@@ -28,7 +29,7 @@ const jobPosting = {
   hiringOrganization: {
     '@type': 'Organization',
     name: 'FPCA Technologies Private Limited',
-    sameAs: 'https://www.fpcatechnologies.com',
+    sameAs: ['https://www.fpcatechnologies.com', linkedInUrl],
     logo: 'https://www.fpcatechnologies.com/fpca-mark.png',
   },
   jobLocation: {
@@ -93,6 +94,21 @@ function BrandLogo({ className = 'h-9' }) {
       className={`${className} w-auto rounded-sm object-contain`}
       src={logoSrc}
     />
+  );
+}
+
+function LinkedInLink({ className = '' }) {
+  return (
+    <a
+      aria-label="FPCA Technologies on LinkedIn"
+      className={`inline-flex items-center gap-2 transition-colors hover:text-[#0A66C2] ${className}`}
+      href={linkedInUrl}
+      rel="noreferrer"
+      target="_blank"
+    >
+      <span aria-hidden="true" className="inline-flex h-5 w-5 items-center justify-center rounded-sm bg-[#0A66C2] text-[11px] font-bold leading-none text-white">in</span>
+      <span>LinkedIn</span>
+    </a>
   );
 }
 
@@ -424,6 +440,7 @@ function CareersPage() {
             <a className="hover:text-[#2E5BFF] transition-colors" href="/#solution">Solution</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a>
             <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            <LinkedInLink />
             <a className="hover:text-[#2E5BFF] transition-colors" href={applicationFormUrl}>Apply</a>
           </div>
         </div>
@@ -714,6 +731,7 @@ function App() {
                 <span className="material-symbols-outlined text-primary text-lg" data-icon="mail">mail</span>
                 <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${contactEmail}`}>{contactEmail}</a>
               </p>
+              <LinkedInLink />
             </div>
           </div>
           <div>
@@ -730,6 +748,7 @@ function App() {
               <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Privacy Policy</a></li>
               <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Terms of Service</a></li>
               <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a></li>
+              <li><LinkedInLink className="text-gray-500" /></li>
             </ul>
           </div>
           <div>
