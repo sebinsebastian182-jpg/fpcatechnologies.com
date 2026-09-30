@@ -664,7 +664,7 @@ function App() {
               FPCA <span className="text-primary-container">TECHNOLOGIES</span>
             </h1>
             <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 leading-relaxed font-light">
-              Accelerating adoption of off-highway electric vehicles with a new way of providing power. An autonomous drone transports and docks the grid connector, then powers down.
+              If there is power nearby, why do you need batteries? Keep heavy electric machinery running on electricity 24/7.
             </p>
             <div className="flex flex-wrap gap-4">
               <a className="bg-primary-container text-on-primary-container px-8 py-4 text-lg font-semibold flex items-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#solution">
@@ -681,7 +681,6 @@ function App() {
               <img alt="Industrial drone tether concept" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High-tech industrial drone in mid-air connected by a glowing power cable to a heavy electric excavator in a quarry at twilight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfU0ZHO-g187GCEYNQDUWl5OtHjEFmRxmx3NHoeJ59E-Z3lVdMZSv7FE_zPnuDeT-0nnlE7fWYc6tNPSDC9qfzx595axzQXKXQNH9k7VDf2wmCLItpddeJpzLvocMR1KXtRj1xteHnxugtlq8xtHXJnva5Kst9_s4PcWB60aKYOyCMu-T6pzki8-A7-VrCcOrfUSbhlhvNsXevF21KNG2hQ0qaCyFcn5Y-c5jFXZJ68lhWkK6fPLLK53LMnztaJFKQw39UjmLUM6M" />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6 p-4 glass-card border-l-2 border-primary-container">
-                <p className="font-label text-xs uppercase tracking-widest text-primary mb-1">Status: Prototype development</p>
                 <p className="text-white font-medium">Autonomous Connector Docking</p>
               </div>
             </div>
