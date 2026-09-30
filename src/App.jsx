@@ -664,7 +664,7 @@ function App() {
               FPCA <span className="text-primary-container">TECHNOLOGIES</span>
             </h1>
             <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 leading-relaxed font-light">
-              If there is power nearby, why do you need batteries? Keep heavy electric machinery running on electricity 24/7.
+              If there is power nearby, why do you need batteries? Making heavy electric machinery run on electricity 24/7.
             </p>
             <div className="flex flex-wrap gap-4">
               <a className="bg-primary-container text-on-primary-container px-8 py-4 text-lg font-semibold flex items-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#solution">
