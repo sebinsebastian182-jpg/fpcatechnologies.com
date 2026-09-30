@@ -1,0 +1,27 @@
+{
+  "company": {
+    "name": "FPCA Technologies Private Limited",
+    "website": "https://www.fpcatechnologies.com",
+    "email": "admin@fpcatechnologies.com",
+    "location": "Kalamassery, Kochi, Kerala, India"
+  },
+  "lastUpdated": "2026-09-30",
+  "services": [
+    {
+      "id": "custom-drone-docking-systems",
+      "name": "Custom Drone Docking System Development",
+      "status": "available-for-enquiries",
+      "serviceUrl": "https://www.fpcatechnologies.com/drone-docking-systems",
+      "description": "Requirement-led design, development and integration of drone docking stations and related docking systems for customer UAV operations.",
+      "capabilities": [
+        "Docking station engineering",
+        "Power or charging integration when required",
+        "Guidance, sensing and station controls",
+        "Drone and autopilot integration",
+        "Prototype development and testing"
+      ],
+      "engagementModel": "Custom engineering project based on requirement review",
+      "contactEmail": "admin@fpcatechnologies.com"
+    }
+  ]
+}

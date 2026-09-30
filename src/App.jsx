@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CareerApplicationPage from './CareerApplicationPage.jsx';
 
 const openings = [
@@ -18,6 +18,38 @@ const careersEmail = contactEmail;
 const logoSrc = '/fpca-logo.png';
 const applicationFormUrl = '/career/apply';
 const linkedInUrl = 'https://www.linkedin.com/company/flying-power-cables-applications/';
+const dockingServicePath = '/drone-docking-systems';
+const dockingInquiryUrl = `mailto:${contactEmail}?subject=${encodeURIComponent('Drone docking system enquiry')}&body=${encodeURIComponent('Hello FPCA Technologies,\n\nWe would like to discuss a drone docking requirement.\n\nApplication/use case:\nDrone platform:\nRequired docking functions:\nDeployment location/environment:\nTarget timeline:\n\nRegards,\n')}`;
+
+const dockingServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Custom Drone Docking System Development',
+  serviceType: 'Drone docking station design, development and integration',
+  description: 'FPCA Technologies works with customers to develop custom drone docking stations and related docking systems based on their aircraft, operating environment and mission requirements.',
+  url: `https://www.fpcatechnologies.com${dockingServicePath}`,
+  areaServed: {
+    '@type': 'Country',
+    name: 'India',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'FPCA Technologies Private Limited',
+    url: 'https://www.fpcatechnologies.com/',
+    logo: 'https://www.fpcatechnologies.com/fpca-mark.png',
+    email: contactEmail,
+    telephone: '+91 80864 30571',
+    sameAs: [linkedInUrl],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Maker Village, KINFRA Hi-Tech Park',
+      addressLocality: 'Kalamassery, Kochi',
+      addressRegion: 'Kerala',
+      postalCode: '683503',
+      addressCountry: 'IN',
+    },
+  },
+};
 
 const jobPosting = {
   '@context': 'https://schema.org',
@@ -82,7 +114,7 @@ const gains = [
 const navLinks = [
   { label: 'Home', href: '/', key: 'home' },
   { label: 'Solution', href: '/#solution', key: 'solution' },
-  { label: 'Benefits', href: '/#benefits', key: 'benefits' },
+  { label: 'Docking Systems', href: dockingServicePath, key: 'docking' },
   { label: 'Applications', href: '/#applications', key: 'applications' },
   { label: 'Careers', href: '/career', key: 'careers' },
 ];
@@ -110,6 +142,35 @@ function LinkedInLink({ className = '' }) {
       <span>LinkedIn</span>
     </a>
   );
+}
+
+function usePageMetadata({ title, description, canonical }) {
+  useEffect(() => {
+    document.title = title;
+
+    const upsertMeta = (selector, identityAttribute, identityValue, content) => {
+      let element = document.head.querySelector(selector);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(identityAttribute, identityValue);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    upsertMeta('meta[name="description"]', 'name', 'description', description);
+    upsertMeta('meta[property="og:title"]', 'property', 'og:title', title);
+    upsertMeta('meta[property="og:description"]', 'property', 'og:description', description);
+    upsertMeta('meta[property="og:url"]', 'property', 'og:url', canonical);
+
+    let canonicalLink = document.head.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', canonical);
+  }, [canonical, description, title]);
 }
 
 function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, secondaryHref, secondaryLabel }) {
@@ -185,6 +246,123 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
         </div>
       </div>
     </nav>
+  );
+}
+
+function DroneDockingSystemsPage() {
+  const pageTitle = 'Custom Drone Docking Systems | FPCA Technologies';
+  const pageDescription = 'FPCA Technologies designs and develops custom drone docking stations and docking-system integrations for customer aircraft, missions and operating environments.';
+  const canonicalUrl = `https://www.fpcatechnologies.com${dockingServicePath}`;
+
+  usePageMetadata({ title: pageTitle, description: pageDescription, canonical: canonicalUrl });
+
+  const capabilities = [
+    {
+      icon: 'precision_manufacturing',
+      title: 'Docking station engineering',
+      copy: 'Mechanical docking concepts and station architecture developed around your drone geometry, payload and deployment constraints.',
+    },
+    {
+      icon: 'electric_bolt',
+      title: 'Power and charging integration',
+      copy: 'Electrical interfaces and charging or power-transfer functions can be evaluated and integrated when required by the project.',
+    },
+    {
+      icon: 'sensors',
+      title: 'Guidance and station controls',
+      copy: 'Support for alignment, landing, sensing, telemetry and station-control requirements as part of the complete docking workflow.',
+    },
+    {
+      icon: 'integration_instructions',
+      title: 'Drone and system integration',
+      copy: 'Integration with the customer drone, autopilot and operating workflow, followed by prototype checks and field-oriented testing.',
+    },
+  ];
+
+  const useCases = [
+    'Inspection and monitoring operations',
+    'Security and surveillance missions',
+    'Industrial and infrastructure sites',
+    'Agriculture and remote field operations',
+    'Research, OEM and custom UAV programmes',
+  ];
+
+  return (
+    <>
+      <script dangerouslySetInnerHTML={{ __html: JSON.stringify(dockingServiceSchema) }} type="application/ld+json" />
+      <TopNav activePage="docking" ctaHref={dockingInquiryUrl} ctaLabel="Discuss a Project" />
+
+      <main className="pt-16 sm:pt-20">
+        <section className="relative overflow-hidden border-b border-outline-variant/20">
+          <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 lg:py-32 relative z-10">
+            <div className="max-w-4xl">
+              <p className="mb-5 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Custom Drone Docking Systems</p>
+              <h1 className="font-headline text-5xl md:text-7xl font-bold leading-tight mb-7">Have a drone docking requirement?</h1>
+              <p className="max-w-3xl text-xl md:text-2xl leading-relaxed text-on-surface-variant mb-10">
+                We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.
+              </p>
+              <a className="inline-flex items-center justify-center gap-2 bg-primary-container px-8 py-4 text-lg font-semibold text-on-primary-container transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href={dockingInquiryUrl}>
+                Share Your Requirement
+                <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-surface-container-low py-20 md:py-24" id="capabilities">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-3xl mb-14">
+              <p className="mb-3 font-label text-xs uppercase tracking-[0.2em] text-primary">What We Can Develop</p>
+              <h2 className="font-headline text-4xl md:text-5xl font-bold mb-5">A docking solution shaped around your operation</h2>
+              <p className="text-lg leading-relaxed text-on-surface-variant">Every drone, site and mission has different constraints. FPCA begins with the requirement and defines the appropriate docking architecture with the customer.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-outline-variant/20 border border-outline-variant/20">
+              {capabilities.map((capability) => (
+                <article className="bg-surface-container-high p-8 md:p-10" key={capability.title}>
+                  <span className="material-symbols-outlined text-primary text-4xl mb-6" aria-hidden="true">{capability.icon}</span>
+                  <h3 className="font-headline text-2xl font-bold mb-3">{capability.title}</h3>
+                  <p className="leading-relaxed text-on-surface-variant">{capability.copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-6">
+            <p className="mb-3 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Where It Fits</p>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold mb-6">Built for repeatable drone operations</h2>
+            <p className="text-lg leading-relaxed text-on-surface-variant mb-8">Docking infrastructure can support operations where drones need a reliable home point, automated turnaround or integration with a larger site system.</p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {useCases.map((useCase) => (
+                <li className="flex items-start gap-3 text-lg" key={useCase}>
+                  <span className="material-symbols-outlined text-tertiary" aria-hidden="true">check_circle</span>
+                  <span>{useCase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+      </main>
+
+      <footer className="w-full border-t border-[#2a2a2a] bg-[#131313] py-12 text-sm tracking-wide">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-8 md:items-end md:justify-between">
+          <div>
+            <BrandLogo className="h-10" />
+            <p className="mt-4 max-w-xl leading-relaxed text-gray-500">Custom drone docking system development and autonomous connector delivery engineering from Kochi, Kerala.</p>
+          </div>
+          <div className="flex flex-wrap gap-6 text-gray-500">
+            <a className="transition-colors hover:text-[#2E5BFF]" href="/">Home</a>
+            <a className="transition-colors hover:text-[#2E5BFF]" href={dockingServicePath}>Docking Systems</a>
+            <a className="transition-colors hover:text-[#2E5BFF]" href="/career">Careers</a>
+            <a className="transition-colors hover:text-[#2E5BFF]" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            <LinkedInLink />
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
 
@@ -453,6 +631,7 @@ function App() {
   const currentPath = window.location.pathname.replace(/\/$/, '');
   const isCareersPage = currentPath === '/career' || currentPath === '/careers';
   const isApplicationPage = currentPath === '/career/apply' || currentPath === '/careers/apply';
+  const isDockingServicePage = currentPath === dockingServicePath || currentPath === '/drone-docking-stations';
 
   if (isApplicationPage) {
     return <CareerApplicationPage />;
@@ -460,6 +639,10 @@ function App() {
 
   if (isCareersPage) {
     return <CareersPage />;
+  }
+
+  if (isDockingServicePage) {
+    return <DroneDockingSystemsPage />;
   }
 
   return (
@@ -568,6 +751,26 @@ function App() {
               <h3 className="text-2xl font-bold mb-4">Seamless Integration</h3>
               <p className="text-on-surface-variant">Compatible with existing electric excavator and tractor architectures, making the transition to FPCA effortless.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Drone Docking Services */}
+      <section className="border-y border-outline-variant/20 bg-surface-container-low py-24">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-7">
+            <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Customer Engineering Service</p>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold mb-6">Need a custom drone docking station?</h2>
+            <p className="text-lg md:text-xl leading-relaxed text-on-surface-variant">FPCA Technologies develops drone docking systems around customer aircraft, missions and operating environments. We can support docking-station engineering, power or charging integration, guidance and controls, and drone-to-station integration based on the project requirement.</p>
+          </div>
+          <div className="lg:col-span-5 flex flex-col gap-4 lg:items-start">
+            <a className="inline-flex items-center justify-center gap-2 bg-primary-container px-8 py-4 text-lg font-semibold text-on-primary-container" href={dockingServicePath}>
+              Explore Docking Systems
+              <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+            </a>
+            <a className="inline-flex items-center justify-center gap-2 border border-outline-variant px-8 py-4 text-lg font-semibold transition-colors hover:bg-surface-container-high" href={dockingInquiryUrl}>
+              Discuss Your Requirement
+            </a>
           </div>
         </div>
       </section>
@@ -740,6 +943,7 @@ function App() {
               <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#solution">Solution</a></li>
               <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#benefits">Benefits</a></li>
               <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#applications">Applications</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href={dockingServicePath}>Drone Docking Systems</a></li>
             </ul>
           </div>
           <div>
