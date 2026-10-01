@@ -29,7 +29,6 @@ function validateInquiry(input) {
     phone: cleanString(input.phone, 25),
     email: cleanString(input.email, 254),
     address: cleanString(input.address, 1_000),
-    requirement: cleanString(input.requirement, 2_000),
   };
 
   if (Object.values(inquiry).some((value) => !value)) {
@@ -111,8 +110,7 @@ export default async function handler(req, res) {
     ['Name', inquiry.name],
     ['Phone number', inquiry.phone],
     ['Email', inquiry.email],
-    ['Site or company address', inquiry.address],
-    ['Brief requirement', inquiry.requirement],
+    ['Address', inquiry.address],
   ].map(([label, value]) => `<tr><th style="padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #e5e7eb">${escapeHtml(label)}</th><td style="padding:10px;border-bottom:1px solid #e5e7eb">${escapeHtml(value).replaceAll('\n', '<br>')}</td></tr>`).join('');
 
   try {

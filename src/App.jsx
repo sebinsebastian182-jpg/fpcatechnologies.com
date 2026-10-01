@@ -19,6 +19,7 @@ const logoSrc = '/fpca-logo.png';
 const applicationFormUrl = '/career/apply';
 const linkedInUrl = 'https://www.linkedin.com/company/flying-power-cables-applications/';
 const dockingServicePath = '/drone-docking-systems';
+const dockingInquiryUrl = `mailto:${contactEmail}?subject=${encodeURIComponent('Drone docking system enquiry')}&body=${encodeURIComponent('Hello FPCA Technologies,\n\nWe would like to discuss a drone docking requirement.\n\nApplication/use case:\nDrone platform:\nRequired docking functions:\nDeployment location/environment:\nTarget timeline:\n\nRegards,\n')}`;
 
 const dockingServiceSchema = {
   '@context': 'https://schema.org',
@@ -112,75 +113,10 @@ const gains = [
 
 const navLinks = [
   { label: 'Home', href: '/', key: 'home' },
-  { label: 'Technology', href: '/#how-it-works', key: 'solution' },
+  { label: 'Solution', href: '/#solution', key: 'solution' },
   { label: 'Docking Systems', href: dockingServicePath, key: 'docking' },
   { label: 'Applications', href: '/#applications', key: 'applications' },
   { label: 'Careers', href: '/career', key: 'careers' },
-];
-
-const systemSteps = [
-  {
-    number: '01',
-    icon: 'flight',
-    title: 'Carry the connector',
-    copy: 'A drone transports the electrical connector from the machine-mounted cable system to the grid connection point.',
-  },
-  {
-    number: '02',
-    icon: 'cable',
-    title: 'Dock with the grid port',
-    copy: 'Guidance and control systems align and secure the connector at an elevated, grid-connected docking port.',
-  },
-  {
-    number: '03',
-    icon: 'power',
-    title: 'Supply power while the drone rests',
-    copy: 'After docking, the drone powers down and electricity flows through the cable to the machine.',
-  },
-];
-
-const fitCriteria = [
-  'The machine has high energy demand or loses productive time to charging.',
-  'It operates inside a defined site or working area.',
-  'A suitable grid connection is available nearby.',
-  'Cable routing and the connection point can be engineered for the site.',
-];
-
-const developmentFacts = [
-  {
-    label: 'Development stage',
-    value: 'Prototype development and validation',
-    copy: 'FPCA is building and testing the autonomous connector-delivery workflow.',
-  },
-  {
-    label: 'Initial market',
-    value: 'Agriculture',
-    copy: 'Construction and mining are additional application areas for future evaluation.',
-  },
-  {
-    label: 'Engineering base',
-    value: 'Kochi, India',
-    copy: 'Based at Maker Village, KINFRA Hi-Tech Park, Kalamassery.',
-  },
-];
-
-const applicationAreas = [
-  {
-    label: 'Initial focus',
-    title: 'Agriculture',
-    copy: 'High-duty tractors and field machinery operating where grid access and cable routing can be planned.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAGPZgM7kcntk7Wp_Slp1PSO4VXGnprtYdtuCua_5qqGqc1AWqcokr3_fWRYAAX0-l1H8P_usxaJT0c2Z_sGRwP2dUmiDaVcm26Uts_MwmIJ1BtXzpsArIO2qCsPDBK7HG6iACC2WH3bZPmr5B_FrC1CCuIj9sl2Y1A7xAVXXbd5if_GcxloO8j9-vaveGzC-1CRVN-U03vOxECGXg9BUsEOJWurXEp-CycSGe8NkppNLoNvCuSJER-mfSWJEVsgkXN2TBwUYIfPtk',
-  },
-  {
-    label: 'Potential application',
-    title: 'Construction',
-    copy: 'Electric machinery at structured sites where direct power could reduce dependence on large onboard batteries.',
-  },
-  {
-    label: 'Potential application',
-    title: 'Mining',
-    copy: 'High-energy equipment in managed operating zones where fixed electrical infrastructure is available.',
-  },
 ];
 
 function BrandLogo({ className = 'h-9' }) {
@@ -188,9 +124,7 @@ function BrandLogo({ className = 'h-9' }) {
     <img
       alt={`${companyName} logo`}
       className={`${className} w-auto rounded-sm object-contain`}
-      height="513"
       src={logoSrc}
-      width="1465"
     />
   );
 }
@@ -244,9 +178,7 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
   const ctaProps = ctaExternal ? { rel: 'noreferrer', target: '_blank' } : {};
 
   return (
-    <>
-      <a className="fixed left-4 top-2 z-[60] -translate-y-20 bg-white px-4 py-2 font-semibold text-black transition-transform focus:translate-y-0" href="#main-content">Skip to main content</a>
-      <nav aria-label="Primary navigation" className="fixed top-0 w-full z-50 bg-[#131313]/95 backdrop-blur-xl shadow-2xl shadow-black/50">
+    <nav className="fixed top-0 w-full z-50 bg-[#131313]/90 backdrop-blur-xl shadow-2xl shadow-black/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 font-['Space_Grotesk'] tracking-tight">
         <div className="flex justify-between items-center h-16 sm:h-20">
           <a aria-label={`${companyName} home`} className="inline-flex shrink-0 items-center" href="/">
@@ -284,7 +216,7 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
               onClick={() => setIsMenuOpen((open) => !open)}
               type="button"
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-2xl">{isMenuOpen ? 'close' : 'menu'}</span>
+              <span className="material-symbols-outlined text-2xl">{isMenuOpen ? 'close' : 'menu'}</span>
             </button>
           </div>
         </div>
@@ -313,41 +245,7 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
           ) : null}
         </div>
       </div>
-      </nav>
-    </>
-  );
-}
-
-function SiteFooter({ description = 'Developing autonomous connector delivery for grid-powered heavy machinery.' }) {
-  return (
-    <footer className="w-full border-t border-outline-variant/30 bg-[#101010] py-12 text-sm">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 md:grid-cols-3">
-        <div>
-          <BrandLogo className="h-10" />
-          <p className="mt-4 max-w-md leading-relaxed text-gray-400">{description}</p>
-        </div>
-        <div>
-          <h2 className="mb-4 font-headline text-base font-bold text-white">Explore</h2>
-          <div className="grid gap-3 text-gray-400">
-            <a className="w-fit transition-colors hover:text-primary" href="/#how-it-works">Technology</a>
-            <a className="w-fit transition-colors hover:text-primary" href={dockingServicePath}>Drone Docking Systems</a>
-            <a className="w-fit transition-colors hover:text-primary" href="/career">Careers</a>
-          </div>
-        </div>
-        <div>
-          <h2 className="mb-4 font-headline text-base font-bold text-white">Contact</h2>
-          <div className="grid gap-3 text-gray-400">
-            <a className="w-fit transition-colors hover:text-primary" href="tel:+918086430571">+91 80864 30571</a>
-            <a className="w-fit break-all transition-colors hover:text-primary" href={`mailto:${contactEmail}`}>{contactEmail}</a>
-            <LinkedInLink />
-            <p className="max-w-sm leading-relaxed">Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503</p>
-          </div>
-        </div>
-      </div>
-      <div className="mx-auto mt-10 max-w-7xl border-t border-outline-variant/20 px-6 pt-6 text-gray-500">
-        © 2026 {companyName}
-      </div>
-    </footer>
+    </nav>
   );
 }
 
@@ -356,7 +254,6 @@ const initialDockingInquiry = {
   phone: '',
   email: '',
   address: '',
-  requirement: '',
   website: '',
 };
 
@@ -406,28 +303,23 @@ function DockingInquiryForm() {
 
   return (
     <form className="w-full border border-outline-variant/50 bg-surface-container-high p-6 md:p-8" onSubmit={handleSubmit}>
-      <h3 className="font-headline text-2xl font-bold">Tell us what you need</h3>
-      <p className="mb-6 mt-2 text-sm leading-relaxed text-on-surface-variant">A short summary is enough. FPCA will review it and contact you.</p>
+      <h3 className="font-headline text-2xl font-bold mb-6">Send your requirement</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="text-sm font-semibold text-on-surface" htmlFor="docking-name">
           Name
-          <input autoComplete="name" className={`${inputClassName} mt-2`} id="docking-name" maxLength="120" name="name" onChange={updateField('name')} required type="text" value={form.name} />
+          <input className={`${inputClassName} mt-2`} id="docking-name" maxLength="120" name="name" onChange={updateField('name')} required type="text" value={form.name} />
         </label>
         <label className="text-sm font-semibold text-on-surface" htmlFor="docking-phone">
           Phone number
-          <input autoComplete="tel" className={`${inputClassName} mt-2`} id="docking-phone" inputMode="tel" maxLength="25" name="phone" onChange={updateField('phone')} required type="tel" value={form.phone} />
+          <input className={`${inputClassName} mt-2`} id="docking-phone" inputMode="tel" maxLength="25" name="phone" onChange={updateField('phone')} required type="tel" value={form.phone} />
         </label>
         <label className="text-sm font-semibold text-on-surface sm:col-span-2" htmlFor="docking-email">
           Email
-          <input autoComplete="email" className={`${inputClassName} mt-2`} id="docking-email" maxLength="254" name="email" onChange={updateField('email')} required type="email" value={form.email} />
+          <input className={`${inputClassName} mt-2`} id="docking-email" maxLength="254" name="email" onChange={updateField('email')} required type="email" value={form.email} />
         </label>
         <label className="text-sm font-semibold text-on-surface sm:col-span-2" htmlFor="docking-address">
-          Site or company address
-          <textarea autoComplete="street-address" className={`${inputClassName} mt-2 min-h-20 resize-y`} id="docking-address" maxLength="1000" name="address" onChange={updateField('address')} required rows="2" value={form.address} />
-        </label>
-        <label className="text-sm font-semibold text-on-surface sm:col-span-2" htmlFor="docking-requirement">
-          Brief requirement
-          <textarea className={`${inputClassName} mt-2 min-h-28 resize-y`} id="docking-requirement" maxLength="2000" name="requirement" onChange={updateField('requirement')} placeholder="What should the drone or docking system do, and where will it operate?" required rows="4" value={form.requirement} />
+          Address
+          <textarea className={`${inputClassName} mt-2 min-h-24 resize-y`} id="docking-address" maxLength="1000" name="address" onChange={updateField('address')} required rows="3" value={form.address} />
         </label>
       </div>
       <label className="absolute -left-[10000px]" aria-hidden="true">
@@ -488,9 +380,9 @@ function DroneDockingSystemsPage() {
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: JSON.stringify(dockingServiceSchema) }} type="application/ld+json" />
-      <TopNav activePage="docking" ctaHref="#docking-enquiry" ctaLabel="Discuss a Project" />
+      <TopNav activePage="docking" ctaHref={dockingInquiryUrl} ctaLabel="Discuss a Project" />
 
-      <main className="pt-16 sm:pt-20" id="main-content">
+      <main className="pt-16 sm:pt-20">
         <section className="relative overflow-hidden border-b border-outline-variant/20">
           <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 lg:py-32 relative z-10">
@@ -500,7 +392,7 @@ function DroneDockingSystemsPage() {
               <p className="max-w-3xl text-xl md:text-2xl leading-relaxed text-on-surface-variant mb-10">
                 We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.
               </p>
-              <a className="inline-flex items-center justify-center gap-2 bg-primary-container px-8 py-4 text-lg font-semibold text-on-primary-container transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#docking-enquiry">
+              <a className="inline-flex items-center justify-center gap-2 bg-primary-container px-8 py-4 text-lg font-semibold text-on-primary-container transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href={dockingInquiryUrl}>
                 Share Your Requirement
                 <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
               </a>
@@ -543,21 +435,23 @@ function DroneDockingSystemsPage() {
           </div>
         </section>
 
-        <section className="border-t border-outline-variant/20 bg-surface-container-low py-16 md:py-24" id="docking-enquiry">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-10 px-6 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
-              <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Start a Conversation</p>
-              <h2 className="mb-6 font-headline text-4xl font-bold md:text-5xl">Share the requirement. We will help define the next step.</h2>
-              <p className="text-lg leading-relaxed text-on-surface-variant">Tell us about the drone, operating environment and outcome you need. We will review whether FPCA can support the project and contact you directly.</p>
-            </div>
-            <div className="lg:col-span-6">
-              <DockingInquiryForm />
-            </div>
-          </div>
-        </section>
-
       </main>
-      <SiteFooter description="Custom drone docking system development and autonomous connector delivery engineering from Kochi, India." />
+
+      <footer className="w-full border-t border-[#2a2a2a] bg-[#131313] py-12 text-sm tracking-wide">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-8 md:items-end md:justify-between">
+          <div>
+            <BrandLogo className="h-10" />
+            <p className="mt-4 max-w-xl leading-relaxed text-gray-500">Custom drone docking system development and autonomous connector delivery engineering from Kochi, Kerala.</p>
+          </div>
+          <div className="flex flex-wrap gap-6 text-gray-500">
+            <a className="transition-colors hover:text-[#2E5BFF]" href="/">Home</a>
+            <a className="transition-colors hover:text-[#2E5BFF]" href={dockingServicePath}>Docking Systems</a>
+            <a className="transition-colors hover:text-[#2E5BFF]" href="/career">Careers</a>
+            <a className="transition-colors hover:text-[#2E5BFF]" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            <LinkedInLink />
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
@@ -568,7 +462,7 @@ function CareersPage() {
       <script dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPosting) }} type="application/ld+json" />
       <TopNav activePage="careers" ctaHref={applicationFormUrl} ctaLabel="Apply Now" />
 
-      <main className="pt-16 sm:pt-20" id="main-content">
+      <main className="pt-16 sm:pt-20">
         <section className="relative min-h-[72vh] lg:min-h-[78vh] flex items-center overflow-hidden">
           <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(0,228,117,0.16),transparent_30%),linear-gradient(135deg,rgba(46,91,255,0.18),transparent_45%)] pointer-events-none"></div>
@@ -621,11 +515,7 @@ function CareersPage() {
                 <img
                   alt="Engineers testing industrial drone hardware"
                   className="w-full aspect-[4/3] object-cover"
-                  decoding="async"
-                  height="1200"
-                  loading="lazy"
                   src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1600&auto=format&fit=crop"
-                  width="1600"
                 />
                 <div className="p-6 border-t border-outline-variant/20">
                   <p className="font-label text-xs uppercase tracking-widest text-primary mb-2">Hiring Focus</p>
@@ -804,7 +694,25 @@ function CareersPage() {
         </section>
       </main>
 
-      <SiteFooter description="Join the FPCA engineering team working across UAVs, robotics, embedded systems and industrial electrification." />
+      <footer className="w-full py-12 border-t border-[#2a2a2a] bg-[#131313] font-['Inter'] text-sm tracking-wide">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-8">
+          <div>
+            <div className="mb-4">
+              <BrandLogo className="h-10" />
+              <p className="font-['Space_Grotesk'] text-sm font-semibold text-white mt-3">{companyName}</p>
+            </div>
+            <p className="text-gray-500 max-w-xl leading-relaxed">Developing autonomous connector delivery for grid-powered heavy machinery.</p>
+          </div>
+          <div className="flex flex-wrap gap-6 text-gray-500">
+            <a className="hover:text-[#2E5BFF] transition-colors" href="/">Home</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href="/#solution">Solution</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a>
+            <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            <LinkedInLink />
+            <a className="hover:text-[#2E5BFF] transition-colors" href={applicationFormUrl}>Apply</a>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
@@ -814,32 +722,6 @@ function App() {
   const isCareersPage = currentPath === '/career' || currentPath === '/careers';
   const isApplicationPage = currentPath === '/career/apply' || currentPath === '/careers/apply';
   const isDockingServicePage = currentPath === dockingServicePath || currentPath === '/drone-docking-stations';
-
-  const routeMetadata = isDockingServicePage
-    ? {
-        title: 'Custom Drone Docking Systems | FPCA Technologies',
-        description: 'FPCA Technologies designs, builds, tests and deploys custom drone docking systems for customer aircraft, missions and operating environments.',
-        canonical: `https://www.fpcatechnologies.com${dockingServicePath}`,
-      }
-    : isApplicationPage
-      ? {
-          title: 'Apply for UAV Robotics Internship | FPCA Technologies',
-          description: 'Apply for the UAV Robotics Software Internship at FPCA Technologies in Kochi, India.',
-          canonical: 'https://www.fpcatechnologies.com/career/apply',
-        }
-      : isCareersPage
-        ? {
-            title: 'Careers in UAV Robotics | FPCA Technologies',
-            description: 'Join FPCA Technologies in Kochi to work on UAV robotics, autonomous navigation and industrial electrification.',
-            canonical: 'https://www.fpcatechnologies.com/career',
-          }
-        : {
-            title: 'FPCA Technologies | Autonomous Grid Connection for Heavy Machinery',
-            description: 'FPCA Technologies is developing autonomous connector delivery for grid-powered heavy electric machinery and custom drone docking systems.',
-            canonical: 'https://www.fpcatechnologies.com/',
-          };
-
-  usePageMetadata(routeMetadata);
 
   if (isApplicationPage) {
     return <CareerApplicationPage />;
@@ -855,171 +737,321 @@ function App() {
 
   return (
     <>
-      <TopNav activePage="home" ctaHref="#docking-enquiry" ctaLabel="Discuss a Project" secondaryHref="#how-it-works" secondaryLabel="How It Works" />
+      {/* Top Navigation Bar */}
+      <TopNav activePage="home" ctaHref={`mailto:${contactEmail}`} ctaLabel="Contact Us" secondaryHref="#solution" secondaryLabel="Learn More" />
 
-      <main id="main-content">
-        <section className="relative flex min-h-[92vh] items-center overflow-hidden pb-16 pt-28 sm:pt-32 lg:pb-20">
-          <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-            <div className="lg:col-span-7">
-              <p className="mb-5 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Autonomous Grid Connection</p>
-              <h1 className="mb-7 max-w-4xl font-headline text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
-                Grid power for heavy electric machinery, delivered by an autonomous drone.
-              </h1>
-              <p className="mb-8 max-w-3xl text-lg leading-relaxed text-on-surface-variant md:text-xl">
-                FPCA is developing a system that carries and docks an electrical connector between heavy machinery and a nearby grid connection. The drone powers down after docking.
-              </p>
-              <div className="mb-8 flex flex-col gap-3 sm:flex-row">
-                <a className="inline-flex items-center justify-center gap-2 bg-primary-container px-7 py-4 text-base font-semibold text-on-primary-container transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#how-it-works">
-                  See How It Works
-                  <span aria-hidden="true" className="material-symbols-outlined">arrow_downward</span>
-                </a>
-                <a className="inline-flex items-center justify-center border border-outline-variant px-7 py-4 text-base font-semibold transition-colors hover:bg-surface-container-high" href="#docking-enquiry">
-                  Discuss Your Machine
-                </a>
-              </div>
-              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-on-surface-variant">
-                <span className="inline-flex items-center gap-2"><span aria-hidden="true" className="h-2 w-2 rounded-full bg-tertiary"></span>Prototype development</span>
-                <span>Maker Village, Kochi, India</span>
-              </div>
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center pt-16 sm:pt-20 overflow-hidden">
+        <div className="absolute inset-0 grid-pattern pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-sm mb-6">
+              <span className="w-2 h-2 bg-tertiary rounded-full"></span>
+              <span className="text-[0.6875rem] font-label uppercase tracking-[0.2em] text-on-surface-variant">The Kinetic Blueprint</span>
             </div>
-            <div className="lg:col-span-5 relative">
-              <figure className="overflow-hidden border border-outline-variant/30 bg-surface-container-low shadow-2xl">
-                <img alt="Concept visualization of a drone carrying an electrical connector" className="aspect-square w-full object-cover" decoding="async" fetchpriority="high" height="512" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfU0ZHO-g187GCEYNQDUWl5OtHjEFmRxmx3NHoeJ59E-Z3lVdMZSv7FE_zPnuDeT-0nnlE7fWYc6tNPSDC9qfzx595axzQXKXQNH9k7VDf2wmCLItpddeJpzLvocMR1KXtRj1xteHnxugtlq8xtHXJnva5Kst9_s4PcWB60aKYOyCMu-T6pzki8-A7-VrCcOrfUSbhlhvNsXevF21KNG2hQ0qaCyFcn5Y-c5jFXZJ68lhWkK6fPLLK53LMnztaJFKQw39UjmLUM6M" width="512" />
-                <figcaption className="border-t border-outline-variant/30 px-5 py-4 text-sm text-on-surface-variant">Concept visualization: autonomous connector delivery</figcaption>
-              </figure>
-            </div>
-          </div>
-        </section>
-
-        <section className="border-y border-outline-variant/20 bg-surface-container-low py-16 md:py-24">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-10 px-6 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
-              <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-primary">The Engineering Problem</p>
-              <h2 className="mb-6 font-headline text-3xl font-bold md:text-5xl">Large batteries can limit high-duty electric machinery.</h2>
-              <div className="space-y-4 text-lg leading-relaxed text-on-surface-variant">
-                <p>Heavy machines need sustained power. Increasing battery capacity also adds mass, cost and charging time.</p>
-                <p>Where suitable electrical infrastructure is available nearby, a direct grid connection may offer another path. FPCA is engineering the autonomous connection system needed to make that practical.</p>
-              </div>
-            </div>
-            <aside className="border-l-2 border-primary-container bg-surface-container-high p-6 md:p-8 lg:col-span-5">
-              <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">The Core Idea</p>
-              <p className="font-headline text-2xl font-semibold leading-relaxed">Use the drone to deliver the connector, not to carry the machine's operating power.</p>
-            </aside>
-          </div>
-        </section>
-
-        <section className="py-16 md:py-24" id="how-it-works">
-          <div className="mx-auto max-w-7xl px-6">
-            <div className="mb-12 max-w-3xl">
-              <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">How It Works</p>
-              <h2 className="mb-5 font-headline text-3xl font-bold md:text-5xl">The drone completes the connection. The cable supplies the power.</h2>
-              <p className="text-lg leading-relaxed text-on-surface-variant">The concept separates connector delivery from energy delivery, so the drone does not need to hover continuously while the machine operates.</p>
-            </div>
-            <ol className="grid grid-cols-1 gap-px border border-outline-variant/20 bg-outline-variant/20 md:grid-cols-3">
-              {systemSteps.map((step) => (
-                <li className="relative bg-surface-container-high p-7 md:p-9" key={step.number}>
-                  <span aria-hidden="true" className="absolute right-5 top-4 font-headline text-5xl font-black text-white/10">{step.number}</span>
-                  <span aria-hidden="true" className="material-symbols-outlined mb-7 text-4xl text-primary">{step.icon}</span>
-                  <h3 className="mb-3 pr-10 font-headline text-2xl font-bold">{step.title}</h3>
-                  <p className="leading-relaxed text-on-surface-variant">{step.copy}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        <section className="border-y border-outline-variant/20 bg-surface-container-low py-16 md:py-24" id="development">
-          <div className="mx-auto max-w-7xl px-6">
-            <div className="mb-10 max-w-3xl">
-              <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-primary">Development Direction</p>
-              <h2 className="mb-5 font-headline text-3xl font-bold md:text-5xl">A focused engineering programme, not an off-the-shelf claim.</h2>
-              <p className="text-lg leading-relaxed text-on-surface-variant">FPCA is developing and validating the connector-delivery system while evaluating the operating conditions required for real deployments.</p>
-            </div>
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              {developmentFacts.map((fact) => (
-                <article className="border-t-2 border-primary bg-background p-6" key={fact.label}>
-                  <p className="mb-3 text-xs uppercase tracking-[0.18em] text-on-surface-variant">{fact.label}</p>
-                  <h3 className="mb-3 font-headline text-xl font-bold">{fact.value}</h3>
-                  <p className="leading-relaxed text-on-surface-variant">{fact.copy}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 md:py-24" id="fit">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-10 px-6 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
-              <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Application Fit</p>
-              <h2 className="mb-5 font-headline text-3xl font-bold md:text-5xl">Could FPCA help your machine or site?</h2>
-              <p className="text-lg leading-relaxed text-on-surface-variant">The concept is most relevant where high-duty machinery operates in a defined area with suitable electrical infrastructure nearby.</p>
-            </div>
-            <div className="lg:col-span-6">
-              <ul className="grid gap-3">
-                {fitCriteria.map((criterion) => (
-                  <li className="flex items-start gap-3 border-b border-outline-variant/20 pb-3 text-base leading-relaxed" key={criterion}>
-                    <span aria-hidden="true" className="material-symbols-outlined mt-0.5 text-xl text-tertiary">check_circle</span>
-                    <span>{criterion}</span>
-                  </li>
-                ))}
-              </ul>
-              <a className="mt-7 inline-flex items-center gap-2 font-semibold text-primary hover:text-white" href="#docking-enquiry">
-                Share your operating requirement
-                <span aria-hidden="true" className="material-symbols-outlined">arrow_forward</span>
+            <h1 className="font-headline text-5xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+              FPCA <span className="text-primary-container">TECHNOLOGIES</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 leading-relaxed font-light">
+              If there is power nearby, why do you need batteries? Making heavy electric machinery run on electricity 24/7.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a className="bg-primary-container text-on-primary-container px-8 py-4 text-lg font-semibold flex items-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]" href="#solution">
+                Explore Technology
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </a>
+              <a className="border border-outline-variant hover:bg-surface-container-high px-8 py-4 text-lg font-semibold transition-colors" href="#applications">
+                Watch Technical Demo
               </a>
             </div>
           </div>
-        </section>
-
-        <section className="border-y border-outline-variant/20 bg-surface-container-low py-16 md:py-24" id="applications">
-          <div className="mx-auto max-w-7xl px-6">
-            <div className="mb-12 max-w-3xl">
-              <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-primary">Application Areas</p>
-              <h2 className="mb-5 font-headline text-3xl font-bold md:text-5xl">Starting with agriculture. Evaluating other high-duty sectors.</h2>
-              <p className="text-lg leading-relaxed text-on-surface-variant">Each application depends on site layout, electrical infrastructure, operating duty and safety requirements.</p>
+          <div className="lg:col-span-5 relative">
+            <div className="aspect-square bg-surface-container-low rounded-xl overflow-hidden shadow-2xl relative group">
+              <img alt="Industrial drone tether concept" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High-tech industrial drone in mid-air connected by a glowing power cable to a heavy electric excavator in a quarry at twilight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfU0ZHO-g187GCEYNQDUWl5OtHjEFmRxmx3NHoeJ59E-Z3lVdMZSv7FE_zPnuDeT-0nnlE7fWYc6tNPSDC9qfzx595axzQXKXQNH9k7VDf2wmCLItpddeJpzLvocMR1KXtRj1xteHnxugtlq8xtHXJnva5Kst9_s4PcWB60aKYOyCMu-T6pzki8-A7-VrCcOrfUSbhlhvNsXevF21KNG2hQ0qaCyFcn5Y-c5jFXZJ68lhWkK6fPLLK53LMnztaJFKQw39UjmLUM6M" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6 p-4 glass-card border-l-2 border-primary-container">
+                <p className="text-white font-medium">Autonomous Connector Docking</p>
+              </div>
             </div>
-            <div className="grid grid-cols-1 gap-px border border-outline-variant/20 bg-outline-variant/20 lg:grid-cols-12">
-              <article className="overflow-hidden bg-surface-container-high lg:col-span-7">
-                <img alt="Agriculture application area" className="aspect-[16/9] w-full object-cover" decoding="async" height="288" loading="lazy" src={applicationAreas[0].image} width="512" />
-                <div className="p-6 md:p-8">
-                  <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">{applicationAreas[0].label}</p>
-                  <h3 className="mb-3 font-headline text-2xl font-bold">{applicationAreas[0].title}</h3>
-                  <p className="leading-relaxed text-on-surface-variant">{applicationAreas[0].copy}</p>
+            {/* Abstract Geometric Decoration */}
+            <div className="absolute -top-6 -right-6 w-32 h-32 border-t-2 border-r-2 border-primary-container/30 pointer-events-none"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem Section */}
+      <section className="py-24 bg-surface-container-low relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="font-headline text-4xl font-bold mb-8">The Battery Bottleneck</h2>
+              <div className="space-y-6 text-lg text-on-surface-variant leading-relaxed">
+                <p>Current industrial electrification faces a critical paradox: Heavy machinery requires immense power, yet massive batteries introduce "Charge Anxiety" and crippling weight.</p>
+                <p>Relying on static charging stations leads to 30% downtime for industrial fleets, stalling productivity and inflating operational overhead.</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-8 bg-surface-container-high flex flex-col justify-between aspect-square">
+                <span className="material-symbols-outlined text-error text-4xl" data-icon="battery_alert">battery_alert</span>
+                <div>
+                  <p className="text-3xl font-headline font-bold text-white mb-2">30%</p>
+                  <p className="text-sm font-label uppercase tracking-wider text-on-surface-variant">Fleet Downtime</p>
                 </div>
-              </article>
-              <div className="grid bg-outline-variant/20 lg:col-span-5">
-                {applicationAreas.slice(1).map((area) => (
-                  <article className="bg-surface-container-high p-6 md:p-8" key={area.title}>
-                    <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">{area.label}</p>
-                    <h3 className="mb-3 font-headline text-2xl font-bold">{area.title}</h3>
-                    <p className="leading-relaxed text-on-surface-variant">{area.copy}</p>
-                  </article>
-                ))}
+              </div>
+              <div className="p-8 bg-surface-container-high flex flex-col justify-between aspect-square translate-y-8">
+                <span className="material-symbols-outlined text-error text-4xl" data-icon="trending_up">trending_up</span>
+                <div>
+                  <p className="text-3xl font-headline font-bold text-white mb-2">2x</p>
+                  <p className="text-sm font-label uppercase tracking-wider text-on-surface-variant">Maintenance Cost</p>
+                </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-16 md:py-24" id="docking-enquiry">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-10 px-6 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
-              <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Customer Engineering</p>
-              <h2 className="mb-6 font-headline text-3xl font-bold md:text-5xl">Tell us about your machine, drone or docking requirement.</h2>
-              <p className="mb-6 text-lg leading-relaxed text-on-surface-variant">FPCA develops custom drone docking systems and evaluates industrial connector-delivery applications. Share the operating need and environment; we will review whether there is a practical fit.</p>
-              <a className="inline-flex items-center gap-2 font-semibold text-primary hover:text-white" href={dockingServicePath}>
-                View custom drone docking capabilities
-                <span aria-hidden="true" className="material-symbols-outlined">arrow_forward</span>
-              </a>
+      {/* Solution Section */}
+      <section className="py-32 overflow-hidden" id="solution">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="font-headline text-5xl font-bold mb-6">Grid Energy. <br /><span className="text-primary">Autonomous Connector Delivery.</span></h2>
+            <p className="text-xl text-on-surface-variant">The drone transports the electrical connector to an elevated grid-connected docking port and powers down after docking.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="group relative p-10 bg-surface-container-high overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 text-8xl font-headline font-black text-white/5 group-hover:text-primary/10 transition-colors">01</div>
+              <span className="material-symbols-outlined text-primary text-5xl mb-8" data-icon="precision_manufacturing">precision_manufacturing</span>
+              <h3 className="text-2xl font-bold mb-4">Autonomous Flight</h3>
+              <p className="text-on-surface-variant">Precision flight control transports and docks the electrical connector at the elevated grid-connected port.</p>
             </div>
-            <div className="lg:col-span-6">
-              <DockingInquiryForm />
+            {/* Step 2 */}
+            <div className="group relative p-10 bg-surface-container-high overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 text-8xl font-headline font-black text-white/5 group-hover:text-primary/10 transition-colors">02</div>
+              <span className="material-symbols-outlined text-primary text-5xl mb-8" data-icon="power">power</span>
+              <h3 className="text-2xl font-bold mb-4">High-Tension Link</h3>
+              <p className="text-on-surface-variant">Optimized power cables deliver grid-level voltage directly to the machine's motor, bypassing the need for storage.</p>
+            </div>
+            {/* Step 3 */}
+            <div className="group relative p-10 bg-surface-container-high overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 text-8xl font-headline font-black text-white/5 group-hover:text-primary/10 transition-colors">03</div>
+              <span className="material-symbols-outlined text-primary text-5xl mb-8" data-icon="sync">sync</span>
+              <h3 className="text-2xl font-bold mb-4">Seamless Integration</h3>
+              <p className="text-on-surface-variant">Compatible with existing electric excavator and tractor architectures, making the transition to FPCA effortless.</p>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      <SiteFooter />
+      {/* Drone Docking Services */}
+      <section className="border-y border-outline-variant/20 bg-surface-container-low py-24" id="docking-enquiry">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-7">
+            <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Custom Drone Docking Systems</p>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold mb-6">Have a drone docking requirement?</h2>
+            <p className="text-lg md:text-xl leading-relaxed text-on-surface-variant">We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.</p>
+          </div>
+          <div className="lg:col-span-5">
+            <DockingInquiryForm />
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section (Kinetic Stats) */}
+      <section className="py-24 bg-surface-container-low border-y border-outline-variant/10" id="benefits">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div className="space-y-4">
+              <div className="text-5xl font-headline font-bold text-tertiary">95%</div>
+              <p className="text-sm font-label uppercase tracking-widest text-on-surface-variant leading-tight">Carbon <br />Reduction</p>
+            </div>
+            <div className="space-y-4">
+              <div className="text-5xl font-headline font-bold text-primary">70%</div>
+              <p className="text-sm font-label uppercase tracking-widest text-on-surface-variant leading-tight">Fuel Cost <br />Savings</p>
+            </div>
+            <div className="space-y-4">
+              <div className="text-5xl font-headline font-bold text-primary">40%</div>
+              <p className="text-sm font-label uppercase tracking-widest text-on-surface-variant leading-tight">Operating <br />Cost Cut</p>
+            </div>
+            <div className="space-y-4">
+              <div className="text-5xl font-headline font-bold text-white">90%+</div>
+              <p className="text-sm font-label uppercase tracking-widest text-on-surface-variant leading-tight">Total <br />Efficiency</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Section */}
+      <section className="py-32 bg-background">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="font-headline text-4xl font-bold mb-12 text-center">Efficiency Engineering</h2>
+          <div className="bg-surface-container-high p-1 rounded-sm overflow-hidden">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-surface-container-highest">
+                  <th className="p-6 font-label uppercase tracking-wider text-xs">Energy Technology</th>
+                  <th className="p-6 font-label uppercase tracking-wider text-xs">Efficiency %</th>
+                  <th className="p-6 font-label uppercase tracking-wider text-xs">Emissions</th>
+                  <th className="p-6 font-label uppercase tracking-wider text-xs">Reliability</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-outline-variant/20">
+                <tr>
+                  <td className="p-6 font-bold text-primary">FPCA Grid Link</td>
+                  <td className="p-6">
+                    <div className="flex items-center gap-3">
+                      <div className="h-2 w-24 bg-surface-container-low rounded-full overflow-hidden">
+                        <div className="h-full bg-primary w-[95%]"></div>
+                      </div>
+                      <span>95%</span>
+                    </div>
+                  </td>
+                  <td className="p-6 text-tertiary">Zero Local</td>
+                  <td className="p-6">Max (Continuous)</td>
+                </tr>
+                <tr>
+                  <td className="p-6 text-on-surface-variant">Battery Electric</td>
+                  <td className="p-6">
+                    <div className="flex items-center gap-3">
+                      <div className="h-2 w-24 bg-surface-container-low rounded-full overflow-hidden">
+                        <div className="h-full bg-on-surface-variant w-[80%]"></div>
+                      </div>
+                      <span>80%</span>
+                    </div>
+                  </td>
+                  <td className="p-6">Zero Local</td>
+                  <td className="p-6">Variable (Charging)</td>
+                </tr>
+                <tr>
+                  <td className="p-6 text-on-surface-variant">Fossil Fuel (Diesel)</td>
+                  <td className="p-6">
+                    <div className="flex items-center gap-3">
+                      <div className="h-2 w-24 bg-surface-container-low rounded-full overflow-hidden">
+                        <div className="h-full bg-error w-[35%]"></div>
+                      </div>
+                      <span>35%</span>
+                    </div>
+                  </td>
+                  <td className="p-6 text-error">High Impact</td>
+                  <td className="p-6">High (Refueling)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Applications Bento Grid */}
+      <section className="py-32 bg-surface" id="applications">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="font-headline text-5xl font-bold mb-16">Universal <span className="text-primary-container">Utility</span></h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Construction */}
+            <div className="group relative h-[500px] overflow-hidden rounded-xl">
+              <img alt="Construction application" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Massive electric excavator working in a modern urban construction site with futuristic glass buildings in the background at dawn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYm-H2gI10V9dO_sEIvMpufRHeD7V27rm_ouMKJ7op6MoJLYul14VA1Cj3GYRJm60JFWsdqzwOkANtBOXIcFp0SCFwE-qwjOq4HB-QWBr_kDpQJdX6Yidts4AbL6Va-0Hj7XluTfLomI7SUgQIKiGhwjhxX8ujlro7yMFFRvbb_lIcMKWugsA5SHHfE-zP6RRIPd0OKgm0J0hJpob_KzWSUaRGSBYBwP1-9FWZ3BNKB2VKSIgOqCeWkC0GfWwmiWFh5ReXAWmBuZ4" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                <span className="text-[0.6rem] font-label uppercase tracking-widest text-primary mb-2 inline-block">Infrastructure</span>
+                <h3 className="text-3xl font-headline font-bold text-white mb-4">Construction</h3>
+                <p className="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">Eliminate diesel fumes in urban centers and power high-torque heavy excavators 24/7 without refueling stops.</p>
+              </div>
+            </div>
+            {/* Mining */}
+            <div className="group relative h-[500px] overflow-hidden rounded-xl">
+              <img alt="Mining application" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Autonomous electric mining truck operating in a deep open-pit mine with dramatic high-contrast lighting from floodlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoUWf7HYr656HMvtuEtk6PEKoX49jpymCAkCPAr60pP4SL8YGvjzuocKuOlmfqaxBZJzAPjkcNhZ5kQcCh1PCniQN9pBGuzcKORzf8Fv_0i7pfw2LXCGrxoYFnFpkndVx8RZy9vDa2tX-Yw-e9Zhqq28SVn5fbRRRdRUg6iddCEFvXsR9ssD5CNmC4SzXLScCqzXi1VSMN40W8Kpmf79TeYcg1aW_gp0uywd-RnbGOMUCcjdSf5VIvL271izEnocFUYlVCS6m8lks" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                <span className="text-[0.6rem] font-label uppercase tracking-widest text-primary mb-2 inline-block">Extraction</span>
+                <h3 className="text-3xl font-headline font-bold text-white mb-4">Mining</h3>
+                <p className="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">Deep-pit operations benefit from reduced ventilation costs as electric machines generate zero heat and exhaust.</p>
+              </div>
+            </div>
+            {/* Agriculture */}
+            <div className="group relative h-[500px] overflow-hidden rounded-xl bg-surface-container-high">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1594398911514-18e49339241f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center grayscale hover:grayscale-0 transition-all duration-500" data-alt="Futuristic autonomous electric tractor plowing a vast agricultural field under a clear blue sky at sunset" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAGPZgM7kcntk7Wp_Slp1PSO4VXGnprtYdtuCua_5qqGqc1AWqcokr3_fWRYAAX0-l1H8P_usxaJT0c2Z_sGRwP2dUmiDaVcm26Uts_MwmIJ1BtXzpsArIO2qCsPDBK7HG6iACC2WH3bZPmr5B_FrC1CCuIj9sl2Y1A7xAVXXbd5if_GcxloO8j9-vaveGzC-1CRVN-U03vOxECGXg9BUsEOJWurXEp-CycSGe8NkppNLoNvCuSJER-mfSWJEVsgkXN2TBwUYIfPtk')"}}></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                <span className="text-[0.6rem] font-label uppercase tracking-widest text-primary mb-2 inline-block">Cultivation</span>
+                <h3 className="text-3xl font-headline font-bold text-white mb-4">Agriculture</h3>
+                <p className="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">Power heavy tilling and harvesting equipment directly from renewable farm grids, slashing fuel dependency.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-primary-container/10"></div>
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent"></div>
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <h2 className="font-headline text-5xl md:text-6xl font-bold mb-8">Join the Sustainable Revolution</h2>
+          <p className="text-xl text-on-surface-variant mb-12">Be at the forefront of the kinetic blueprint for a fossil-free industrial future.</p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <a className="bg-primary-container text-on-primary-container px-10 py-5 text-xl font-bold transition-all hover:scale-105" href="/career">Join Our Team</a>
+            <a className="border border-outline-variant hover:bg-surface-container-high px-10 py-5 text-xl font-bold transition-colors" href={`mailto:${contactEmail}`}>Request a Quote</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="w-full py-12 border-t border-[#2a2a2a] bg-[#131313] font-['Inter'] text-sm tracking-wide">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto px-6">
+          <div className="col-span-1 md:col-span-1">
+            <div className="mb-4">
+              <BrandLogo className="h-10" />
+              <p className="font-['Space_Grotesk'] text-sm font-semibold text-white mt-3">{companyName}</p>
+            </div>
+            <p className="text-gray-500 leading-relaxed mb-6">Developing autonomous connector delivery for grid-powered heavy machinery.</p>
+            <div className="space-y-3 text-gray-500 text-sm">
+              <p className="flex items-start gap-3">
+                <span className="material-symbols-outlined text-primary text-lg mt-0.5" data-icon="location_on">location_on</span>
+                <span className="leading-relaxed">Kerala Technology Innovation Zone, Kinfra Hi-Tech Park Main Rd, HMT Colony, North Kalamassery, Kalamassery, Kochi, Kerala 683503</span>
+              </p>
+              <p className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-primary text-lg" data-icon="call">call</span>
+                <span>+918086430571</span>
+              </p>
+              <p className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-primary text-lg" data-icon="mail">mail</span>
+                <a className="hover:text-[#2E5BFF] transition-colors" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+              </p>
+              <LinkedInLink />
+            </div>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold mb-6">Navigation</h4>
+            <ul className="space-y-4">
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#solution">Solution</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#benefits">Benefits</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#applications">Applications</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href={dockingServicePath}>Drone Docking Systems</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold mb-6">Company</h4>
+            <ul className="space-y-4">
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Privacy Policy</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="#">Terms of Service</a></li>
+              <li><a className="text-gray-500 hover:text-[#2E5BFF] transition-colors" href="/career">Careers</a></li>
+              <li><LinkedInLink className="text-gray-500" /></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold mb-6">Newsletter</h4>
+            <div className="flex gap-2">
+              <input className="bg-surface-container-high border-none text-white focus:ring-1 focus:ring-primary-container w-full px-4 py-2" placeholder="Email" type="email" />
+              <button className="bg-primary-container p-2 text-on-primary-container">
+                <span className="material-symbols-outlined" data-icon="send">send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-[#2a2a2a] text-center text-gray-500">
+          © 2026 {companyName}. Engineered for the Kinetic Blueprint.
+        </div>
+      </footer>
     </>
   );
 }

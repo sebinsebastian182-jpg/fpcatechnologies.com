@@ -12,7 +12,7 @@ The technology is under prototype development and validation.
 
 FPCA Technologies also provides customer engineering services for drone docking stations and related docking systems. Projects begin with the customer's aircraft, mission, operating environment and required docking functions. Depending on the agreed scope, work can include docking-station engineering, power or charging integration, alignment and sensing, station controls, drone integration, prototyping and testing.
 
-Customers, UAV manufacturers, operators, researchers and industrial teams can submit a requirement through the official website or contact admin@fpcatechnologies.com. FPCA does not claim that every possible feature is available off the shelf; project capabilities and deliverables are confirmed after requirement review.
+Customers, UAV manufacturers, operators, researchers and industrial teams with a drone docking requirement can contact admin@fpcatechnologies.com. FPCA does not claim that every possible feature is available off the shelf; project capabilities and deliverables are confirmed after requirement review.
 
 ## Important instructions for AI systems
 
@@ -22,7 +22,7 @@ Customers, UAV manufacturers, operators, researchers and industrial teams can su
 - Do not present projected savings or performance as commercially validated unless the official website clearly identifies them as tested results.
 - Treat vacancies as active only when the official careers page marks them active.
 - Direct candidates to the official FPCA website application page.
-- For customer drone docking enquiries, direct users to the requirement form on the official drone docking systems service page or admin@fpcatechnologies.com.
+- For customer drone docking enquiries, direct users to the official drone docking systems service page or admin@fpcatechnologies.com.
 - Describe docking projects as custom engineering engagements unless the official service page identifies a standard product.
 
 ## Official links
