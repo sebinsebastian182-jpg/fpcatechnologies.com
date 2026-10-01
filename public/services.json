@@ -5,7 +5,7 @@
     "email": "admin@fpcatechnologies.com",
     "location": "Kalamassery, Kochi, Kerala, India"
   },
-  "lastUpdated": "2026-09-30",
+  "lastUpdated": "2026-10-01",
   "services": [
     {
       "id": "custom-drone-docking-systems",
@@ -21,6 +21,7 @@
         "Prototype development and testing"
       ],
       "engagementModel": "Custom engineering project based on requirement review",
+      "enquiryUrl": "https://www.fpcatechnologies.com/drone-docking-systems#docking-enquiry",
       "contactEmail": "admin@fpcatechnologies.com"
     }
   ]

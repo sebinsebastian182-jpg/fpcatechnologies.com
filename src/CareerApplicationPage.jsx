@@ -149,19 +149,22 @@ function ChoiceField({ error, id, label, options, required = false, value, onCha
 
 function ApplicationHeader() {
   return (
-    <nav className="fixed top-0 z-50 w-full bg-[#131313]/95 shadow-2xl shadow-black/50 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
-        <a aria-label="FPCA Technologies home" href="/">
-          <img alt="FPCA Technologies Private Limited logo" className="h-8 w-auto rounded-sm object-contain sm:h-10" src="/fpca-logo.png" />
-        </a>
-        <div className="flex items-center gap-4 text-sm sm:text-base">
-          <a className="text-gray-400 transition-colors hover:text-white" href="/career">Careers</a>
-          <a className="bg-primary-container px-4 py-2 font-medium text-on-primary-container sm:px-6" href="mailto:admin@fpcatechnologies.com">
-            Contact
+    <>
+      <a className="fixed left-4 top-2 z-[60] -translate-y-20 bg-white px-4 py-2 font-semibold text-black transition-transform focus:translate-y-0" href="#main-content">Skip to main content</a>
+      <nav aria-label="Application navigation" className="fixed top-0 z-50 w-full bg-[#131313]/95 shadow-2xl shadow-black/50 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6">
+          <a aria-label="FPCA Technologies home" className="inline-flex shrink-0" href="/">
+            <img alt="FPCA Technologies Private Limited logo" className="h-7 w-auto rounded-sm object-contain sm:h-10" height="513" src="/fpca-logo.png" width="1465" />
           </a>
+          <div className="flex shrink-0 items-center gap-2 text-sm sm:gap-4 sm:text-base">
+            <a className="hidden text-gray-400 transition-colors hover:text-white sm:inline" href="/career">Careers</a>
+            <a className="bg-primary-container px-3 py-2 font-medium text-on-primary-container sm:px-6" href="mailto:admin@fpcatechnologies.com">
+              Contact
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 
@@ -338,7 +341,7 @@ export default function CareerApplicationPage() {
   return (
     <>
       <ApplicationHeader />
-      <main className="min-h-screen bg-background pt-16 sm:pt-20">
+      <main className="min-h-screen bg-background pt-16 sm:pt-20" id="main-content">
         <section className="relative overflow-hidden border-b border-outline-variant/20">
           <div className="grid-pattern pointer-events-none absolute inset-0" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(0,228,117,0.12),transparent_30%),linear-gradient(135deg,rgba(46,91,255,0.18),transparent_45%)]" />
