@@ -848,9 +848,9 @@ function App() {
       <section className="border-y border-outline-variant/20 bg-surface-container-low py-24" id="docking-enquiry">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           <div className="lg:col-span-7">
-            <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Customer Engineering Service</p>
-            <h2 className="font-headline text-4xl md:text-5xl font-bold mb-6">Need a custom drone docking station?</h2>
-            <p className="text-lg md:text-xl leading-relaxed text-on-surface-variant">FPCA Technologies develops drone docking systems around customer aircraft, missions and operating environments. We can support docking-station engineering, power or charging integration, guidance and controls, and drone-to-station integration based on the project requirement.</p>
+            <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Custom Drone Docking Systems</p>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold mb-6">Have a drone docking requirement?</h2>
+            <p className="text-lg md:text-xl leading-relaxed text-on-surface-variant">We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.</p>
           </div>
           <div className="lg:col-span-5">
             <DockingInquiryForm />
