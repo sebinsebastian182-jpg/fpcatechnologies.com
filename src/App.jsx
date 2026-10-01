@@ -249,6 +249,96 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
   );
 }
 
+const initialDockingInquiry = {
+  name: '',
+  phone: '',
+  email: '',
+  address: '',
+  website: '',
+};
+
+function DockingInquiryForm() {
+  const [form, setForm] = useState(initialDockingInquiry);
+  const [status, setStatus] = useState('idle');
+  const [message, setMessage] = useState('');
+  const [submissionStartedAt, setSubmissionStartedAt] = useState(() => Date.now());
+
+  const updateField = (field) => (event) => {
+    setForm((current) => ({ ...current, [field]: event.target.value }));
+    if (status !== 'idle') {
+      setStatus('idle');
+      setMessage('');
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (status === 'submitting') return;
+
+    setStatus('submitting');
+    setMessage('');
+
+    try {
+      const response = await fetch('/api/docking-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, submissionStartedAt }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.error || 'Your enquiry could not be sent. Please try again.');
+      }
+
+      setForm(initialDockingInquiry);
+      setSubmissionStartedAt(Date.now());
+      setStatus('success');
+      setMessage(`Thank you. Your enquiry has been sent. Reference: ${payload.reference}`);
+    } catch (error) {
+      setStatus('error');
+      setMessage(error.message || 'Your enquiry could not be sent. Please try again.');
+    }
+  };
+
+  const inputClassName = 'w-full border border-outline-variant bg-background px-4 py-3 text-base text-on-surface outline-none transition-colors placeholder:text-on-surface-variant/60 focus:border-primary';
+
+  return (
+    <form className="w-full border border-outline-variant/50 bg-surface-container-high p-6 md:p-8" onSubmit={handleSubmit}>
+      <h3 className="font-headline text-2xl font-bold mb-6">Send your requirement</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <label className="text-sm font-semibold text-on-surface" htmlFor="docking-name">
+          Name
+          <input className={`${inputClassName} mt-2`} id="docking-name" maxLength="120" name="name" onChange={updateField('name')} required type="text" value={form.name} />
+        </label>
+        <label className="text-sm font-semibold text-on-surface" htmlFor="docking-phone">
+          Phone number
+          <input className={`${inputClassName} mt-2`} id="docking-phone" inputMode="tel" maxLength="25" name="phone" onChange={updateField('phone')} required type="tel" value={form.phone} />
+        </label>
+        <label className="text-sm font-semibold text-on-surface sm:col-span-2" htmlFor="docking-email">
+          Email
+          <input className={`${inputClassName} mt-2`} id="docking-email" maxLength="254" name="email" onChange={updateField('email')} required type="email" value={form.email} />
+        </label>
+        <label className="text-sm font-semibold text-on-surface sm:col-span-2" htmlFor="docking-address">
+          Address
+          <textarea className={`${inputClassName} mt-2 min-h-24 resize-y`} id="docking-address" maxLength="1000" name="address" onChange={updateField('address')} required rows="3" value={form.address} />
+        </label>
+      </div>
+      <label className="absolute -left-[10000px]" aria-hidden="true">
+        Website
+        <input autoComplete="off" name="website" onChange={updateField('website')} tabIndex="-1" type="text" value={form.website} />
+      </label>
+      <button className="mt-5 inline-flex w-full items-center justify-center gap-2 bg-primary-container px-6 py-3.5 text-base font-bold text-on-primary-container transition hover:shadow-[0_0_20px_rgba(46,91,255,0.4)] disabled:cursor-wait disabled:opacity-70" disabled={status === 'submitting'} type="submit">
+        {status === 'submitting' ? 'Sending…' : 'Send Enquiry'}
+        {status !== 'submitting' && <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>}
+      </button>
+      {message && (
+        <p className={`mt-4 text-sm leading-relaxed ${status === 'success' ? 'text-tertiary' : 'text-error'}`} role={status === 'error' ? 'alert' : 'status'}>
+          {message}
+        </p>
+      )}
+    </form>
+  );
+}
+
 function DroneDockingSystemsPage() {
   const pageTitle = 'Custom Drone Docking Systems | FPCA Technologies';
   const pageDescription = 'FPCA Technologies designs and develops custom drone docking stations and docking-system integrations for customer aircraft, missions and operating environments.';
@@ -755,21 +845,15 @@ function App() {
       </section>
 
       {/* Drone Docking Services */}
-      <section className="border-y border-outline-variant/20 bg-surface-container-low py-24">
+      <section className="border-y border-outline-variant/20 bg-surface-container-low py-24" id="docking-enquiry">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           <div className="lg:col-span-7">
             <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-tertiary">Customer Engineering Service</p>
             <h2 className="font-headline text-4xl md:text-5xl font-bold mb-6">Need a custom drone docking station?</h2>
             <p className="text-lg md:text-xl leading-relaxed text-on-surface-variant">FPCA Technologies develops drone docking systems around customer aircraft, missions and operating environments. We can support docking-station engineering, power or charging integration, guidance and controls, and drone-to-station integration based on the project requirement.</p>
           </div>
-          <div className="lg:col-span-5 flex flex-col gap-4 lg:items-start">
-            <a className="inline-flex items-center justify-center gap-2 bg-primary-container px-8 py-4 text-lg font-semibold text-on-primary-container" href={dockingServicePath}>
-              Explore Docking Systems
-              <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-            </a>
-            <a className="inline-flex items-center justify-center gap-2 border border-outline-variant px-8 py-4 text-lg font-semibold transition-colors hover:bg-surface-container-high" href={dockingInquiryUrl}>
-              Discuss Your Requirement
-            </a>
+          <div className="lg:col-span-5">
+            <DockingInquiryForm />
           </div>
         </div>
       </section>
