@@ -2,9 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-color: #0A0C10;
+    color: #EEF0F4;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  ::placeholder {
+    color: #6B7485;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-label text-[11px] uppercase tracking-[0.18em];
+  }
+  .btn {
+    @apply inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded border border-transparent px-6 text-[15px] font-semibold transition-[transform,background-color,border-color,color] duration-150 ease-out active:translate-y-px;
+  }
+  .btn-primary {
+    @apply bg-accent text-white hover:bg-accent-hover;
+  }
+  .btn-ghost {
+    @apply border-white/20 bg-transparent text-on-surface hover:border-white/50 hover:text-white;
+  }
+  .card {
+    @apply rounded-xl border border-white/[0.07] bg-surface-container-high;
+  }
+  .field-input {
+    @apply w-full min-h-[48px] rounded border border-white/10 bg-background px-3.5 py-3 text-base text-on-surface outline-none transition-colors placeholder:text-[#6B7485] focus:border-accent focus:ring-[3px] focus:ring-accent/25;
   }
   .grid-pattern {
     background-image: radial-gradient(circle, #434656 1px, transparent 1px);
@@ -12,7 +53,7 @@
     opacity: 0.1;
   }
   .glass-card {
-    background: rgba(42, 42, 42, 0.6);
+    background: rgba(17, 20, 27, 0.8);
     backdrop-filter: blur(12px);
   }
 }

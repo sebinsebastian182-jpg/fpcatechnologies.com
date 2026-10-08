@@ -149,14 +149,14 @@ function ChoiceField({ error, id, label, options, required = false, value, onCha
 
 function ApplicationHeader() {
   return (
-    <nav className="fixed top-0 z-50 w-full bg-[#131313]/95 shadow-2xl shadow-black/50 backdrop-blur-xl">
+    <nav className="fixed top-0 z-50 w-full border-b border-white/[0.06] bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
         <a aria-label="FPCA Technologies home" href="/">
           <img alt="FPCA Technologies Private Limited logo" className="h-8 w-auto rounded-sm object-contain sm:h-10" src="/fpca-logo.png" />
         </a>
         <div className="flex items-center gap-4 text-sm sm:text-base">
           <a className="text-gray-400 transition-colors hover:text-white" href="/career">Careers</a>
-          <a className="bg-primary-container px-4 py-2 font-medium text-on-primary-container sm:px-6" href="mailto:admin@fpcatechnologies.com">
+          <a className="btn btn-primary min-h-[44px] px-4 text-sm sm:px-5" href="mailto:admin@fpcatechnologies.com">
             Contact
           </a>
         </div>
@@ -167,7 +167,7 @@ function ApplicationHeader() {
 
 function ApplicationFooter() {
   return (
-    <footer className="border-t border-[#2a2a2a] bg-[#131313] py-10 text-sm">
+    <footer className="border-t border-white/[0.08] bg-surface-container-lowest py-10 text-sm">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 px-6 text-gray-500 md:flex-row md:items-center">
         <div>
           <img alt="FPCA Technologies Private Limited logo" className="mb-3 h-9 w-auto object-contain" src="/fpca-logo.png" />
@@ -344,7 +344,7 @@ export default function CareerApplicationPage() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(0,228,117,0.12),transparent_30%),linear-gradient(135deg,rgba(46,91,255,0.18),transparent_45%)]" />
           <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 lg:py-20">
             <a className="mb-8 inline-flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary" href="/career">
-              <span aria-hidden="true" className="material-symbols-outlined text-lg">arrow_back</span>
+              <svg aria-hidden="true" className="h-4 w-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
               Back to Careers
             </a>
             <div className="grid gap-10 lg:grid-cols-12">
@@ -375,7 +375,7 @@ export default function CareerApplicationPage() {
         <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:py-20">
           {status === 'success' ? (
             <div className="border border-tertiary/50 bg-tertiary/10 p-7 text-center sm:p-12" role="status">
-              <span aria-hidden="true" className="material-symbols-outlined mb-5 text-6xl text-tertiary">task_alt</span>
+              <svg aria-hidden="true" className="mb-5 h-14 w-14 text-tertiary" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="m8.5 12 2.5 2.5 4.5-5" /></svg>
               <h2 className="mb-4 font-headline text-3xl font-bold">Application submitted successfully</h2>
               <p className="mb-2 text-on-surface-variant">Your application reference number is:</p>
               <p className="mb-6 break-all font-headline text-2xl font-bold text-white">{result?.reference}</p>
@@ -449,7 +449,7 @@ export default function CareerApplicationPage() {
                 <h2 className="mb-3 font-headline text-2xl font-bold">Resume or CV<RequiredMark /></h2>
                 <p className="mb-5 text-sm text-on-surface-variant">PDF, DOC, or DOCX · maximum 2 MB</p>
                 <label className="inline-flex cursor-pointer items-center gap-3 border border-primary bg-primary-container/10 px-5 py-3 font-medium text-white hover:bg-primary-container/20" htmlFor="resume">
-                  <span aria-hidden="true" className="material-symbols-outlined">upload_file</span>
+                  <svg aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24"><path d="M12 16V8M8 12l4-4 4 4" /><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
                   Choose file
                 </label>
                 <input
