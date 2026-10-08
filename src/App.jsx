@@ -310,7 +310,7 @@ function SiteFooter({ tagline = 'Developing autonomous connector delivery for gr
     <footer className="border-t border-white/[0.08] bg-surface-container-lowest px-5 pb-10 pt-14 text-sm sm:px-8">
       <div className="mx-auto flex max-w-content flex-wrap items-start justify-between gap-12">
         <div className="flex min-w-0 max-w-md flex-1 basis-[320px] flex-col gap-4">
-          <BrandLogo className="h-9" />
+          <BrandLogo className="h-9 self-start" />
           <p className="font-semibold text-on-surface">{companyName}</p>
           <p className="leading-relaxed text-muted">{tagline}</p>
           {showContact && (
