@@ -6,7 +6,7 @@ Official service page: https://www.fpcatechnologies.com/drone-docking-systems
 
 Contact: admin@fpcatechnologies.com
 
-Location: Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala, India
+Location: Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503, India
 
 ## Service summary
 

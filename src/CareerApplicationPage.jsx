@@ -364,7 +364,7 @@ export default function CareerApplicationPage() {
                   <div><dt className="text-white">Type</dt><dd>Internship</dd></div>
                   <div><dt className="text-white">Duration</dt><dd>3 months</dd></div>
                   <div><dt className="text-white">Mode</dt><dd>Full-time, on-site</dd></div>
-                  <div><dt className="text-white">Location</dt><dd>Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala</dd></div>
+                  <div><dt className="text-white">Location</dt><dd>Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503</dd></div>
                   <div className="sm:col-span-2"><dt className="text-white">Field</dt><dd>UAV autonomy, robotics software, flight-control integration, simulation and field testing</dd></div>
                 </dl>
               </aside>

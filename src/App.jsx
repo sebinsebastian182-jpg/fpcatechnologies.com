@@ -8,7 +8,7 @@ const openings = [
     type: 'Internship',
     duration: '3 months',
     mode: 'On-site',
-    location: 'Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi',
+    location: 'Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503',
     focus: 'UAV autonomy, robotics software, flight control integration, simulation, and field testing.',
   },
 ];
@@ -254,7 +254,7 @@ function SiteFooter({ tagline = 'Developing autonomous connector delivery for gr
           <p className="leading-relaxed text-muted">{tagline}</p>
           {showContact && (
             <div className="flex flex-col gap-2.5 leading-relaxed text-muted">
-              <span>Kerala Technology Innovation Zone, Kinfra Hi-Tech Park Main Rd, HMT Colony, North Kalamassery, Kalamassery, Kochi, Kerala 683503</span>
+              <span>Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503</span>
               <a className="transition-colors hover:text-[#8FA8FF]" href="tel:+918086430571">+918086430571</a>
               <a className="transition-colors hover:text-[#8FA8FF]" href={`mailto:${contactEmail}`}>{contactEmail}</a>
               <LinkedInLink />
@@ -714,7 +714,7 @@ function CareersPage() {
         <section className="border-t border-white/[0.06] px-5 py-24 sm:px-8 md:py-32" style={{ background: 'radial-gradient(900px 400px at 50% 100%, rgba(59,108,255,.18), transparent 60%)' }}>
           <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
             <h2 className="font-headline text-5xl leading-[1.04] md:text-6xl">Ready to work on real UAV systems?</h2>
-            <p className="max-w-[50ch] text-lg leading-relaxed text-on-surface-variant md:text-xl">Apply for the 3-month on-site internship at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi.</p>
+            <p className="max-w-[50ch] text-lg leading-relaxed text-on-surface-variant md:text-xl">Apply for the 3-month on-site internship at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503.</p>
             <div className="pt-3">
               <a className="btn btn-primary min-h-[56px] px-8 text-base" href={applicationFormUrl}>
                 Apply Now

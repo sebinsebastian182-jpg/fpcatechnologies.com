@@ -98,7 +98,7 @@ Call to action: Join Our Team (https://www.fpcatechnologies.com/career)
 
 ## Footer
 FPCA TECHNOLOGIES Private Limited — Developing autonomous connector delivery for grid-powered heavy machinery.
-Address: Kerala Technology Innovation Zone, Kinfra Hi-Tech Park Main Rd, HMT Colony, North Kalamassery, Kalamassery, Kochi, Kerala 683503
+Address: Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503
 Phone: +91 80864 30571 · Email: admin@fpcatechnologies.com · LinkedIn: https://www.linkedin.com/company/flying-power-cables-applications/
 Navigation: Solution, Benefits, Applications, Drone Docking Systems, Careers. Company: Careers, LinkedIn.
 © FPCA TECHNOLOGIES Private Limited. Engineered for the Kinetic Blueprint.
@@ -156,7 +156,7 @@ FPCA is developing an autonomous system in which a drone transports an electrica
 ## Current opening: UAV Robotics Software Intern
 A hands-on internship for makers who want to build autonomous drone systems for real-world industrial electrification.
 
-Internship · 3 months · On-site · Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi
+Internship · 3 months · On-site · Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503
 Focus: UAV autonomy, robotics software, flight control integration, simulation, and field testing.
 Status: active (see https://www.fpcatechnologies.com/jobs.json)
 
@@ -195,7 +195,7 @@ We focus on how you reason, build, test, and communicate tradeoffs. Expect direc
 4. Offer and onboarding
 
 ## Ready to work on real UAV systems?
-Apply for the 3-month on-site internship at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi.
+Apply for the 3-month on-site internship at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503.
 Apply Now: https://www.fpcatechnologies.com/career/apply
 
 ---

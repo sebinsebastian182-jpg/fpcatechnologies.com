@@ -230,7 +230,7 @@ export const pages = [
     path: '/career/apply',
     title: 'Apply — UAV Robotics Software Intern | FPCA Technologies',
     description:
-      'Application form for the UAV Robotics Software Intern position at FPCA Technologies, Maker Village, Kalamassery, Kochi.',
+      'Application form for the UAV Robotics Software Intern position at FPCA Technologies, Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503.',
     schemas: [organizationSchema, jobPostingSchema],
   },
   {
@@ -238,7 +238,7 @@ export const pages = [
     canonical: '/career/apply',
     title: 'Apply — UAV Robotics Software Intern | FPCA Technologies',
     description:
-      'Application form for the UAV Robotics Software Intern position at FPCA Technologies, Maker Village, Kalamassery, Kochi.',
+      'Application form for the UAV Robotics Software Intern position at FPCA Technologies, Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503.',
     schemas: [organizationSchema, jobPostingSchema],
   },
 ];
