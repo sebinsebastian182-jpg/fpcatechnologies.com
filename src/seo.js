@@ -38,30 +38,47 @@ export const organizationSchema = {
     telephone: contactPhone,
     availableLanguage: ['en'],
   },
+  image: logoUrl,
+  knowsAbout: [
+    'Autonomous grid-power connector delivery for heavy machinery',
+    'Tethered drone power delivery for electric off-highway machinery',
+    'Drone docking station design and integration',
+    'UAV autonomy, robotics software and flight-control integration',
+    'Electrification of agricultural, construction and mining equipment',
+  ],
+  makesOffer: [
+    {
+      '@type': 'Offer',
+      itemOffered: { '@id': `${siteUrl}/#autonomous-connector-delivery` },
+      availability: 'https://schema.org/PreOrder',
+      areaServed: { '@type': 'Country', name: 'India' },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: { '@id': `${siteUrl}/drone-docking-systems#service` },
+      availability: 'https://schema.org/InStock',
+      areaServed: { '@type': 'Country', name: 'India' },
+    },
+  ],
 };
 
-export const productSchema = {
+export const connectorDeliverySchema = {
   '@context': 'https://schema.org',
-  '@type': 'Product',
+  '@type': 'Service',
   '@id': `${siteUrl}/#autonomous-connector-delivery`,
   name: 'Autonomous Connector Delivery System',
-  brand: { '@id': `${siteUrl}/#organization` },
-  manufacturer: { '@id': `${siteUrl}/#organization` },
+  serviceType: 'Autonomous grid-power connector delivery for heavy machinery',
+  provider: { '@id': `${siteUrl}/#organization` },
+  areaServed: { '@type': 'Country', name: 'India' },
   url: `${siteUrl}/#solution`,
   image: `${siteUrl}/application-agriculture.webp`,
   description:
-    'A tethered, drone-based power delivery system for heavy electric machinery. A drone carries an electrical connector from a machine-mounted cable reel to an elevated, grid-connected docking port, then powers down while grid electricity flows through the tether to the machine. The drone relocates the connector to the next port as the machine moves across the site.',
+    'A tethered, drone-based power delivery system for heavy electric machinery. A drone carries an electrical connector from a machine-mounted cable reel to an elevated, grid-connected docking port, then powers down while grid electricity flows through the tether to the machine. The drone relocates the connector to the next port as the machine moves across the site. Stage: prototype development and validation. Primary market: agriculture; future markets: construction and mining.',
   category: 'Industrial power delivery for electric off-highway machinery',
   audience: {
     '@type': 'Audience',
     audienceType: 'Agricultural, construction and mining equipment operators and OEMs',
   },
-  additionalProperty: [
-    { '@type': 'PropertyValue', name: 'Development stage', value: 'Prototype development and validation' },
-    { '@type': 'PropertyValue', name: 'Primary market', value: 'Agriculture' },
-    { '@type': 'PropertyValue', name: 'Future markets', value: 'Construction and mining' },
-    { '@type': 'PropertyValue', name: 'Power source', value: 'Grid electricity via elevated docking ports fed by an underground supply' },
-  ],
 };
 
 export const dockingServiceSchema = {
@@ -177,7 +194,7 @@ export const pages = [
     title: 'FPCA Technologies — Grid power for heavy electric machinery by autonomous connector delivery',
     description:
       'FPCA Technologies develops autonomous connector delivery for grid-powered heavy machinery and custom drone docking systems for customer UAV operations. Based in Kochi, India.',
-    schemas: [organizationSchema, productSchema, dockingServiceSchema, faqSchema],
+    schemas: [organizationSchema, connectorDeliverySchema, dockingServiceSchema, faqSchema],
   },
   {
     path: '/drone-docking-systems',
