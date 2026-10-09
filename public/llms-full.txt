@@ -1,0 +1,214 @@
+# FPCA Technologies — full site text
+
+Source: https://www.fpcatechnologies.com/ · Last updated: 2026-10-09
+This file contains the complete visible text of every page on the website, in Markdown, for AI assistants and crawlers. See https://www.fpcatechnologies.com/llms.txt for a summary and usage notes.
+
+---
+
+# Page: Homepage
+URL: https://www.fpcatechnologies.com/
+
+## FPCA TECHNOLOGIES
+The Kinetic Blueprint
+
+If there is power nearby, why do you need batteries? Making heavy electric machinery run on electricity 24/7.
+
+Calls to action: Explore Technology (#solution) · See Applications (#applications) · Contact Us (admin@fpcatechnologies.com)
+
+Hero illustration: Grid power for compact farm machines — autonomous port switching for a 24/7 operating goal. Caption: Autonomous Connector Docking.
+
+## The Battery Bottleneck
+Current industrial electrification faces a critical paradox: Heavy machinery requires immense power, yet massive batteries introduce "Charge Anxiety" and crippling weight.
+
+Relying on static charging stations leads to 30% downtime for industrial fleets, stalling productivity and inflating operational overhead.
+
+- 30% — Fleet Downtime
+- 2x — Maintenance Cost
+
+## Grid Energy. Autonomous Connector Delivery.
+The drone transports the electrical connector to an elevated grid-connected docking port and powers down after docking.
+
+1. Autonomous Flight — Precision flight control transports and docks the electrical connector at the elevated grid-connected port.
+2. High-Tension Link — Optimized power cables deliver grid-level voltage directly to the machine's motor, bypassing the need for storage.
+3. Seamless Integration — Compatible with existing electric excavator and tractor architectures, making the transition to FPCA effortless.
+
+## How it works in the field: Grid power that follows the machine
+Power comes from an underground grid supply to elevated docking ports. The drone carries the connector to the nearest port.
+
+- Agriculture (concept illustration): Compact farm machines run on grid electricity 24/7, with the drone switching ports autonomously as the machine works down the field. The illustration shows a grid supply cabinet, an underground grid supply cable, Port 1 and Port 2 on elevated poles, a compact farm machine with a raised tether guide and cable reel, and the drone switching from Port 1 to Port 2 at the midpoint as the machine moves toward Port 2.
+- Mining (concept illustration): Power that moves with the pit: the same drone relocates the connector from port to port as the electric excavator advances, with no exhaust at the working face. The illustration shows a grid supply cabinet, an underground grid supply, Port 1 (docked: drone powers down), Port 2 and Port 3, an electric excavator with a 2 m mast and cable reel, and the drone moving to the next port as the machine advances.
+
+## Custom Drone Docking Systems: Have a drone docking requirement?
+We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.
+
+Concept animation: custom docking port with autonomous approach and grid connection (video).
+
+Enquiry form "Send your requirement" — fields: Name, Phone number, Email, Address. Submitting sends the enquiry to FPCA and shows a reference number.
+
+## Benefits
+- 95% — Carbon Reduction
+- 70% — Fuel Cost Savings
+- 40% — Operating Cost Cut
+- 90%+ — Total Efficiency
+
+(These are design targets and comparative estimates for the system under development, not independently verified field results.)
+
+## Efficiency Engineering
+| Energy Technology | Efficiency % | Emissions | Reliability |
+| --- | --- | --- | --- |
+| FPCA Grid Link | 95% | Zero Local | Max (Continuous) |
+| Battery Electric | 80% | Zero Local | Variable (Charging) |
+| Fossil Fuel (Diesel) | 35% | High Impact | High (Refueling) |
+
+## Universal Utility (Applications)
+- Infrastructure — Construction: Eliminate diesel fumes in urban centers and power high-torque heavy excavators 24/7 without refueling stops.
+- Extraction — Mining: Deep-pit operations benefit from reduced ventilation costs as electric machines generate zero heat and exhaust.
+- Cultivation — Agriculture: Power heavy tilling and harvesting equipment directly from renewable farm grids, slashing fuel dependency.
+
+## Frequently asked questions: Questions we are asked most
+Short, factual answers about the technology, who it is for, and how to work with us.
+
+### What does FPCA Technologies do?
+FPCA Technologies Private Limited is a deep-technology company in Kochi, India. We are developing an autonomous connector delivery system that lets heavy electric machinery run directly on grid electricity instead of batteries, and we provide custom engineering of drone docking systems for UAV operators.
+
+### How does autonomous connector delivery work?
+An underground grid supply feeds elevated docking ports placed along the work area. A drone carries the electrical connector from a cable reel mounted on the machine to the nearest port, docks, and powers down. Grid electricity then flows through the tether to the machine. As the machine works across the site, the drone relocates the connector to the next port. The drone does not hover while power is supplied.
+
+### Who is it for?
+Agriculture is our primary market: compact farm machines such as tractors and tilling or harvesting equipment working bounded fields. Construction and mining are the next applications, including electric excavators and loaders on urban sites and in open pits.
+
+### Why is it better than diesel power or manual cable handling?
+Compared with diesel, an electric machine on grid power produces no exhaust at the point of work and avoids refuelling stops and fuel logistics. Compared with a battery, there is no large pack to carry, charge or replace, and the machine is not limited by pack capacity. Compared with a manually handled cable, the connector is delivered and switched between ports autonomously, so an operator does not have to drag, route or reconnect a live cable as the machine moves.
+
+### What stage is the technology at?
+The autonomous connector delivery system is under prototype development and validation. Published performance figures on this site are design targets, not independently verified field results. Measured figures will be published as validation progresses.
+
+### Do you build custom drone docking stations for other companies?
+Yes. We design, build, test and deploy custom drone docking ports for customer aircraft and sites. Depending on the agreed scope this can cover docking-station engineering, power or charging integration, alignment, sensing and telemetry, station controls, drone and autopilot integration, prototyping and testing. Deliverables are confirmed after a requirement review.
+
+### How do I request a pilot, demo or quote?
+Email admin@fpcatechnologies.com or call +91 80864 30571. For drone docking projects you can also use the enquiry form on this page. Tell us your machine or drone type, the site, and your timeline, and we will reply with next steps.
+
+### Where are you based?
+We are incubated at Maker Village, Kerala Startup Mission's integrated startup complex at KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503, India.
+
+## Join the Sustainable Revolution
+Be at the forefront of the kinetic blueprint for a fossil-free industrial future.
+Call to action: Join Our Team (https://www.fpcatechnologies.com/career)
+
+## Footer
+FPCA TECHNOLOGIES Private Limited — Developing autonomous connector delivery for grid-powered heavy machinery.
+Address: Kerala Technology Innovation Zone, Kinfra Hi-Tech Park Main Rd, HMT Colony, North Kalamassery, Kalamassery, Kochi, Kerala 683503
+Phone: +91 80864 30571 · Email: admin@fpcatechnologies.com · LinkedIn: https://www.linkedin.com/company/flying-power-cables-applications/
+Navigation: Solution, Benefits, Applications, Drone Docking Systems, Careers. Company: Careers, LinkedIn.
+© FPCA TECHNOLOGIES Private Limited. Engineered for the Kinetic Blueprint.
+
+---
+
+# Page: Custom Drone Docking Systems
+URL: https://www.fpcatechnologies.com/drone-docking-systems (alias: /drone-docking-stations)
+
+## Have a drone docking requirement?
+We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.
+
+Call to action: Share Your Requirement / Discuss a Project (email admin@fpcatechnologies.com with the subject "Drone docking system enquiry").
+
+Concept animation: custom docking port with autonomous approach and grid connection (video).
+
+## What We Can Develop: A docking solution shaped around your operation
+Every drone, site and mission has different constraints. FPCA begins with the requirement and defines the appropriate docking architecture with the customer.
+
+- Docking station engineering — Mechanical docking concepts and station architecture developed around your drone geometry, payload and deployment constraints.
+- Power and charging integration — Electrical interfaces and charging or power-transfer functions can be evaluated and integrated when required by the project.
+- Guidance and station controls — Support for alignment, landing, sensing, telemetry and station-control requirements as part of the complete docking workflow.
+- Drone and system integration — Integration with the customer drone, autopilot and operating workflow, followed by prototype checks and field-oriented testing.
+
+## Where It Fits: Built for repeatable drone operations
+Docking infrastructure can support operations where drones need a reliable home point, automated turnaround or integration with a larger site system.
+
+- Inspection and monitoring operations
+- Security and surveillance missions
+- Industrial and infrastructure sites
+- Agriculture and remote field operations
+- Research, OEM and custom UAV programmes
+
+Footer: Custom drone docking system development and autonomous connector delivery engineering from Kochi, Kerala. Links: Home, Docking Systems, Careers, admin@fpcatechnologies.com, LinkedIn.
+
+---
+
+# Page: Careers
+URL: https://www.fpcatechnologies.com/career (alias: /careers)
+
+## Build the future of industrial electrification
+Careers at FPCA. Join our engineering team building autonomous tethered drone systems that deliver grid power to heavy electric machines.
+
+Calls to action: View Open Roles · Send Your Profile (admin@fpcatechnologies.com) · Apply Now (https://www.fpcatechnologies.com/career/apply)
+
+Hiring Focus: UAV robotics software, autonomous navigation, flight control integration, and field testing.
+Open now: UAV Robotics Software Intern — 3 months · On-site · Maker Village, Kochi.
+
+## About FPCA: Powering heavy EVs without the battery bottleneck
+FPCA is developing an autonomous system in which a drone transports an electrical connector to an elevated grid-connected docking port. After docking, the drone powers down while the machine receives electricity through the tether.
+
+- Grid power in motion — Our autonomous tethered drone enables heavy machines to draw power directly from the electrical grid, reducing battery dependence and downtime.
+- Real product engineering — Incubated at Maker Village, Kerala Startup Mission Integrated Startup Complex, we work across UAVs, robotics, embedded systems, and autonomous navigation.
+
+## Current opening: UAV Robotics Software Intern
+A hands-on internship for makers who want to build autonomous drone systems for real-world industrial electrification.
+
+Internship · 3 months · On-site · Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi
+Focus: UAV autonomy, robotics software, flight control integration, simulation, and field testing.
+Status: active (see https://www.fpcatechnologies.com/jobs.json)
+
+### What you will work on
+- Develop software for autonomous UAV operations.
+- Work with ROS 2, Python, and C++ for robotics software development.
+- Integrate GPS, LiDAR, cameras, UWB, telemetry, and other sensing systems.
+- Support Pixhawk flight controller integration using MAVLink, ArduPilot or PX4, and companion computers such as Raspberry Pi.
+- Develop and test control algorithms for autonomous flight and tether management.
+- Debug software through laboratory checks and outdoor flight testing.
+- Document experiments and collaborate with hardware and mechanical teams to improve system performance.
+
+Core tools: ROS 2, Python, C++, Linux, Pixhawk, MAVLink, ArduPilot/PX4, Raspberry Pi
+Systems exposure: GPS, LiDAR, Cameras, UWB, Telemetry, Tether control
+
+### Who should apply
+- Pursuing or recently completed a Diploma or Bachelor's degree in Robotics, Mechatronics, Electronics, Electrical Engineering, Mechanical Engineering, Computer Science, or a related field.
+- Basic knowledge of robotics and autonomous systems.
+- Familiarity with Linux, especially Ubuntu, is preferred.
+- Exposure to ROS or ROS 2, Raspberry Pi, Pixhawk, MAVLink, ArduPilot, or PX4 is a plus.
+- Strong interest in UAVs, drones, robotics, and autonomous navigation.
+- Problem-solving mindset, willingness to learn, and comfort working hands-on.
+- Ability to work on-site in Kochi and participate in laboratory and field testing.
+
+### What you will gain
+- Hands-on experience building a real autonomous UAV product.
+- Exposure to robotics, embedded systems, autonomous navigation, and drone technologies.
+- Experience taking a product from prototype toward real-world deployment.
+- Practice with engineering documentation, experiments, debugging, and cross-disciplinary collaboration.
+
+## Hiring process: Practical, engineering-led interviews
+We focus on how you reason, build, test, and communicate tradeoffs. Expect direct conversations with the people building the system.
+1. Profile review
+2. Technical conversation
+3. Work sample discussion
+4. Offer and onboarding
+
+## Ready to work on real UAV systems?
+Apply for the 3-month on-site internship at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi.
+Apply Now: https://www.fpcatechnologies.com/career/apply
+
+---
+
+# Page: Application form
+URL: https://www.fpcatechnologies.com/career/apply (alias: /careers/apply)
+
+Online application for the UAV Robotics Software Intern role. Required: full name, email, mobile, current location, institution, qualification, area of study, graduation year, earliest joining date, internship duration, on-site availability, relocation availability, laptop availability, motivation (50–1,500 characters), a relevant project (50–2,000 characters), résumé (PDF, DOC or DOCX, up to 2 MB) and recruitment consent. Optional: LinkedIn, GitHub, portfolio URL, relevant skills. Applicants receive a confirmation email with a reference number.
+
+---
+
+# Contact
+- Email: admin@fpcatechnologies.com
+- Phone: +91 80864 30571
+- LinkedIn: https://www.linkedin.com/company/flying-power-cables-applications/
+- Address: Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503, India

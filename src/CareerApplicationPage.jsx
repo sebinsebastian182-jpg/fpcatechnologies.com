@@ -149,8 +149,8 @@ function ChoiceField({ error, id, label, options, required = false, value, onCha
 
 function ApplicationHeader() {
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-white/[0.06] bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
+    <header className="fixed top-0 z-50 w-full border-b border-white/[0.06] bg-background/80 backdrop-blur-xl">
+      <nav aria-label="Primary" className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
         <a aria-label="FPCA Technologies home" href="/">
           <img alt="FPCA Technologies Private Limited logo" className="h-8 w-auto rounded-sm object-contain sm:h-10" src="/fpca-logo.png" />
         </a>
@@ -160,8 +160,8 @@ function ApplicationHeader() {
             Contact
           </a>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
 

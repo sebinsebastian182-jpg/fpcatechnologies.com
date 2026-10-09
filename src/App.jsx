@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CareerApplicationPage from './CareerApplicationPage.jsx';
+import { faqItems } from './seo.js';
 
 const openings = [
   {
@@ -22,69 +23,6 @@ const dockingServicePath = '/drone-docking-systems';
 const dockingVideoSrc = '/drone-docking-port.mp4';
 const dockingVideoPoster = '/drone-docking-port-poster.jpg';
 const dockingInquiryUrl = `mailto:${contactEmail}?subject=${encodeURIComponent('Drone docking system enquiry')}&body=${encodeURIComponent('Hello FPCA Technologies,\n\nWe would like to discuss a drone docking requirement.\n\nApplication/use case:\nDrone platform:\nRequired docking functions:\nDeployment location/environment:\nTarget timeline:\n\nRegards,\n')}`;
-
-const dockingServiceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'Custom Drone Docking System Development',
-  serviceType: 'Drone docking station design, development and integration',
-  description: 'FPCA Technologies works with customers to develop custom drone docking stations and related docking systems based on their aircraft, operating environment and mission requirements.',
-  url: `https://www.fpcatechnologies.com${dockingServicePath}`,
-  areaServed: {
-    '@type': 'Country',
-    name: 'India',
-  },
-  provider: {
-    '@type': 'Organization',
-    name: 'FPCA Technologies Private Limited',
-    url: 'https://www.fpcatechnologies.com/',
-    logo: 'https://www.fpcatechnologies.com/fpca-mark.png',
-    email: contactEmail,
-    telephone: '+91 80864 30571',
-    sameAs: [linkedInUrl],
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Maker Village, KINFRA Hi-Tech Park',
-      addressLocality: 'Kalamassery, Kochi',
-      addressRegion: 'Kerala',
-      postalCode: '683503',
-      addressCountry: 'IN',
-    },
-  },
-};
-
-const jobPosting = {
-  '@context': 'https://schema.org',
-  '@type': 'JobPosting',
-  title: 'UAV Robotics Software Intern',
-  description: 'A three-month, full-time, on-site internship working on UAV autonomy, robotics software, flight-control integration, simulation, sensor integration, laboratory checks, and field testing.',
-  datePosted: '2026-07-28',
-  employmentType: 'INTERN',
-  hiringOrganization: {
-    '@type': 'Organization',
-    name: 'FPCA Technologies Private Limited',
-    sameAs: ['https://www.fpcatechnologies.com', linkedInUrl],
-    logo: 'https://www.fpcatechnologies.com/fpca-mark.png',
-  },
-  jobLocation: {
-    '@type': 'Place',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Maker Village, KINFRA Hi-Tech Park',
-      addressLocality: 'Kalamassery',
-      addressRegion: 'Kerala',
-      postalCode: '683503',
-      addressCountry: 'IN',
-    },
-  },
-  directApply: true,
-  url: 'https://www.fpcatechnologies.com/career',
-  applicationContact: {
-    '@type': 'ContactPoint',
-    email: 'admin@fpcatechnologies.com',
-    contactType: 'Recruitment',
-  },
-};
 
 const responsibilities = [
   'Develop software for autonomous UAV operations.',
@@ -226,13 +164,13 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
   const ctaProps = ctaExternal ? { rel: 'noreferrer', target: '_blank' } : {};
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-white/[0.06] bg-background/80 backdrop-blur-xl">
+    <header className="fixed top-0 z-50 w-full border-b border-white/[0.06] bg-background/80 backdrop-blur-xl">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <div className="flex h-[72px] items-center justify-between gap-6">
           <a aria-label={`${companyName} home`} className="inline-flex shrink-0 items-center" href="/">
             <BrandLogo className="h-8 sm:h-9" />
           </a>
-          <div className="hidden items-center gap-8 md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
             {navLinks.map((link) => (
               <a
                 className={`${activePage === link.key ? 'text-white' : 'text-[#B8C0CF] hover:text-white'} text-sm font-medium transition-colors`}
@@ -242,7 +180,7 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
                 {link.label}
               </a>
             ))}
-          </div>
+          </nav>
           <div className="flex items-center gap-3 sm:gap-5">
             {secondaryHref && secondaryLabel ? (
               <a className="hidden text-sm font-medium text-[#B8C0CF] transition-colors hover:text-white md:block" href={secondaryHref}>
@@ -268,7 +206,8 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
             </button>
           </div>
         </div>
-        <div
+        <nav
+          aria-label="Mobile"
           className={`${isMenuOpen ? 'grid' : 'hidden'} gap-1 border-t border-white/[0.06] py-3 md:hidden`}
           id="mobile-navigation"
         >
@@ -291,9 +230,9 @@ function TopNav({ activePage = 'home', ctaHref, ctaLabel, ctaExternal = false, s
               {secondaryLabel}
             </a>
           ) : null}
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }
 
@@ -345,12 +284,25 @@ function SiteFooter({ tagline = 'Developing autonomous connector delivery for gr
 }
 
 function DockingVideo({ className = '' }) {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  }, []);
+
   return (
     <figure className={`flex flex-col gap-3 ${className}`}>
       <div className="aspect-video max-w-full overflow-hidden rounded-xl border border-white/10 bg-[#E9EBEF]">
         <video
           autoPlay
           className="block h-full w-full object-cover"
+          ref={videoRef}
           controls
           loop
           muted
@@ -501,7 +453,6 @@ function DroneDockingSystemsPage() {
 
   return (
     <>
-      <script dangerouslySetInnerHTML={{ __html: JSON.stringify(dockingServiceSchema) }} type="application/ld+json" />
       <TopNav activePage="docking" ctaHref={dockingInquiryUrl} ctaLabel="Discuss a Project" />
 
       <main className="pt-[72px]">
@@ -587,7 +538,6 @@ function MetaChip({ Icon: ChipIcon, children, className = '' }) {
 function CareersPage() {
   return (
     <>
-      <script dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPosting) }} type="application/ld+json" />
       <TopNav activePage="careers" ctaHref={applicationFormUrl} ctaLabel="Apply Now" />
 
       <main className="pt-[72px]">
@@ -790,8 +740,8 @@ function CareersPage() {
 
 /* ---------- Homepage ---------- */
 
-function App() {
-  const currentPath = window.location.pathname.replace(/\/$/, '');
+function App({ path }) {
+  const currentPath = (path ?? window.location.pathname).replace(/\/$/, '');
   const isCareersPage = currentPath === '/career' || currentPath === '/careers';
   const isApplicationPage = currentPath === '/career/apply' || currentPath === '/careers/apply';
   const isDockingServicePage = currentPath === dockingServicePath || currentPath === '/drone-docking-stations';
@@ -1033,6 +983,30 @@ function App() {
                   <h3 className="font-headline text-[34px] leading-[1.1]">{item.title}</h3>
                   <p className="text-[15px] leading-relaxed text-on-surface-variant">{item.copy}</p>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section aria-labelledby="faq-heading" className="border-t border-white/[0.06] px-5 py-20 sm:px-8 md:py-28" id="faq">
+          <div className="mx-auto flex max-w-content flex-wrap items-start gap-14">
+            <div className="flex min-w-0 flex-1 basis-[380px] flex-col gap-5">
+              <Eyebrow>Frequently asked questions</Eyebrow>
+              <h2 className="font-headline text-4xl leading-[1.06] md:text-[52px]" id="faq-heading">Questions we are asked most</h2>
+              <p className="max-w-[46ch] text-lg leading-relaxed text-on-surface-variant">Short, factual answers about the technology, who it is for, and how to work with us.</p>
+            </div>
+            <div className="card min-w-0 flex-1 basis-[560px] divide-y divide-white/[0.07]">
+              {faqItems.map((item) => (
+                <details className="group px-6 py-5 md:px-8" key={item.question}>
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                    <span>{item.question}</span>
+                    <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 text-primary transition-transform group-open:rotate-45">
+                      <Icon size={16}><path d="M12 5v14M5 12h14" /></Icon>
+                    </span>
+                  </summary>
+                  <p className="pt-4 text-[15px] leading-relaxed text-on-surface-variant">{item.answer}</p>
+                </details>
               ))}
             </div>
           </div>

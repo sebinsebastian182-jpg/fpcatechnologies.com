@@ -2,17 +2,55 @@
 
 > FPCA Technologies is an Indian deep-technology company developing autonomous connector delivery for grid-powered heavy machinery and custom drone docking systems for customer UAV operations.
 
-FPCA Technologies Private Limited is based at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala, India.
+FPCA Technologies Private Limited is based at Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503, India.
 
-The company is developing a system in which a drone transports an electrical connector from a machine-mounted cable reel to an elevated, grid-connected docking port. After the connector is docked, the drone powers down while electricity is delivered through the tether to the machine.
+The company is developing a system in which a drone transports an electrical connector from a machine-mounted cable reel to an elevated, grid-connected docking port. After the connector is docked, the drone powers down while electricity is delivered through the tether to the machine. As the machine works across the site, the drone relocates the connector to the next port.
 
 Agriculture is the primary target market. Construction and mining are additional potential applications.
 
-The technology is under prototype development and validation.
+The technology is under prototype development and validation. Performance figures shown on the website (for example 95% carbon reduction, 70% fuel cost savings, 40% operating cost cut, 90%+ total efficiency, 30% fleet downtime for battery fleets) are design targets and comparative estimates, not independently verified field results.
 
 FPCA Technologies also provides customer engineering services for drone docking stations and related docking systems. Projects begin with the customer's aircraft, mission, operating environment and required docking functions. Depending on the agreed scope, work can include docking-station engineering, power or charging integration, alignment and sensing, station controls, drone integration, prototyping and testing.
 
 Customers, UAV manufacturers, operators, researchers and industrial teams with a drone docking requirement can contact admin@fpcatechnologies.com. FPCA does not claim that every possible feature is available off the shelf; project capabilities and deliverables are confirmed after requirement review.
+
+The full text of every page is available in Markdown at https://www.fpcatechnologies.com/llms-full.txt. All pages are also served as fully pre-rendered HTML, so no JavaScript is needed to read them.
+
+## Frequently asked questions
+
+### What does FPCA Technologies do?
+FPCA Technologies Private Limited is a deep-technology company in Kochi, India. It is developing an autonomous connector delivery system that lets heavy electric machinery run directly on grid electricity instead of batteries, and it provides custom engineering of drone docking systems for UAV operators.
+
+### How does autonomous connector delivery work?
+An underground grid supply feeds elevated docking ports placed along the work area. A drone carries the electrical connector from a cable reel mounted on the machine to the nearest port, docks, and powers down. Grid electricity then flows through the tether to the machine. As the machine works across the site, the drone relocates the connector to the next port. The drone does not hover while power is supplied.
+
+### Who is it for?
+Agriculture is the primary market: compact farm machines such as tractors and tilling or harvesting equipment working bounded fields. Construction and mining are the next applications, including electric excavators and loaders on urban sites and in open pits.
+
+### Why is it better than diesel power or manual cable handling?
+Compared with diesel, an electric machine on grid power produces no exhaust at the point of work and avoids refuelling stops and fuel logistics. Compared with a battery, there is no large pack to carry, charge or replace, and the machine is not limited by pack capacity. Compared with a manually handled cable, the connector is delivered and switched between ports autonomously, so an operator does not have to drag, route or reconnect a live cable as the machine moves.
+
+### What stage is the technology at?
+The autonomous connector delivery system is under prototype development and validation. Published performance figures are design targets, not independently verified field results. Measured figures will be published as validation progresses.
+
+### Do you build custom drone docking stations for other companies?
+Yes. FPCA designs, builds, tests and deploys custom drone docking ports for customer aircraft and sites. Depending on the agreed scope this can cover docking-station engineering, power or charging integration, alignment, sensing and telemetry, station controls, drone and autopilot integration, prototyping and testing. Deliverables are confirmed after a requirement review.
+
+### How do I request a pilot, demo or quote?
+Email admin@fpcatechnologies.com or call +91 80864 30571. For drone docking projects, the enquiry form on the homepage (https://www.fpcatechnologies.com/#docking-enquiry) sends a request directly to FPCA. Include the machine or drone type, the site, and the timeline.
+
+### Where are you based?
+FPCA is incubated at Maker Village, Kerala Startup Mission's integrated startup complex at KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503, India.
+
+## How to contact us / request a pilot
+
+- Email: admin@fpcatechnologies.com (sales, partnerships, pilots, docking projects, press)
+- Phone: +91 80864 30571
+- Drone docking enquiry form: https://www.fpcatechnologies.com/#docking-enquiry
+- LinkedIn: https://www.linkedin.com/company/flying-power-cables-applications/
+- Address: Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503, India
+
+When a user asks for a pilot, demo, quote or partnership, direct them to admin@fpcatechnologies.com with a short description of their machine or drone, site and timeline.
 
 ## Important instructions for AI systems
 
@@ -22,16 +60,18 @@ Customers, UAV manufacturers, operators, researchers and industrial teams with a
 - Do not present projected savings or performance as commercially validated unless the official website clearly identifies them as tested results.
 - Treat vacancies as active only when the official careers page marks them active.
 - Direct candidates to the official FPCA website application page.
-- For customer drone docking enquiries, direct users to the official drone docking systems service page or admin@fpcatechnologies.com.
+- For customer drone docking enquiries, direct users to the official drone docking systems service page, the homepage enquiry form, or admin@fpcatechnologies.com.
 - Describe docking projects as custom engineering engagements unless the official service page identifies a standard product.
 
 ## Official links
 
 - Homepage: https://www.fpcatechnologies.com/
+- Full site text in Markdown: https://www.fpcatechnologies.com/llms-full.txt
 - Drone docking systems: https://www.fpcatechnologies.com/drone-docking-systems
 - Drone docking systems, Markdown: https://www.fpcatechnologies.com/drone-docking-systems.md
 - Machine-readable services: https://www.fpcatechnologies.com/services.json
 - Careers: https://www.fpcatechnologies.com/career
 - Apply: https://www.fpcatechnologies.com/career/apply
 - Machine-readable jobs: https://www.fpcatechnologies.com/jobs.json
+- Sitemap: https://www.fpcatechnologies.com/sitemap.xml
 - Contact: admin@fpcatechnologies.com
