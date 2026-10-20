@@ -2,7 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Analytics } from '@vercel/analytics/react'
 import App from './App.jsx'
+import { initAnalytics, isTrackingDisabled } from './analytics.js'
 import './index.css'
+
+initAnalytics()
 
 const container = document.getElementById('root')
 const currentPath = window.location.pathname.replace(/\/$/, '') || '/'
@@ -11,7 +14,7 @@ const prerenderedPath = container.dataset.prerenderPath
 const app = (
   <React.StrictMode>
     <App />
-    <Analytics />
+    <Analytics beforeSend={(event) => (isTrackingDisabled() ? null : event)} />
   </React.StrictMode>
 )
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import CareerApplicationPage from './CareerApplicationPage.jsx';
+import { trackEvent } from './analytics.js';
 import { faqItems } from './seo.js';
 
 const openings = [
@@ -365,14 +366,16 @@ function DockingInquiryForm() {
       setSubmissionStartedAt(Date.now());
       setStatus('success');
       setMessage(`Thank you. Your enquiry has been sent. Reference: ${payload.reference}`);
+      trackEvent('docking_enquiry_sent');
     } catch (error) {
+      trackEvent('docking_enquiry_failed');
       setStatus('error');
       setMessage(error.message || 'Your enquiry could not be sent. Please try again.');
     }
   };
 
   return (
-    <form className="card flex w-full flex-col gap-5 p-6 md:p-9" onSubmit={handleSubmit}>
+    <form className="card flex w-full flex-col gap-5 p-6 md:p-9" data-form="docking_enquiry" onSubmit={handleSubmit}>
       <h3 className="text-2xl font-bold">Send your requirement</h3>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <label className="flex flex-col gap-2 text-[13px] font-semibold text-[#C9D0DC]" htmlFor="docking-name">

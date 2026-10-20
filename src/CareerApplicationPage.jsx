@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { trackEvent } from './analytics.js';
 
 const linkedInUrl = 'https://www.linkedin.com/company/flying-power-cables-applications/';
 
@@ -323,8 +324,10 @@ export default function CareerApplicationPage() {
       }
       setResult(payload);
       setStatus('success');
+      trackEvent('career_application_sent');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
+      trackEvent('career_application_failed');
       setSubmitError(error.message || 'Your application could not be submitted. Please try again.');
       setStatus('error');
     }
@@ -379,13 +382,13 @@ export default function CareerApplicationPage() {
               <h2 className="mb-4 font-headline text-3xl font-bold">Application submitted successfully</h2>
               <p className="mb-2 text-on-surface-variant">Your application reference number is:</p>
               <p className="mb-6 break-all font-headline text-2xl font-bold text-white">{result?.reference}</p>
-              <p className="mb-8 text-on-surface-variant">A confirmation copy was sent to {form.email}.</p>
+              <p className="mb-8 text-on-surface-variant" data-clarity-mask="True">A confirmation copy was sent to {form.email}.</p>
               <a className="inline-flex bg-primary-container px-7 py-3 font-semibold text-on-primary-container" href="/career">
                 Return to Careers
               </a>
             </div>
           ) : (
-            <form className="space-y-8" noValidate onSubmit={handleSubmit}>
+            <form className="space-y-8" data-form="career_application" noValidate onSubmit={handleSubmit}>
               <p className="text-sm text-on-surface-variant"><span className="text-error">*</span> Required fields</p>
 
               <section className="border border-outline-variant/20 bg-surface-container-high p-5 sm:p-8">
@@ -466,7 +469,7 @@ export default function CareerApplicationPage() {
                   required
                   type="file"
                 />
-                <p className="mt-3 break-all text-sm text-on-surface-variant" id="resume-filename">
+                <p className="mt-3 break-all text-sm text-on-surface-variant" data-clarity-mask="True" id="resume-filename">
                   {resume ? `Selected: ${resume.name}` : 'No file selected'}
                 </p>
                 <FieldError id="resume" message={errors.resume} />
