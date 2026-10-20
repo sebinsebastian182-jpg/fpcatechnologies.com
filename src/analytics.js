@@ -10,7 +10,7 @@
 
 // Clarity Project ID: clarity.microsoft.com > your project > Settings > Overview.
 // While this is empty Clarity stays off and the site behaves exactly as before.
-const clarityProjectId = '';
+const clarityProjectId = 'z0nu42tap4';
 
 // Clarity only runs on the live site, so local development and Vercel preview links add no data.
 const liveHosts = ['www.fpcatechnologies.com', 'fpcatechnologies.com'];
