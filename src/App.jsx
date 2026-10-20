@@ -374,8 +374,11 @@ function DockingInquiryForm() {
     }
   };
 
+  // method="post" keeps a visitor's details out of the web address if the form is ever submitted
+  // before the page's scripts have loaded. data-clarity-mask keeps everything inside the form,
+  // including what visitors type, out of Clarity session recordings.
   return (
-    <form className="card flex w-full flex-col gap-5 p-6 md:p-9" data-form="docking_enquiry" onSubmit={handleSubmit}>
+    <form className="card flex w-full flex-col gap-5 p-6 md:p-9" data-clarity-mask="True" data-form="docking_enquiry" method="post" onSubmit={handleSubmit}>
       <h3 className="text-2xl font-bold">Send your requirement</h3>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <label className="flex flex-col gap-2 text-[13px] font-semibold text-[#C9D0DC]" htmlFor="docking-name">

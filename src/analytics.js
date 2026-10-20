@@ -6,6 +6,7 @@
 //
 // This module only does work in the browser. Importing it has no side effects, so the static
 // pre-render (scripts/build.mjs) and the HTML that crawlers and AI agents read stay unchanged.
+// Every entry point is wrapped so that analytics can never break the page or the forms.
 
 // Clarity Project ID: clarity.microsoft.com > your project > Settings > Overview.
 // While this is empty Clarity stays off and the site behaves exactly as before.
@@ -14,13 +15,24 @@ const clarityProjectId = '';
 // Clarity only runs on the live site, so local development and Vercel preview links add no data.
 const liveHosts = ['www.fpcatechnologies.com', 'fpcatechnologies.com'];
 
+// Pages Clarity never runs on. The job application form promises that applicant information is
+// used only for recruitment, so that page is left out entirely (Vercel still counts its visits).
+const clarityExcludedPages = /^\/careers?\/apply\/?$/;
+
 // Open any page once with ?analytics=off to stop counting your own visits in that browser,
 // and ?analytics=on to start counting again. Unlike IP blocking this works on any network.
 const optOutKey = 'fpca-analytics-off';
+let optedOutThisPage = false;
 
-// Custom events sent to Clarity (Clarity > Recordings / Dashboard > filter by Smart events).
-//   <form data-form="x">   x_started  when a visitor first focuses a field
-//   form submit result     x_sent / x_failed  (fired from the form components)
+// Query parameters removed from the address bar before any analytics runs: the switch above, so a
+// copied link can never opt other people out, and the enquiry form's fields, which a browser puts
+// in the address if the form is submitted before the page's scripts have loaded.
+const privateParams = ['analytics', 'name', 'phone', 'email', 'address', 'website'];
+
+// Custom events sent to Clarity. They appear as Smart events in the Clarity dashboard and in the
+// Events panel of each recording.
+//   <form data-form="x">   x_started  the first time a visitor focuses one of its fields
+//   form submit result     x_sent / x_failed  (fired from the form component)
 //   link clicks            matched by href below
 const linkEvents = [
   { event: 'docking_email_click', test: (href) => href.startsWith('mailto:') && /subject=Drone%20docking/i.test(href) },
@@ -28,10 +40,11 @@ const linkEvents = [
   { event: 'phone_click', test: (href) => href.startsWith('tel:') },
   { event: 'linkedin_click', test: (href) => href.includes('linkedin.com') },
   { event: 'apply_click', test: (href) => /^\/careers?\/apply\/?$/.test(href) },
-  { event: 'careers_click', test: (href) => /^\/careers?\/?$/.test(href) },
+  // Counted only from outside the careers pages, so "Back to Careers" links don't count as interest.
+  { event: 'careers_click', test: (href) => /^\/careers?\/?$/.test(href) && !/^\/careers?(\/|$)/.test(window.location.pathname) },
 ];
 
-export function isTrackingDisabled() {
+function storedOptOut() {
   try {
     return window.localStorage.getItem(optOutKey) === '1';
   } catch {
@@ -39,19 +52,37 @@ export function isTrackingDisabled() {
   }
 }
 
-export function trackEvent(name) {
-  if (typeof window.clarity !== 'function' || isTrackingDisabled()) return;
-  window.clarity('event', name);
+export function isTrackingDisabled() {
+  return optedOutThisPage || storedOptOut();
 }
 
-function syncOptOutFromUrl() {
+export function trackEvent(name) {
   try {
-    const choice = new window.URLSearchParams(window.location.search).get('analytics');
-    if (choice === 'off') window.localStorage.setItem(optOutKey, '1');
-    if (choice === 'on') window.localStorage.removeItem(optOutKey);
+    if (typeof window.clarity !== 'function' || isTrackingDisabled()) return;
+    window.clarity('event', name);
   } catch {
-    // Storage can be blocked (private browsing); counting then simply stays on.
+    // A failing analytics call must never change what the visitor sees.
   }
+}
+
+function applyTeamSwitch() {
+  const choice = (new window.URLSearchParams(window.location.search).get('analytics') || '').toLowerCase();
+  if (choice !== 'off' && choice !== 'on') return;
+  optedOutThisPage = choice === 'off';
+  try {
+    if (optedOutThisPage) window.localStorage.setItem(optOutKey, '1');
+    else window.localStorage.removeItem(optOutKey);
+  } catch {
+    // Storage can be blocked (private browsing); the switch then applies to this page only.
+  }
+}
+
+function cleanAddressBar() {
+  const url = new window.URL(window.location.href);
+  const found = privateParams.filter((key) => url.searchParams.has(key));
+  if (!found.length) return;
+  found.forEach((key) => url.searchParams.delete(key));
+  window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}${url.hash}`);
 }
 
 function closestFrom(event, selector) {
@@ -69,13 +100,17 @@ function onClick(event) {
 const startedForms = new WeakSet();
 
 function onFocusIn(event) {
-  const form = closestFrom(event, 'form[data-form]');
+  const field = event.target instanceof window.Element ? event.target : null;
+  // Only real fields count; buttons and the hidden spam-trap field (tabIndex -1) are ignored.
+  if (!field || !field.matches('input, textarea, select') || field.tabIndex < 0) return;
+  const form = field.closest('form[data-form]');
   if (!form || startedForms.has(form)) return;
   startedForms.add(form);
   trackEvent(`${form.dataset.form}_started`);
 }
 
-// Clarity's own loader keeps a queue until its script arrives, so events fired early are not lost.
+// Clarity's own loader keeps a queue until its script arrives, so events fired in the first moments
+// are sent once it loads (unless the visitor has already left the page by then).
 function installClarityQueue() {
   window.clarity =
     window.clarity ||
@@ -102,11 +137,17 @@ function afterPageLoad(callback) {
 }
 
 export function initAnalytics() {
-  syncOptOutFromUrl();
-  if (!clarityProjectId || !liveHosts.includes(window.location.hostname) || isTrackingDisabled()) return;
+  try {
+    applyTeamSwitch();
+    cleanAddressBar();
+    if (!clarityProjectId || !liveHosts.includes(window.location.hostname) || isTrackingDisabled()) return;
+    if (clarityExcludedPages.test(window.location.pathname)) return;
 
-  installClarityQueue();
-  document.addEventListener('click', onClick, true);
-  document.addEventListener('focusin', onFocusIn, true);
-  afterPageLoad(loadClarityScript);
+    installClarityQueue();
+    document.addEventListener('click', onClick, true);
+    document.addEventListener('focusin', onFocusIn, true);
+    afterPageLoad(loadClarityScript);
+  } catch {
+    // Analytics must never stop the page from loading or the forms from working.
+  }
 }
