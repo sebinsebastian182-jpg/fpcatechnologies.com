@@ -11,6 +11,17 @@ const ALLOWED_FILES = {
   docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 };
 
+// Real names only: letters in any script (including Indian scripts), spaces, dots, apostrophes and
+// hyphens, 2 to 100 characters. No digits or links, because the name is repeated in the confirmation
+// email that goes to the address typed in the form, so it must not be usable to carry spam.
+// LINK_LIKE catches web addresses written with dots ("spam.com", "www.x.in") while allowing initials ("A.R. Rahman").
+const NAME_PATTERN = /^[\p{L}\p{M}](?:[\p{L}\p{M} .'’-]|\u200C|\u200D){1,99}$/u;
+const LINK_LIKE = /\.\p{L}{2}/u;
+
+function isValidName(value) {
+  return NAME_PATTERN.test(value) && !LINK_LIKE.test(value);
+}
+
 const requiredTextFields = [
   'fullName',
   'email',
@@ -102,6 +113,9 @@ function validateApplication(input) {
 
   for (const field of requiredTextFields) {
     if (!application[field]) return { error: 'Please complete all required fields.' };
+  }
+  if (!isValidName(application.fullName)) {
+    return { error: 'Please enter your full name using letters only (no numbers or links), up to 100 characters.' };
   }
   if (!isValidEmail(application.email)) return { error: 'Please enter a valid email address.' };
   if (!/^\+?[0-9\s().-]{7,25}$/.test(application.mobile)) return { error: 'Please enter a valid mobile number.' };

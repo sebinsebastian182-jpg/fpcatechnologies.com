@@ -9,6 +9,10 @@ const ALLOWED_RESUME_TYPES = [
   'application/msword',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 ];
+// Same rule as api/apply.js: letters in any script, spaces, dots, apostrophes and hyphens, 2–100 characters,
+// and nothing that looks like a web address.
+const NAME_PATTERN = /^[\p{L}\p{M}](?:[\p{L}\p{M} .'’-]|\u200C|\u200D){1,99}$/u;
+const LINK_LIKE = /\.\p{L}{2}/u;
 
 const initialForm = {
   role: ROLE,
@@ -260,6 +264,10 @@ export default function CareerApplicationPage() {
       if (!String(form[field]).trim()) next[field] = message;
     });
 
+    const fullName = form.fullName.trim();
+    if (fullName && (!NAME_PATTERN.test(fullName) || LINK_LIKE.test(fullName))) {
+      next.fullName = 'Use letters only (no numbers or links), up to 100 characters.';
+    }
     if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
       next.email = 'Enter a valid email address.';
     }
@@ -391,7 +399,7 @@ export default function CareerApplicationPage() {
               <section className="border border-outline-variant/20 bg-surface-container-high p-5 sm:p-8">
                 <h2 className="mb-6 font-headline text-2xl font-bold">Personal information</h2>
                 <div className="grid gap-6 md:grid-cols-2">
-                  <TextField autoComplete="name" error={errors.fullName} id="fullName" label="Full name" required type="text" {...inputValue('fullName')} />
+                  <TextField autoComplete="name" error={errors.fullName} id="fullName" label="Full name" maxLength="100" required type="text" {...inputValue('fullName')} />
                   <TextField autoComplete="email" error={errors.email} id="email" label="Email address" required type="email" {...inputValue('email')} />
                   <TextField autoComplete="tel" error={errors.mobile} id="mobile" inputMode="tel" label="Mobile number" placeholder="+91 98765 43210" required type="tel" {...inputValue('mobile')} />
                   <TextField autoComplete="address-level2" error={errors.currentLocation} id="currentLocation" label="Current location" required type="text" {...inputValue('currentLocation')} />
