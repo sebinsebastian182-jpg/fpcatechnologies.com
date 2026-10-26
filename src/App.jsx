@@ -22,7 +22,14 @@ const applicationFormUrl = '/career/apply';
 const linkedInUrl = 'https://www.linkedin.com/company/flying-power-cables-applications/';
 const dockingServicePath = '/drone-docking-systems';
 const dockingVideoSrc = '/drone-docking-port.mp4';
+// Same animation at 720p (about 0.7 MB instead of 6.5 MB) so it starts quickly on phones.
+const dockingVideoSrcSmall = '/drone-docking-port-720p.mp4';
 const dockingVideoPoster = '/drone-docking-port-poster.jpg';
+// Home-page hero: the 60-second concept animation of the full system (grid supply, drone docking,
+// cable connection, machine operation, port switching). Silent web copy; phones get a 640x360 file.
+const heroVideoSrc = '/fpca-concept-animation.mp4';
+const heroVideoSrcSmall = '/fpca-concept-animation-360p.mp4';
+const heroVideoPoster = '/fpca-concept-animation-poster.jpg';
 const dockingInquiryUrl = `mailto:${contactEmail}?subject=${encodeURIComponent('Drone docking system enquiry')}&body=${encodeURIComponent('Hello FPCA Technologies,\n\nWe would like to discuss a drone docking requirement.\n\nApplication/use case:\nDrone platform:\nRequired docking functions:\nDeployment location/environment:\nTarget timeline:\n\nRegards,\n')}`;
 
 const responsibilities = [
@@ -83,6 +90,8 @@ function Icon({ children, size = 20, className = '', stroke = 'currentColor' }) 
 
 const ArrowRight = (props) => <Icon {...props}><path d="M5 12h14M13 6l6 6-6 6" /></Icon>;
 const ArrowDown = (props) => <Icon {...props}><path d="M12 5v14M6 13l6 6 6-6" /></Icon>;
+const PauseIcon = (props) => <Icon {...props}><path d="M9 6v12M15 6v12" /></Icon>;
+const PlayIcon = (props) => <Icon {...props}><path d="M8 5.5v13l10-6.5z" /></Icon>;
 const BoltIcon = (props) => <Icon {...props}><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></Icon>;
 const DockIcon = (props) => <Icon {...props}><path d="M12 3v8M9 8l3 3 3-3" /><path d="M4 14h16v6H4z" /><path d="M8 14v-2h8v2" /></Icon>;
 const SyncIcon = (props) => <Icon {...props}><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3" /><path d="M18 3v4h-4M6 21v-4h4" /></Icon>;
@@ -284,38 +293,89 @@ function SiteFooter({ tagline = 'Developing autonomous connector delivery for gr
   );
 }
 
-function DockingVideo({ className = '' }) {
+// A looping concept animation (the docking-port animation unless other files are passed in). It
+// starts loading and playing as soon as the page opens (muted, looping); phones get the lighter
+// file. The hero version has no player bar, just a small pause/play button in the top-right corner,
+// where it covers nothing in the animation. Visitors who ask their device for reduced motion see a
+// still frame instead.
+function DockingVideo({
+  caption = 'Concept animation · custom docking port with autonomous approach and grid connection',
+  className = '',
+  poster = dockingVideoPoster,
+  src = dockingVideoSrc,
+  srcSmall = dockingVideoSrcSmall,
+  variant = 'section',
+}) {
   const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(true);
+  const isHero = variant === 'hero';
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) return undefined;
+    const sync = () => setPlaying(!video.paused);
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
     video.muted = true;
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {});
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.pause();
+    } else {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
     }
+    sync();
+    return () => {
+      video.removeEventListener('play', sync);
+      video.removeEventListener('pause', sync);
+    };
   }, []);
+
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    } else {
+      video.pause();
+    }
+  };
 
   return (
     <figure className={`flex flex-col gap-3 ${className}`}>
-      <div className="aspect-video max-w-full overflow-hidden rounded-xl border border-white/10 bg-[#E9EBEF]">
+      <div className={`relative aspect-video max-w-full overflow-hidden rounded-xl border border-white/10 bg-[#E9EBEF] ${isHero ? 'shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)]' : ''}`}>
         <video
           autoPlay
           className="block h-full w-full object-cover"
-          ref={videoRef}
-          controls
+          controls={!isHero}
           loop
           muted
           playsInline
-          poster={dockingVideoPoster}
-          preload="metadata"
-          src={dockingVideoSrc}
+          poster={poster}
+          preload="auto"
+          ref={videoRef}
         >
+          <source media="(max-width: 767px)" src={srcSmall} type="video/mp4" />
+          <source src={src} type="video/mp4" />
           Your browser does not support embedded video.
         </video>
+        {isHero ? (
+          <button
+            aria-label={playing ? 'Pause animation' : 'Play animation'}
+            className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#0A0C10]/60 text-white transition-colors hover:bg-[#0A0C10]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:right-3 sm:top-3 sm:h-9 sm:w-9"
+            onClick={togglePlayback}
+            title={playing ? 'Pause animation' : 'Play animation'}
+            type="button"
+          >
+            {playing ? <PauseIcon size={16} /> : <PlayIcon size={16} />}
+          </button>
+        ) : null}
       </div>
-      <figcaption className="eyebrow text-[#6B7485]">Concept animation · custom docking port with autonomous approach and grid connection</figcaption>
+      <figcaption className={`eyebrow ${isHero ? 'text-muted' : 'text-[#6B7485]'}`}>{caption}</figcaption>
     </figure>
   );
 }
@@ -807,20 +867,23 @@ function App({ path }) {
                   <ArrowRight size={16} />
                 </a>
                 <a className="btn btn-ghost" href="#applications">See Applications</a>
+                {/* Phones only: most phone visitors leave before reaching the enquiry form further down. */}
+                <a className="btn btn-ghost md:hidden" href="#docking-enquiry">
+                  Share Your Requirement
+                  <ArrowDown size={16} />
+                </a>
               </div>
             </div>
-            <figure className="flex min-w-0 flex-1 basis-[480px] flex-col gap-3">
-              <div className="overflow-hidden rounded-xl border border-white/10 bg-white shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)]">
-                <img
-                  alt="Industrial drone tether concept"
-                  className="block h-auto w-full"
-                  height="812"
-                  src="/application-agriculture.webp"
-                  width="1938"
-                />
-              </div>
-              <figcaption className="glass-card border-l-2 border-accent px-4 py-3 text-[15px] font-semibold">Autonomous Connector Docking</figcaption>
-            </figure>
+            {/* The concept animation plays straight away. Same caption words as before, now shown as
+                plain text so it no longer looks like a button. */}
+            <DockingVideo
+              caption="Autonomous Connector Docking"
+              className="min-w-0 flex-1 basis-[480px]"
+              poster={heroVideoPoster}
+              src={heroVideoSrc}
+              srcSmall={heroVideoSrcSmall}
+              variant="hero"
+            />
           </div>
         </section>
 
