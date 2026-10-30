@@ -16,6 +16,8 @@ const openings = [
 
 const companyName = 'FPCA TECHNOLOGIES Private Limited';
 const contactEmail = 'admin@fpcatechnologies.com';
+const contactPhone = '+918086430571';
+const contactPhoneDisplay = '+91 80864 30571';
 const careersEmail = contactEmail;
 const logoSrc = '/fpca-logo.png';
 const applicationFormUrl = '/career/apply';
@@ -30,7 +32,10 @@ const dockingVideoPoster = '/drone-docking-port-poster.jpg';
 const heroVideoSrc = '/fpca-concept-animation.mp4';
 const heroVideoSrcSmall = '/fpca-concept-animation-360p.mp4';
 const heroVideoPoster = '/fpca-concept-animation-poster.jpg';
-const dockingInquiryUrl = `mailto:${contactEmail}?subject=${encodeURIComponent('Drone docking system enquiry')}&body=${encodeURIComponent('Hello FPCA Technologies,\n\nWe would like to discuss a drone docking requirement.\n\nApplication/use case:\nDrone platform:\nRequired docking functions:\nDeployment location/environment:\nTarget timeline:\n\nRegards,\n')}`;
+// "Contact Us" and the drone-docking page's buttons lead to the enquiry form on the home page. They
+// used to open the visitor's email app, which does nothing on computers without one set up (seen in
+// Clarity as repeated dead clicks on Contact Us).
+const enquiryFormPath = '/#docking-enquiry';
 
 const responsibilities = [
   'Develop software for autonomous UAV operations.',
@@ -90,6 +95,8 @@ function Icon({ children, size = 20, className = '', stroke = 'currentColor' }) 
 
 const ArrowRight = (props) => <Icon {...props}><path d="M5 12h14M13 6l6 6-6 6" /></Icon>;
 const ArrowDown = (props) => <Icon {...props}><path d="M12 5v14M6 13l6 6 6-6" /></Icon>;
+const MailIcon = (props) => <Icon {...props}><rect height="14" rx="2" width="18" x="3" y="5" /><path d="m3.5 6.5 8.5 6.5 8.5-6.5" /></Icon>;
+const PhoneIcon = (props) => <Icon {...props}><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></Icon>;
 const PauseIcon = (props) => <Icon {...props}><path d="M9 6v12M15 6v12" /></Icon>;
 const PlayIcon = (props) => <Icon {...props}><path d="M8 5.5v13l10-6.5z" /></Icon>;
 const BoltIcon = (props) => <Icon {...props}><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></Icon>;
@@ -380,6 +387,84 @@ function DockingVideo({
   );
 }
 
+/* ---------- Direct contact (email and phone with Copy buttons) ---------- */
+
+// Copies text to the clipboard. Uses the older copy command where the Clipboard API isn't available.
+async function copyToClipboard(text) {
+  try {
+    if (window.isSecureContext && window.navigator.clipboard) {
+      await window.navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    // Fall back to the older method below.
+  }
+  try {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+    document.body.appendChild(area);
+    area.select();
+    const copied = document.execCommand('copy');
+    area.remove();
+    return copied;
+  } catch {
+    return false;
+  }
+}
+
+function CopyButton({ eventName, label, value }) {
+  const [state, setState] = useState('idle');
+  const resetTimer = useRef(0);
+
+  useEffect(() => () => window.clearTimeout(resetTimer.current), []);
+
+  const handleCopy = async () => {
+    const copied = await copyToClipboard(value);
+    setState(copied ? 'copied' : 'failed');
+    if (copied && eventName) trackEvent(eventName);
+    window.clearTimeout(resetTimer.current);
+    resetTimer.current = window.setTimeout(() => setState('idle'), 2500);
+  };
+
+  return (
+    <>
+      <button
+        aria-label={`Copy ${label}`}
+        className={`inline-flex min-h-[32px] items-center rounded border px-3 text-xs font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${state === 'copied' ? 'border-tertiary/50 text-tertiary' : 'border-white/15 text-[#C9D0DC] hover:border-white/30 hover:text-white'}`}
+        onClick={handleCopy}
+        type="button"
+      >
+        {state === 'copied' ? 'Copied' : state === 'failed' ? 'Copy failed' : 'Copy'}
+      </button>
+      <span aria-live="polite" className="sr-only">{state === 'copied' ? `${label} copied` : ''}</span>
+    </>
+  );
+}
+
+// Shown beside the enquiry form for visitors who would rather write or call. The Copy buttons help
+// people whose computer has no email app set up, where clicking an email link does nothing.
+function DirectContact() {
+  const rowClass = 'flex flex-wrap items-center gap-x-3 gap-y-2';
+  const linkClass = 'text-[15px] text-on-surface transition-colors hover:text-[#8FA8FF]';
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="text-sm font-semibold text-[#C9D0DC]">Prefer email or phone?</p>
+      <div className={rowClass}>
+        <MailIcon className="shrink-0 text-primary" size={18} />
+        <a className={linkClass} href={`mailto:${contactEmail}`}>{contactEmail}</a>
+        <CopyButton eventName="email_copy" label="email address" value={contactEmail} />
+      </div>
+      <div className={rowClass}>
+        <PhoneIcon className="shrink-0 text-primary" size={18} />
+        <a className={linkClass} href={`tel:${contactPhone}`}>{contactPhoneDisplay}</a>
+        <CopyButton eventName="phone_copy" label="phone number" value={contactPhone} />
+      </div>
+    </div>
+  );
+}
+
 /* ---------- Docking enquiry form (logic unchanged) ---------- */
 
 const initialDockingInquiry = {
@@ -519,7 +604,7 @@ function DroneDockingSystemsPage() {
 
   return (
     <>
-      <TopNav activePage="docking" ctaHref={dockingInquiryUrl} ctaLabel="Discuss a Project" />
+      <TopNav activePage="docking" ctaHref={enquiryFormPath} ctaLabel="Discuss a Project" />
 
       <main className="pt-[72px]">
         <section className="relative overflow-hidden px-5 pb-20 pt-20 sm:px-8 md:pt-28" style={{ background: 'radial-gradient(1000px 480px at 80% -10%, rgba(53,208,127,.12), transparent 60%), radial-gradient(900px 500px at 10% 20%, rgba(59,108,255,.16), transparent 60%)' }}>
@@ -531,7 +616,7 @@ function DroneDockingSystemsPage() {
                 We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.
               </p>
               <div className="pt-2">
-                <a className="btn btn-primary" href={dockingInquiryUrl}>
+                <a className="btn btn-primary" href={enquiryFormPath}>
                   Share Your Requirement
                   <ArrowRight size={16} />
                 </a>
@@ -844,7 +929,7 @@ function App({ path }) {
 
   return (
     <>
-      <TopNav activePage="home" ctaHref={`mailto:${contactEmail}`} ctaLabel="Contact Us" secondaryHref="#solution" secondaryLabel="Learn More" />
+      <TopNav activePage="home" ctaHref="#docking-enquiry" ctaLabel="Contact Us" secondaryHref="#solution" secondaryLabel="Learn More" />
 
       <main className="pt-[72px]">
         {/* Hero */}
@@ -984,6 +1069,7 @@ function App({ path }) {
               <Eyebrow tone="tertiary">Custom Drone Docking Systems</Eyebrow>
               <h2 className="font-headline text-4xl leading-[1.06] md:text-[52px]">Have a drone docking requirement?</h2>
               <p className="max-w-[50ch] text-lg leading-relaxed text-on-surface-variant">We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.</p>
+              <DirectContact />
               <DockingVideo className="pt-2" />
             </div>
             <div className="min-w-0 flex-1 basis-[520px]">
