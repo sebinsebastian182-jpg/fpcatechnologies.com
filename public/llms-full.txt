@@ -1,6 +1,6 @@
 # FPCA Technologies — full site text
 
-Source: https://www.fpcatechnologies.com/ · Last updated: 2026-10-09
+Source: https://www.fpcatechnologies.com/ · Last updated: 2026-11-02
 This file contains the complete visible text of every page on the website, in Markdown, for AI assistants and crawlers. See https://www.fpcatechnologies.com/llms.txt for a summary and usage notes.
 
 ---
@@ -13,9 +13,9 @@ The Kinetic Blueprint
 
 If there is power nearby, why do you need batteries? Making heavy electric machinery run on electricity 24/7.
 
-Calls to action: Explore Technology (#solution) · See Applications (#applications) · Contact Us (admin@fpcatechnologies.com)
+Calls to action: Explore Technology (#solution) · See Applications (#applications) · Contact Us (opens the enquiry form at #docking-enquiry) · on phones also Share Your Requirement (#docking-enquiry)
 
-Hero illustration: Grid power for compact farm machines — autonomous port switching for a 24/7 operating goal. Caption: Autonomous Connector Docking.
+Hero video: FPCA's 60-second concept animation of the full system (grid supply, drone docking, cable connection, machine operation and port switching), playing silently on a loop with a pause button. Caption: Autonomous Connector Docking.
 
 ## The Battery Bottleneck
 Current industrial electrification faces a critical paradox: Heavy machinery requires immense power, yet massive batteries introduce "Charge Anxiety" and crippling weight.
@@ -42,6 +42,8 @@ Power comes from an underground grid supply to elevated docking ports. The drone
 We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.
 
 Concept animation: custom docking port with autonomous approach and grid connection (video).
+
+Prefer email or phone? admin@fpcatechnologies.com · +91 80864 30571 (each with a Copy button).
 
 Enquiry form "Send your requirement" — fields: Name, Phone number, Email, Address. Submitting sends the enquiry to FPCA and shows a reference number.
 
@@ -100,7 +102,7 @@ Call to action: Join Our Team (https://www.fpcatechnologies.com/career)
 FPCA TECHNOLOGIES Private Limited — Developing autonomous connector delivery for grid-powered heavy machinery.
 Address: Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503
 Phone: +91 80864 30571 · Email: admin@fpcatechnologies.com · LinkedIn: https://www.linkedin.com/company/flying-power-cables-applications/
-Navigation: Solution, Benefits, Applications, Drone Docking Systems, Careers. Company: Careers, LinkedIn.
+Navigation: Solution, Benefits, Applications, Drone Docking Systems, Blog, Careers. Company: Careers, LinkedIn.
 © FPCA TECHNOLOGIES Private Limited. Engineered for the Kinetic Blueprint.
 
 ---
@@ -111,7 +113,7 @@ URL: https://www.fpcatechnologies.com/drone-docking-systems (alias: /drone-docki
 ## Have a drone docking requirement?
 We design, build, test and deploy custom drone docking ports tailored to your operating environment and project requirements.
 
-Call to action: Share Your Requirement / Discuss a Project (email admin@fpcatechnologies.com with the subject "Drone docking system enquiry").
+Call to action: Share Your Requirement / Discuss a Project (opens the enquiry form on the homepage: https://www.fpcatechnologies.com/#docking-enquiry).
 
 Concept animation: custom docking port with autonomous approach and grid connection (video).
 

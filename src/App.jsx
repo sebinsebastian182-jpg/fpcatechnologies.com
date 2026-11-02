@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import CareerApplicationPage from './CareerApplicationPage.jsx';
 import { trackEvent } from './analytics.js';
-import { faqItems } from './seo.js';
+import { blogAuthor, blogPath, blogPosts, getBlogPost } from './blog/posts.js';
+import { blogIndexDescription, blogIndexTitle, faqItems } from './seo.js';
 
 const openings = [
   {
@@ -69,6 +70,7 @@ const navLinks = [
   { label: 'Solution', href: '/#solution', key: 'solution' },
   { label: 'Docking Systems', href: dockingServicePath, key: 'docking' },
   { label: 'Applications', href: '/#applications', key: 'applications' },
+  { label: 'Blog', href: blogPath, key: 'blog' },
   { label: 'Careers', href: '/career', key: 'careers' },
 ];
 
@@ -259,6 +261,7 @@ function SiteFooter({ tagline = 'Developing autonomous connector delivery for gr
     { label: 'Benefits', href: '/#benefits' },
     { label: 'Applications', href: '/#applications' },
     { label: 'Drone Docking Systems', href: dockingServicePath },
+    { label: 'Blog', href: blogPath },
     { label: 'Careers', href: '/career' },
   ];
 
@@ -889,6 +892,303 @@ function CareersPage() {
   );
 }
 
+/* ---------- Blog ---------- */
+
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+// Fixed format (not toLocaleDateString) so the pre-rendered HTML and the browser always agree.
+function formatDate(isoDate) {
+  const [year, month, day] = isoDate.split('-').map(Number);
+  return `${day} ${monthNames[month - 1]} ${year}`;
+}
+
+// Numbers each source in the order it is first cited anywhere in the article.
+function citationNumbers(post) {
+  const texts = [...post.summary];
+  post.body.forEach((block) => {
+    ['text', 'title', 'caption', 'note'].forEach((key) => {
+      if (typeof block[key] === 'string') texts.push(block[key]);
+    });
+    ['items', 'paragraphs', 'head'].forEach((key) => {
+      if (Array.isArray(block[key])) texts.push(...block[key]);
+    });
+    if (Array.isArray(block.rows)) block.rows.forEach((row) => texts.push(...row));
+  });
+  const numbers = new Map();
+  texts.forEach((text) => {
+    for (const match of text.matchAll(/\[\^([a-z0-9]+)\]/g)) {
+      if (!numbers.has(match[1])) numbers.set(match[1], numbers.size + 1);
+    }
+  });
+  return numbers;
+}
+
+// Renders the article text marks: **bold**, [link](url) and [^source] citations.
+function RichText({ text, citations }) {
+  const parts = [];
+  const pattern = /\[\^([a-z0-9]+)\]|\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)\s]+)\)/g;
+  let last = 0;
+  let match;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > last) parts.push(text.slice(last, match.index));
+    if (match[1]) {
+      const number = citations.get(match[1]);
+      parts.push(
+        <sup className="ml-px" key={`c${match.index}`}>
+          <a aria-label={`Source ${number}`} className="text-primary no-underline hover:underline" href={`#source-${number}`}>[{number}]</a>
+        </sup>,
+      );
+    } else if (match[2]) {
+      parts.push(<strong className="font-semibold text-on-surface" key={`b${match.index}`}><RichText citations={citations} text={match[2]} /></strong>);
+    } else {
+      const external = /^https?:/.test(match[4]);
+      parts.push(
+        <a
+          className="text-primary underline decoration-primary/40 underline-offset-4 hover:decoration-primary"
+          href={match[4]}
+          key={`l${match.index}`}
+          {...(external ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
+        >
+          {match[3]}
+        </a>,
+      );
+    }
+    last = pattern.lastIndex;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return <>{parts}</>;
+}
+
+function BlogFigure({ alt, caption, eager = false, height, src, width }) {
+  return (
+    <figure className="my-10 flex flex-col gap-3">
+      <div className="overflow-hidden rounded-xl border border-white/10 bg-[#E9EBEF]">
+        <img
+          alt={alt}
+          className="block h-auto w-full"
+          decoding="async"
+          height={height}
+          loading={eager ? 'eager' : 'lazy'}
+          src={src}
+          width={width}
+          {...(eager ? { fetchpriority: 'high' } : {})}
+        />
+      </div>
+      {caption ? <figcaption className="text-sm leading-relaxed text-muted">{caption}</figcaption> : null}
+    </figure>
+  );
+}
+
+function BlogBlock({ block, citations }) {
+  const paragraphClass = 'text-[17px] leading-[1.75] text-[#C9D0DC]';
+  switch (block.type) {
+    case 'h2':
+      return <h2 className="mb-4 mt-14 scroll-mt-28 font-headline text-[32px] leading-[1.1] text-on-surface md:text-[40px]" id={block.id}>{block.text}</h2>;
+    case 'h3':
+      return <h3 className="mb-3 mt-8 text-xl font-bold text-on-surface">{block.text}</h3>;
+    case 'ul':
+    case 'ol': {
+      const ListTag = block.type;
+      return (
+        <ListTag className={`my-5 flex flex-col gap-3 pl-6 ${block.type === 'ol' ? 'list-decimal' : 'list-disc'} ${paragraphClass} marker:text-primary`}>
+          {block.items.map((item) => <li className="pl-1" key={item}><RichText citations={citations} text={item} /></li>)}
+        </ListTag>
+      );
+    }
+    case 'table': {
+      // Wide tables scroll sideways on phones; narrower ones wrap to fit.
+      const wide = block.head.length >= 5;
+      const cellClass = 'px-3 py-2.5 sm:px-4 sm:py-3';
+      return (
+        <figure className="my-8">
+          {block.caption ? (
+            <figcaption className="mb-3 text-[15px] font-semibold leading-snug text-on-surface">
+              <RichText citations={citations} text={block.caption} />
+            </figcaption>
+          ) : null}
+          <div className="overflow-x-auto rounded-xl border border-white/10">
+            <table className={`w-full border-collapse text-left text-[14px] leading-snug sm:text-[15px] ${wide ? 'min-w-[640px]' : ''}`}>
+              <thead className="bg-surface-container-high text-[12px] uppercase tracking-[0.06em] text-muted sm:text-[13px]">
+                <tr>{block.head.map((cell, index) => <th className={`${cellClass} font-semibold`} key={`${cell}-${index}`} scope="col">{cell}</th>)}</tr>
+              </thead>
+              <tbody>
+                {block.rows.map((row) => (
+                  <tr className="border-t border-white/[0.08]" key={row.join('|')}>
+                    {row.map((cell, index) => (
+                      <td className={`${cellClass} align-top ${index === 0 ? 'text-on-surface' : 'text-[#C9D0DC]'}`} key={`${cell}-${index}`}>
+                        <RichText citations={citations} text={cell} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {block.note ? (
+            <p className="mt-3 text-sm leading-relaxed text-muted"><RichText citations={citations} text={block.note} /></p>
+          ) : null}
+        </figure>
+      );
+    }
+    case 'figure':
+      return <BlogFigure {...block} />;
+    case 'callout': {
+      const tones = {
+        fpca: 'border-accent/60 bg-accent/[0.08]',
+        note: 'border-white/15 bg-surface-container-high',
+        formula: 'border-tertiary/40 bg-tertiary/[0.06]',
+      };
+      return (
+        <aside className={`my-8 rounded-xl border p-6 md:p-7 ${tones[block.tone] || tones.note}`}>
+          {block.title ? <p className="mb-3 text-base font-bold text-on-surface">{block.title}</p> : null}
+          {block.paragraphs?.map((text) => <p className={`${paragraphClass} mb-3 last:mb-0`} key={text}><RichText citations={citations} text={text} /></p>)}
+          {block.items ? (
+            <ul className={`flex flex-col gap-2.5 pl-5 ${block.tone === 'formula' ? 'list-none pl-0 font-label text-[14px] leading-relaxed text-[#C9D0DC]' : `list-disc ${paragraphClass} marker:text-muted`}`}>
+              {block.items.map((item) => <li key={item}><RichText citations={citations} text={item} /></li>)}
+            </ul>
+          ) : null}
+        </aside>
+      );
+    }
+    default:
+      return <p className={`${paragraphClass} my-5`}><RichText citations={citations} text={block.text} /></p>;
+  }
+}
+
+function BlogPostCard({ post }) {
+  return (
+    <article className="card group flex flex-col overflow-hidden">
+      <a className="flex h-full flex-col" href={`${blogPath}/${post.slug}`}>
+        <div className="aspect-video overflow-hidden bg-[#E9EBEF]">
+          <img alt="" className="block h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" decoding="async" height={post.hero.height} loading="lazy" src={post.hero.src} width={post.hero.width} />
+        </div>
+        <div className="flex flex-1 flex-col gap-3 p-6">
+          <Eyebrow tone="tertiary">{post.topic}</Eyebrow>
+          <h3 className="font-headline text-[26px] leading-[1.12] text-on-surface">{post.title}</h3>
+          <p className="text-[15px] leading-relaxed text-on-surface-variant">{post.description}</p>
+          <p className="mt-auto pt-2 text-sm text-muted">{formatDate(post.datePublished)} · {post.readingMinutes} min read</p>
+        </div>
+      </a>
+    </article>
+  );
+}
+
+function BlogIndexPage() {
+  usePageMetadata({
+    title: blogIndexTitle,
+    description: blogIndexDescription,
+    canonical: `https://www.fpcatechnologies.com${blogPath}`,
+  });
+
+  return (
+    <>
+      <TopNav activePage="blog" ctaHref={enquiryFormPath} ctaLabel="Contact Us" />
+      <main className="pt-[72px]">
+        <section className="relative overflow-hidden px-5 pb-12 pt-16 sm:px-8 md:pt-24" style={{ background: 'radial-gradient(1000px 480px at 80% -10%, rgba(59,108,255,.14), transparent 60%)' }}>
+          <div className="mx-auto flex max-w-content flex-col gap-5">
+            <Eyebrow>Blog</Eyebrow>
+            <h1 className="max-w-3xl font-headline text-[44px] leading-[1.04] sm:text-6xl">Powering open-pit mining machines</h1>
+            <p className="max-w-[62ch] text-lg leading-relaxed text-on-surface-variant md:text-xl">
+              Practical, sourced articles for mine owners, engineers and contractors on diesel costs, electric machines and the cables that feed them.
+            </p>
+          </div>
+        </section>
+        <section className="px-5 pb-24 sm:px-8">
+          <div className="mx-auto grid max-w-content grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {blogPosts.map((post) => <BlogPostCard key={post.slug} post={post} />)}
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
+  );
+}
+
+function BlogPostPage({ post }) {
+  const citations = citationNumbers(post);
+  const sources = [...citations.keys()].map((key) => ({ key, number: citations.get(key), ...post.sources[key] }));
+  const otherPosts = blogPosts.filter((other) => other.slug !== post.slug);
+
+  usePageMetadata({
+    title: `${post.seoTitle} | FPCA Technologies`,
+    description: post.description,
+    canonical: `https://www.fpcatechnologies.com${blogPath}/${post.slug}`,
+  });
+
+  return (
+    <>
+      <TopNav activePage="blog" ctaHref={enquiryFormPath} ctaLabel="Contact Us" />
+      <main className="pt-[72px]">
+        <article className="px-5 pb-20 pt-12 sm:px-8 md:pt-16">
+          <div className="mx-auto max-w-[760px]">
+            <nav aria-label="Breadcrumb" className="mb-8 text-sm text-muted">
+              <a className="hover:text-white" href="/">Home</a>
+              <span aria-hidden="true" className="px-2">/</span>
+              <a className="hover:text-white" href={blogPath}>Blog</a>
+            </nav>
+            <header className="flex flex-col gap-5">
+              <Eyebrow tone="tertiary">{post.topic}</Eyebrow>
+              <h1 className="font-headline text-[40px] leading-[1.05] text-on-surface sm:text-5xl md:text-[56px]">{post.title}</h1>
+              <p className="text-lg leading-relaxed text-on-surface-variant md:text-xl">{post.description}</p>
+              <p className="text-sm text-muted">
+                By {blogAuthor} · <time dateTime={post.datePublished}>{formatDate(post.datePublished)}</time> · {post.readingMinutes} min read
+              </p>
+            </header>
+
+            <BlogFigure {...post.hero} eager />
+
+            <aside className="card my-10 p-6 md:p-7">
+              <p className="mb-4 text-base font-bold text-on-surface">In short</p>
+              <ul className="flex list-disc flex-col gap-3 pl-5 text-[16px] leading-relaxed text-[#C9D0DC] marker:text-tertiary">
+                {post.summary.map((item) => <li key={item}><RichText citations={citations} text={item} /></li>)}
+              </ul>
+            </aside>
+
+            {post.body.map((block, index) => <BlogBlock block={block} citations={citations} key={`${block.type}-${index}`} />)}
+
+            <aside className="card mt-14 flex flex-col gap-5 p-6 md:p-8">
+              <h2 className="font-headline text-[30px] leading-[1.1] text-on-surface">Planning to electrify an open pit?</h2>
+              <p className="text-[16px] leading-relaxed text-on-surface-variant">Tell us about your machines, your site and your timeline, and we will reply with next steps.</p>
+              <div>
+                <a className="btn btn-primary" href={enquiryFormPath}>
+                  Share Your Requirement
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+              <DirectContact />
+            </aside>
+
+            <section aria-labelledby="sources-heading" className="mt-14">
+              <h2 className="mb-4 font-headline text-[28px] text-on-surface" id="sources-heading">Sources</h2>
+              <ol className="flex list-decimal flex-col gap-2.5 pl-6 text-[14px] leading-relaxed text-muted marker:text-muted">
+                {sources.map((source) => (
+                  <li className="scroll-mt-28 pl-1" id={`source-${source.number}`} key={source.key}>
+                    <a className="text-[#C9D0DC] underline decoration-white/20 underline-offset-4 hover:text-white" href={source.url} rel="noopener noreferrer" target="_blank">{source.title}</a>
+                    {`. ${source.publisher}, ${source.date}.`}
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-6 text-[14px] leading-relaxed text-muted">
+                Figures were checked against these sources in {formatDate(post.dateModified).replace(/^\d+ /, '')}. Prices and rules change, so use your own numbers. This article is general information, not engineering, legal or financial advice.
+              </p>
+            </section>
+
+            {otherPosts.length ? (
+              <section aria-labelledby="read-next" className="mt-16">
+                <h2 className="mb-6 font-headline text-[28px] text-on-surface" id="read-next">Read next</h2>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  {otherPosts.map((other) => <BlogPostCard key={other.slug} post={other} />)}
+                </div>
+              </section>
+            ) : null}
+          </div>
+        </article>
+      </main>
+      <SiteFooter />
+    </>
+  );
+}
+
 /* ---------- Homepage ---------- */
 
 function App({ path }) {
@@ -907,6 +1207,15 @@ function App({ path }) {
 
   if (isDockingServicePage) {
     return <DroneDockingSystemsPage />;
+  }
+
+  if (currentPath === blogPath) {
+    return <BlogIndexPage />;
+  }
+
+  if (currentPath.startsWith(`${blogPath}/`)) {
+    const post = getBlogPost(currentPath.slice(blogPath.length + 1));
+    return post ? <BlogPostPage post={post} /> : <BlogIndexPage />;
   }
 
   const solutionSteps = [

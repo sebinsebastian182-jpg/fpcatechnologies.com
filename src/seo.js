@@ -1,6 +1,8 @@
 // Shared site metadata, structured data and FAQ content.
 // Used by the React pages (visible FAQ) and by scripts/build.mjs (pre-rendered <head>).
 
+import { blogPath, blogPosts } from './blog/posts.js';
+
 export const siteUrl = 'https://www.fpcatechnologies.com';
 export const companyName = 'FPCA Technologies Private Limited';
 export const contactEmail = 'admin@fpcatechnologies.com';
@@ -187,6 +189,89 @@ export const faqSchema = {
   })),
 };
 
+// ---------- Blog ----------
+
+export const blogIndexTitle = 'Blog: Open-Pit Mining Power and Electrification | FPCA Technologies';
+export const blogIndexDescription =
+  'Practical, sourced articles for mine owners and engineers on powering open-pit mining machines: diesel costs, electric shovels and excavators, trolley assist, batteries and trailing cables.';
+
+const breadcrumbSchema = (items) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.name, item: item.url })),
+});
+
+const blogPostUrl = (post) => `${siteUrl}${blogPath}/${post.slug}`;
+
+const blogPostingSchema = (post) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${blogPostUrl(post)}#article`,
+  headline: post.title,
+  description: post.description,
+  image: [`${siteUrl}${post.hero.og}`, `${siteUrl}${post.hero.src}`],
+  datePublished: post.datePublished,
+  dateModified: post.dateModified,
+  author: { '@type': 'Organization', name: companyName, url: `${siteUrl}/` },
+  publisher: { '@id': `${siteUrl}/#organization` },
+  mainEntityOfPage: blogPostUrl(post),
+  isPartOf: { '@id': `${siteUrl}${blogPath}#blog` },
+  inLanguage: 'en',
+  about: post.topic,
+});
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': `${siteUrl}${blogPath}#blog`,
+  name: 'FPCA Technologies Blog',
+  description: blogIndexDescription,
+  url: `${siteUrl}${blogPath}`,
+  publisher: { '@id': `${siteUrl}/#organization` },
+  inLanguage: 'en',
+  blogPost: blogPosts.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.title,
+    url: blogPostUrl(post),
+    datePublished: post.datePublished,
+  })),
+};
+
+const blogPages = [
+  {
+    path: blogPath,
+    title: blogIndexTitle,
+    description: blogIndexDescription,
+    image: `${siteUrl}${blogPosts[0].hero.og}`,
+    schemas: [
+      organizationSchema,
+      blogSchema,
+      breadcrumbSchema([
+        { name: 'Home', url: `${siteUrl}/` },
+        { name: 'Blog', url: `${siteUrl}${blogPath}` },
+      ]),
+    ],
+  },
+  ...blogPosts.map((post) => ({
+    path: `${blogPath}/${post.slug}`,
+    title: `${post.seoTitle} | FPCA Technologies`,
+    description: post.description,
+    image: `${siteUrl}${post.hero.og}`,
+    ogType: 'article',
+    publishedTime: post.datePublished,
+    modifiedTime: post.dateModified,
+    schemas: [
+      organizationSchema,
+      blogPostingSchema(post),
+      breadcrumbSchema([
+        { name: 'Home', url: `${siteUrl}/` },
+        { name: 'Blog', url: `${siteUrl}${blogPath}` },
+        { name: post.title, url: blogPostUrl(post) },
+      ]),
+    ],
+  })),
+];
+
 // One entry per pre-rendered route. `path` is the URL path; `alias` routes reuse another page's content.
 export const pages = [
   {
@@ -241,4 +326,5 @@ export const pages = [
       'Application form for the UAV Robotics Software Intern position at FPCA Technologies, Maker Village, KINFRA Hi-Tech Park, Kalamassery, Kochi, Kerala 683503.',
     schemas: [organizationSchema, jobPostingSchema],
   },
+  ...blogPages,
 ];
